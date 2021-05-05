@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 
 class GeneExpressionData(object):
     """
-    Class for processing gene expression data into
+    Class for processing gene expression data into a dataframe that can then be written into a .tsv file.
     """
 
     def __init__(self, samples_file, data_directory, clinical_file, data_format="FPKM"):
