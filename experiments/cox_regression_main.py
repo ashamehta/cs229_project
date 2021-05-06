@@ -5,13 +5,15 @@ import numpy as np
 import sklearn as sk
 from sklearn.model_selection import train_test_split
 from sksurv.linear_model import CoxPHSurvivalAnalysis
+from sksurv.util import Surv
 
 import matplotlib.pyplot as plt
 
 
 class CoxRegressionExp(object):
     # Names for the columns corresponding to the labels used by this model.
-    LABEL_NAME = "label"
+    STATUS = "status"
+    STATUS_TIME = "status_time"
 
     def __init__(self, feature_df, clinical_df):
         self.feature_df = feature_df
@@ -22,30 +24,31 @@ class CoxRegressionExp(object):
         # Get only the relevant columns.
         labels_df = clinical_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
 
-        # Construct label column for the Cox Regression model to use.
+        # Construct STATUS, and STATUS column for the Cox Regression model to use.
         # The label for each sample should be a structured array (status, event).
         def get_event(row):
-            # Each row would be labeled with (status, status event)
-            status = (row["vital_status"] == "Dead")
             if np.isnan(row["days_to_last_follow_up"]):
                 if np.isnan(row["days_to_death"]):
-                    return (status, 0.0)
-                return (status, row["days_to_death"])
+                    return 0.0
+                return row["days_to_death"]
             elif np.isnan(row["days_to_death"]):
-                return (status, row["days_to_last_follow_up"])
-            return (status, max(row["days_to_last_follow_up"], row["days_to_death"]))
-        labels_df[self.LABEL_NAME] = labels_df.apply(lambda row: get_event(row), axis=1)
+                return row["days_to_last_follow_up"]
+            return max(row["days_to_last_follow_up"], row["days_to_death"])
+        labels_df[self.STATUS_TIME] = labels_df.apply(lambda row: get_event(row), axis=1)
+        labels_df[self.STATUS] = labels_df.apply(lambda row: (row["vital_status"] == "Dead"), axis=1)
 
         # Include only the processed columns.
-        labels_df = labels_df[["case_id", self.LABEL_NAME]]
+        labels_df = labels_df[["case_id", self.STATUS, self.STATUS_TIME]]
         return labels_df
 
     def get_x_and_y(self, merged_dataframe):
         # Gets the X and Y matrices for the model to use.
-        y_dataframe = merged_dataframe[[self.LABEL_NAME]]
-        print(y_dataframe)
-        x_dataframe = merged_dataframe.drop(["case_id", self.LABEL_NAME], axis=1)
-        return np.asarray(x_dataframe), np.asarray(y_dataframe)
+        y_dataframe = merged_dataframe[[self.STATUS, self.STATUS_TIME]]
+        x_dataframe = merged_dataframe.drop(["case_id", self.STATUS, self.STATUS_TIME], axis=1)
+
+        y_vector = Surv.from_dataframe(self.STATUS, self.STATUS_TIME, y_dataframe)
+        x_matrix = np.asarray(x_dataframe)
+        return x_matrix, y_vector
 
     def run_experiment(self):
         # Order of rows matters from this point on (ensures data for cases are aligned).
