@@ -85,13 +85,16 @@ def basic_train_and_test(cox_regression_dataset, cox_model, model_file="cox_mode
     print("Concordance Index Censored for Training Dataset:", train_score)
     print("Concordance Index Censored for Test Dataset:", test_score)
 
-    save_cox_model(cox_model, data.feature_df, model_file)
+    save_cox_model(cox_model, data.feature_df, output_file=model_file)
 
     return train_score, test_score
 
 
 def cross_validation_tune(cox_regression_dataset, cox_models):
-    pass
+    data = cox_regression_dataset
+    scores = [model_selection.cross_val_score(model, data.X, data.y) for model in cox_models]
+    return scores
+
 
 
 
@@ -132,22 +135,30 @@ def coxnet_lasso_experiment():
     print("L1 ratio = 1.0, alpha_min_ratio = 0.01")
     coxnet_model = sk_lm.CoxnetSurvivalAnalysis(l1_ratio=1.0, alpha_min_ratio=0.01)
     basic_train_and_test(dataset, coxnet_model, model_file="output/cox_model_lasso_exp2.tsv")
-coxnet_lasso_experiment()
+# coxnet_lasso_experiment()
 
 def coxnet_lasso_feature_selection():
     model_df = pd.read_csv("cox_model_lasso_exp2.tsv", sep="\t", index_col=0)
     mutation_df3 = fs.select_features_from_cox_coef(model_df, mutation_df2, num_features=75)
     mutation_df3.to_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
-coxnet_lasso_feature_selection()
+# coxnet_lasso_feature_selection()
 
 def cox_experiment_with_selected_features():
     mutation_df3 = pd.read_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
     print("Num selected features:", mutation_df3.shape[1])
     dataset = CoxRegressionDataset(mutation_df3, clinical_df)
 
-    model = sk_lm.CoxPHSurvivalAnalysis(alpha=0.001, verbose=1)
-    # TODO: Select an "alpha" via cross-validation process.
-    basic_train_and_test(dataset, model, model_file="output/cox_model_selected_exp3.tsv")
+    alphas = [0.00001, 0.00005, 0.0001, 0.0005, 0.001, 0.005, 0.01, 0.03]
+    models = [sk_lm.CoxPHSurvivalAnalysis(alpha=a) for a in alphas]
+    scores = [np.mean(model_selection.cross_val_score(model, dataset.X, dataset.y)) for model in models]
+    print(scores)
+    for alpha, model, score in zip(alphas, models, scores):
+        if score == max(scores):
+            model.fit(dataset.X, dataset.y)
+            print("Using alpha=%s:\nAverage Cross-Validation Score=%s\nAverage Cross-Validation Score=%s" % (
+                alpha, score, model.score(dataset.X_test, dataset.y_test)) )
+            break
+
 cox_experiment_with_selected_features()
 
 
