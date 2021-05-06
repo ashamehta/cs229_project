@@ -19,12 +19,19 @@ class CoxRegressionDataset(object):
     STATUS = "status"
     STATUS_TIME = "status_time"
 
-    def __init__(self, feature_df, clinical_df, test_size=0.4):
+    def __init__(self, feature_df, clinical_df, standardize=False, test_size=0.4):
         self.feature_df = feature_df
         self.labels_df = self.get_labels(clinical_df)
 
         X, y = self.get_x_and_y(self.feature_df, self.labels_df)
+        if standardize:
+            X = self.standardize_data(X)
         self.X, self.X_test, self.y, self.y_test = self.split_dataset(X, y, test_size=test_size)
+
+    def standardize_data(self, X):
+        scaler = preprocessing.StandardScaler()
+        X = scaler.fit_transform(X)
+        return X
 
     def get_labels(self, clinical_df):
         # Get only the relevant columns.
@@ -98,6 +105,7 @@ def cross_validation_tune(cox_regression_dataset, cox_models):
 
 
 
+print("###### Mutations Data #######")
 
 print("-- 1. Reading Data --")
 
@@ -106,7 +114,6 @@ gexp_tsv = "processed_data/gene_expression_matrix.tsv"
 clinical_tsv = "processed_data/clinical_processed.tsv"
 
 mutation_df = pd.read_csv(mutation_tsv, sep="\t")
-gexp_df = None
 clinical_df = pd.read_csv(clinical_tsv, sep="\t")
 
 
@@ -138,13 +145,13 @@ def coxnet_lasso_experiment():
 # coxnet_lasso_experiment()
 
 def coxnet_lasso_feature_selection():
-    model_df = pd.read_csv("cox_model_lasso_exp2.tsv", sep="\t", index_col=0)
+    model_df = pd.read_csv("output/cox_model_lasso_exp2.tsv", sep="\t", index_col=0)
     mutation_df3 = fs.select_features_from_cox_coef(model_df, mutation_df2, num_features=75)
-    mutation_df3.to_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
+    mutation_df3.to_csv("processed_data/selected_83_mutations_matrix.tsv", sep="\t")
 # coxnet_lasso_feature_selection()
 
 def cox_experiment_with_selected_features():
-    mutation_df3 = pd.read_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
+    mutation_df3 = pd.read_csv("processed_data/selected_83_mutations_matrix.tsv", sep="\t")
     print("Num selected features:", mutation_df3.shape[1])
     dataset = CoxRegressionDataset(mutation_df3, clinical_df)
 
@@ -152,20 +159,68 @@ def cox_experiment_with_selected_features():
     models = [sk_lm.CoxPHSurvivalAnalysis(alpha=a) for a in alphas]
     scores = [np.mean(model_selection.cross_val_score(model, dataset.X, dataset.y)) for model in models]
     print(scores)
-    for alpha, model, score in zip(alphas, models, scores):
-        if score == max(scores):
-            model.fit(dataset.X, dataset.y)
-            print("Using alpha=%s:\nAverage Cross-Validation Score=%s\nAverage Cross-Validation Score=%s" % (
-                alpha, score, model.score(dataset.X_test, dataset.y_test)) )
-            break
+    max_score, argmax_score = 0, None
+    for i, score in enumerate(scores):
+        if score > max_score:
+            max_score, argmax_score = score, i
+    model = models[argmax_score]
+    model.fit(dataset.X, dataset.y)
+    print("Using alpha=%s:\nAverage Cross-Validation Score=%s\nAverage Cross-Validation Score=%s" % (
+        alphas[argmax_score], score, model.score(dataset.X_test, dataset.y_test)) )
 
-cox_experiment_with_selected_features()
-
-
-# TODO: Repeat above with gene expression data.
-
+# cox_experiment_with_selected_features()
 
 
 
+
+
+print("\n###### Gene Expression Data #######")
+
+print("-- 1. Reading Gene Expression Data --")
+
+gexp_df = pd.read_csv(gexp_tsv, sep="\t")
+
+
+print("-- 2. Variance Thresholding Feature Selection --")
+
+print("Num total features:", gexp_df.shape[1])
+gexp_df2 = fs.remove_low_variance_features(gexp_df, quantile=0.85, features_name="gene_expression")
+print("Num selected features:", gexp_df2.shape[1])
+
+
+print("-- 3. Feature Selection based on Coefficients of Lasso-Regularized Cox Regression --")
+
+def coxnet_lasso_gexp_experiment():
+    dataset = CoxRegressionDataset(gexp_df2, clinical_df)
+    print("L1 ratio = 1.0, alpha_min_ratio = 0.01")
+    coxnet_model = sk_lm.CoxnetSurvivalAnalysis(l1_ratio=1.0, alpha_min_ratio=0.01)
+    basic_train_and_test(dataset, coxnet_model, model_file="output/cox_model_lasso_gexp_exp1.tsv")
+# coxnet_lasso_gexp_experiment()
+
+def coxnet_lasso_gexp_feature_selection():
+    model_df = pd.read_csv("output/cox_model_lasso_gexp_exp1.tsv", sep="\t", index_col=0)
+    gexp_df3 = fs.select_features_from_cox_coef(model_df, gexp_df2, num_features=75)
+    gexp_df3.to_csv("processed_data/selected_83_mutations_matrix.tsv", sep="\t")
+# coxnet_lasso_gexp_feature_selection()
+
+def cox_experiment_with_selected_gexp_features():
+    gexp_df3 = pd.read_csv("processed_data/selected_83_mutations_matrix.tsv", sep="\t")
+    print("Num selected features:", gexp_df3.shape[1])
+    dataset = CoxRegressionDataset(gexp_df3, clinical_df, standardize=True)
+
+    alphas = list(range(5, 15, 1))
+    models = [sk_lm.CoxPHSurvivalAnalysis(alpha=a) for a in alphas]
+    scores = [np.mean(model_selection.cross_val_score(model, dataset.X, dataset.y)) for model in models]
+    print(scores)
+    max_score, argmax_score = 0, None
+    for i, score in enumerate(scores):
+        if score > max_score:
+            max_score, argmax_score = score, i
+    model = models[argmax_score]
+    model.fit(dataset.X, dataset.y)
+    print("Using alpha=%s:\nAverage Cross-Validation Score=%s\nAverage Cross-Validation Score=%s" % (
+        alphas[argmax_score], score, model.score(dataset.X_test, dataset.y_test)) )
+
+cox_experiment_with_selected_gexp_features()
 
 
