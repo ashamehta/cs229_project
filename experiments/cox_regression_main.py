@@ -9,16 +9,18 @@ from sksurv.util import Surv
 
 import matplotlib.pyplot as plt
 
+import feature_selection as fs
+
 
 class CoxRegressionExp(object):
     # Names for the columns corresponding to the labels used by this model.
     STATUS = "status"
     STATUS_TIME = "status_time"
 
-    def __init__(self, feature_df, clinical_df, learning_rate=0.0001):
+    def __init__(self, feature_df, clinical_df, learning_rate=0.001):
         self.feature_df = feature_df
         self.labels_df = self.get_labels(clinical_df)
-        self.model = CoxPHSurvivalAnalysis(alpha=learning_rate)
+        self.model = CoxPHSurvivalAnalysis(alpha=learning_rate, verbose=1)
 
     def get_labels(self, clinical_df):
         # Get only the relevant columns.
@@ -81,7 +83,12 @@ def read_data(mutation_tsv, gexp_tsv, clinical_tsv):
 print("-- Reading Data --")
 mutation_df, gexp_df, clinical_df = read_data(mutation_tsv, gexp_tsv, clinical_tsv)
 
+print("-- Some Basic Feature Selection --")
+print("Num total features:", mutation_df.shape[1])
+mutation_sel_df = fs.remove_low_variance_features(mutation_df, quantile=0.85)
+print("Num selected features:", mutation_sel_df.shape[1])
+
 print("-- Running Experiment --")
-cox_experiment = CoxRegressionExp(mutation_df, clinical_df)
+cox_experiment = CoxRegressionExp(mutation_sel_df, clinical_df)
 mut_test_score = cox_experiment.run_experiment()
 
