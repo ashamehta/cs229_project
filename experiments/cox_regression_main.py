@@ -3,8 +3,10 @@ import pandas as pd
 import numpy as np
 
 import sklearn as sk
-from sklearn.model_selection import train_test_split
-from sksurv.linear_model import CoxPHSurvivalAnalysis
+from sklearn import model_selection
+from sklearn import preprocessing
+
+from sksurv import linear_model as sk_lm
 from sksurv.util import Surv
 
 import matplotlib.pyplot as plt
@@ -17,10 +19,11 @@ class CoxRegressionExp(object):
     STATUS = "status"
     STATUS_TIME = "status_time"
 
-    def __init__(self, feature_df, clinical_df, learning_rate=0.001):
+    def __init__(self, feature_df, clinical_df,
+                 model=sk_lm.CoxPHSurvivalAnalysis(alpha=0.001, verbose=1)):
         self.feature_df = feature_df
         self.labels_df = self.get_labels(clinical_df)
-        self.model = CoxPHSurvivalAnalysis(alpha=learning_rate, verbose=1)
+        self.model = model
 
     def get_labels(self, clinical_df):
         # Get only the relevant columns.
@@ -52,18 +55,26 @@ class CoxRegressionExp(object):
         x_matrix = np.asarray(x_dataframe)
         return x_matrix, y_vector
 
+    def save_model(self, output_file="cox_model_exp1.tsv"):
+        features = self.feature_df.drop(columns=["case_id"]).columns
+        coefficients = self.model.coef_
+        model_df = pd.DataFrame(data=coefficients, columns=features)
+        model_df.to_csv(output_file, sep="\t")
+
     def run_experiment(self):
         # Order of rows matters from this point on (ensures data for cases are aligned).
         merged_df = self.labels_df.merge(self.feature_df, left_on="case_id", right_on="case_id")
         X, y = self.get_x_and_y(merged_df)
         # print(y)
 
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=0)
-        model = self.model.fit(X_train, y_train)
+        X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.4, random_state=0)
+        self.model = self.model.fit(X_train, y_train)
 
-        train_score, test_score = model.score(X_train, y_train), model.score(X_test, y_test)
+        train_score, test_score = self.model.score(X_train, y_train), self.model.score(X_test, y_test)
         print("Concordance Index Censored for Training Dataset:", train_score)
         print("Concordance Index Censored for Test Dataset:", test_score)
+
+        self.save_model()
 
         return test_score
 
@@ -91,4 +102,5 @@ print("Num selected features:", mutation_sel_df.shape[1])
 print("-- Running Experiment --")
 cox_experiment = CoxRegressionExp(mutation_sel_df, clinical_df)
 mut_test_score = cox_experiment.run_experiment()
+
 
