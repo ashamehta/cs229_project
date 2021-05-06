@@ -58,7 +58,7 @@ class CoxRegressionExp(object):
 
     def save_model(self, output_file="cox_model_exp1.tsv"):
         features = self.feature_df.drop(columns=["case_id"]).columns
-        if len(self.model.coef_) == 1:
+        if len(self.model.coef_.shape) == 1:
             coefficients = np.array([self.model.coef_])
             model_df = pd.DataFrame(data=coefficients, columns=features)
         else:
@@ -109,7 +109,7 @@ print("-- 2. Some Basic Feature Selection --")
 
 print("Num total features:", mutation_df.shape[1])
 mutation_df2 = fs.remove_low_variance_features(mutation_df, quantile=0.85)
-print("Num selected features:", mutation_sel_df.shape[1])
+print("Num selected features:", mutation_df2.shape[1])
 
 
 
@@ -129,9 +129,19 @@ def coxnet_lasso_experiment():
     cox_experiment.run_experiment(model_file="cox_model_lasso_exp2.tsv")
 # coxnet_lasso_experiment()
 
-model_df = pd.read_csv("cox_model_lasso_exp2.tsv", sep="\t", index_col=0)
-mutation_df3 = fs.select_features_from_cox_coef(model_df, mutation_df2)
-mutation_df3.to_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
+def coxnet_lasso_feature_selection():
+    model_df = pd.read_csv("cox_model_lasso_exp2.tsv", sep="\t", index_col=0)
+    mutation_df3 = fs.select_features_from_cox_coef(model_df, mutation_df2)
+    mutation_df3.to_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
+# coxnet_lasso_feature_selection()
+
+def cox_experiment_with_selected_features():
+    mutation_df3 = pd.read_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
+    print("Num selected features:", mutation_df3.shape[1])
+    model = sk_lm.CoxPHSurvivalAnalysis(alpha=0.001, verbose=1)
+    cox_experiment = CoxRegressionExp(mutation_df3, clinical_df)
+    cox_experiment.run_experiment(model_file="cox_model_selected_exp3.tsv")
+cox_experiment_with_selected_features()
 
 
 
