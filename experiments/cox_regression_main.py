@@ -14,16 +14,17 @@ import matplotlib.pyplot as plt
 import feature_selection as fs
 
 
-class CoxRegressionExp(object):
+class CoxRegressionDataset(object):
     # Names for the columns corresponding to the labels used by this model.
     STATUS = "status"
     STATUS_TIME = "status_time"
 
-    def __init__(self, feature_df, clinical_df,
-                 model=sk_lm.CoxPHSurvivalAnalysis(alpha=0.001, verbose=1)):
+    def __init__(self, feature_df, clinical_df, test_size=0.4):
         self.feature_df = feature_df
         self.labels_df = self.get_labels(clinical_df)
-        self.model = model
+
+        X, y = self.get_x_and_y(self.feature_df, self.labels_df)
+        self.X, self.X_test, self.y, self.y_test = self.split_dataset(X, y, test_size=test_size)
 
     def get_labels(self, clinical_df):
         # Get only the relevant columns.
@@ -46,44 +47,52 @@ class CoxRegressionExp(object):
         labels_df = labels_df[["case_id", self.STATUS, self.STATUS_TIME]]
         return labels_df
 
-    def get_x_and_y(self, merged_dataframe):
+    def get_x_and_y(self, feature_df, labels_df):
+        merged_df = labels_df.merge(feature_df, left_on="case_id", right_on="case_id")
+
         # Gets the X and Y matrices for the model to use.
-        y_dataframe = merged_dataframe[[self.STATUS, self.STATUS_TIME]]
+        y_dataframe = merged_df[[self.STATUS, self.STATUS_TIME]]
         y_vector = Surv.from_dataframe(self.STATUS, self.STATUS_TIME, y_dataframe)
 
-        x_dataframe = merged_dataframe.drop(["case_id", self.STATUS, self.STATUS_TIME], axis=1)
+        x_dataframe = merged_df.drop(["case_id", self.STATUS, self.STATUS_TIME], axis=1)
         x_matrix = np.asarray(x_dataframe)
 
         return x_matrix, y_vector
 
-    def save_model(self, output_file="cox_model_exp1.tsv"):
-        features = self.feature_df.drop(columns=["case_id"]).columns
-        if len(self.model.coef_.shape) == 1:
-            coefficients = np.array([self.model.coef_])
-            model_df = pd.DataFrame(data=coefficients, columns=features)
-        else:
-            coefficients = self.model.coef_.transpose()
-            indeces = self.model.alphas_
-            model_df = pd.DataFrame(data=coefficients, index=indeces, columns=features)
-        model_df.to_csv(output_file, sep="\t")
-        print("Model parameters saved to " + output_file)
+    def split_dataset(self, X, y, test_size):
+        X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=test_size, random_state=0)
+        return X_train, X_test, y_train, y_test
 
-    def run_experiment(self, model_file="cox_model_exp1.tsv"):
-        # Order of rows matters from this point on (ensures data for cases are aligned).
-        merged_df = self.labels_df.merge(self.feature_df, left_on="case_id", right_on="case_id")
-        X, y = self.get_x_and_y(merged_df)
-        # print(y)
 
-        X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.4, random_state=0)
-        self.model = self.model.fit(X_train, y_train)
+def save_cox_model(cox_model, feature_df, output_file="cox_exp1.tsv"):
+    features = feature_df.drop(columns=["case_id"]).columns
+    if len(cox_model.coef_.shape) == 1:
+        coefficients = np.array([cox_model.coef_])
+        model_df = pd.DataFrame(data=coefficients, columns=features)
+    else:
+        coefficients = cox_model.coef_.transpose()
+        indeces = cox_model.alphas_
+        model_df = pd.DataFrame(data=coefficients, index=indeces, columns=features)
+    model_df.to_csv(output_file, sep="\t")
+    print("Model parameters saved to " + output_file)
 
-        train_score, test_score = self.model.score(X_train, y_train), self.model.score(X_test, y_test)
-        print("Concordance Index Censored for Training Dataset:", train_score)
-        print("Concordance Index Censored for Test Dataset:", test_score)
 
-        self.save_model(model_file)
+def basic_train_and_test(cox_regression_dataset, cox_model, model_file="cox_model_exp1.tsv"):
+    data = cox_regression_dataset
+    cox_model = cox_model.fit(data.X, data.y)
 
-        return test_score
+    train_score, test_score = cox_model.score(data.X, data.y), cox_model.score(data.X_test, data.y_test)
+    print("Concordance Index Censored for Training Dataset:", train_score)
+    print("Concordance Index Censored for Test Dataset:", test_score)
+
+    save_cox_model(cox_model, data.feature_df, model_file)
+
+    return train_score, test_score
+
+
+def cross_validation_tune(cox_regression_dataset, cox_models):
+    pass
+
 
 
 
@@ -93,19 +102,13 @@ mutation_tsv = "processed_data/mutations_matrix.tsv"
 gexp_tsv = "processed_data/gene_expression_matrix.tsv"
 clinical_tsv = "processed_data/clinical_processed.tsv"
 
-def read_data(mutation_tsv, gexp_tsv, clinical_tsv):
-    # Read input data.
-    mut_df = pd.read_csv(mutation_tsv, sep="\t")
-    # gexp_df = pd.read_csv(gexp_tsv, sep="\t")
-    gexp_df = None
-    clin_df = pd.read_csv(clinical_tsv, sep="\t")
-    return mut_df, gexp_df, clin_df
-
-mutation_df, gexp_df, clinical_df = read_data(mutation_tsv, gexp_tsv, clinical_tsv)
+mutation_df = pd.read_csv(mutation_tsv, sep="\t")
+gexp_df = None
+clinical_df = pd.read_csv(clinical_tsv, sep="\t")
 
 
 
-print("-- 2. Some Basic Feature Selection --")
+print("-- 2. Variance Thresholding Feature Selection --")
 
 print("Num total features:", mutation_df.shape[1])
 mutation_df2 = fs.remove_low_variance_features(mutation_df, quantile=0.85)
@@ -115,33 +118,40 @@ print("Num selected features:", mutation_df2.shape[1])
 
 print("-- 3. Feature Selection based on Coefficients of Lasso-Regularized Cox Regression --")
 
+# This is all done with mutations data; we have yet to try gene expression data.
 # Reference: https://scikit-survival.readthedocs.io/en/latest/user_guide/coxnet.html#LASSO
 
-def basic_cox_experiment():
-    cox_experiment = CoxRegressionExp(mutation_df2, clinical_df)
-    cox_experiment.run_experiment(model_file="cox_model_exp2.tsv")
-# basic_cox_experiment()
+def initial_cox_experiment():
+    dataset = CoxRegressionDataset(mutation_df2, clinical_df)
+    cox_model = sk_lm.CoxPHSurvivalAnalysis(alpha=0.001, verbose=1)
+    basic_train_and_test(dataset, cox_model, test_size=0.4, model_file="output/cox_model_exp1.tsv")
+# initial_cox_experiment()
 
 def coxnet_lasso_experiment():
+    dataset = CoxRegressionDataset(mutation_df2, clinical_df)
     print("L1 ratio = 1.0, alpha_min_ratio = 0.01")
     coxnet_model = sk_lm.CoxnetSurvivalAnalysis(l1_ratio=1.0, alpha_min_ratio=0.01)
-    cox_experiment = CoxRegressionExp(mutation_df2, clinical_df, model=coxnet_model)
-    cox_experiment.run_experiment(model_file="cox_model_lasso_exp2.tsv")
-# coxnet_lasso_experiment()
+    basic_train_and_test(dataset, coxnet_model, model_file="output/cox_model_lasso_exp2.tsv")
+coxnet_lasso_experiment()
 
 def coxnet_lasso_feature_selection():
     model_df = pd.read_csv("cox_model_lasso_exp2.tsv", sep="\t", index_col=0)
-    mutation_df3 = fs.select_features_from_cox_coef(model_df, mutation_df2)
+    mutation_df3 = fs.select_features_from_cox_coef(model_df, mutation_df2, num_features=75)
     mutation_df3.to_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
-# coxnet_lasso_feature_selection()
+coxnet_lasso_feature_selection()
 
 def cox_experiment_with_selected_features():
     mutation_df3 = pd.read_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
     print("Num selected features:", mutation_df3.shape[1])
+    dataset = CoxRegressionDataset(mutation_df3, clinical_df)
+
     model = sk_lm.CoxPHSurvivalAnalysis(alpha=0.001, verbose=1)
-    cox_experiment = CoxRegressionExp(mutation_df3, clinical_df)
-    cox_experiment.run_experiment(model_file="cox_model_selected_exp3.tsv")
+    # TODO: Select an "alpha" via cross-validation process.
+    basic_train_and_test(dataset, model, model_file="output/cox_model_selected_exp3.tsv")
 cox_experiment_with_selected_features()
+
+
+# TODO: Repeat above with gene expression data.
 
 
 
