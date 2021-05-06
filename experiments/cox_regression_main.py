@@ -49,19 +49,21 @@ class CoxRegressionExp(object):
     def get_x_and_y(self, merged_dataframe):
         # Gets the X and Y matrices for the model to use.
         y_dataframe = merged_dataframe[[self.STATUS, self.STATUS_TIME]]
-        x_dataframe = merged_dataframe.drop(["case_id", self.STATUS, self.STATUS_TIME], axis=1)
-
         y_vector = Surv.from_dataframe(self.STATUS, self.STATUS_TIME, y_dataframe)
+
+        x_dataframe = merged_dataframe.drop(["case_id", self.STATUS, self.STATUS_TIME], axis=1)
         x_matrix = np.asarray(x_dataframe)
+
         return x_matrix, y_vector
 
     def save_model(self, output_file="cox_model_exp1.tsv"):
         features = self.feature_df.drop(columns=["case_id"]).columns
-        coefficients = self.model.coef_
+        coefficients = np.array([self.model.coef_])
         model_df = pd.DataFrame(data=coefficients, columns=features)
         model_df.to_csv(output_file, sep="\t")
+        print("Model parameters saved to " + output_file)
 
-    def run_experiment(self):
+    def run_experiment(self, model_file="cox_model_exp1.tsv"):
         # Order of rows matters from this point on (ensures data for cases are aligned).
         merged_df = self.labels_df.merge(self.feature_df, left_on="case_id", right_on="case_id")
         X, y = self.get_x_and_y(merged_df)
@@ -100,7 +102,15 @@ mutation_sel_df = fs.remove_low_variance_features(mutation_df, quantile=0.85)
 print("Num selected features:", mutation_sel_df.shape[1])
 
 print("-- Running Experiment --")
-cox_experiment = CoxRegressionExp(mutation_sel_df, clinical_df)
-mut_test_score = cox_experiment.run_experiment()
+def basic_cox_experiment():
+    cox_experiment = CoxRegressionExp(mutation_sel_df, clinical_df)
+    mut_test_score = cox_experiment.run_experiment(model_file="cox_model_exp2.tsv")
+# basic_cox_experiment()
+
+def coxnet_lasso_experiment():
+    print("L1 ratio = 1.0, alpha_min_ratio = 0.01")
+    coxnet_model = CoxnetSurvivalAnalysis(l1_ratio=1.0, alpha_min_ratio=0.01)
+    cox_experiment = CoxRegressionExp(mutation_sel_df, clinical_df, model=coxnet_model)
+    mut_test_score = cox_experiment.run_experiment(model_file="cox_model_lasso_exp2.tsv")
 
 
