@@ -8,21 +8,23 @@ from sklearn import feature_selection
 import matplotlib.pyplot as plt
 
 
-def remove_low_variance_features(feature_df, quantile=0.85, features_name=None):
+def remove_low_variance_features(feature_df, threshold=None, quantile=0.85, features_name=None):
     """Applies variance thresholding to feature_df, eliminating features with variance under the |quantile|."""
     variances = np.var(np.asarray(feature_df)[:,1:], axis=0)
-    quant = np.quantile(variances, quantile)
+    if threshold is None:
+        threshold = np.quantile(variances, quantile)
+    print("Variance threshold:", threshold)
 
     if features_name is not None:
         plt.hist(variances, bins=50)
         plt.yscale("log")
-        plt.title("Histogram of " + features_name + " variances\n(red line is " + str(quantile) + " quanntile)")
+        plt.title("Histogram of " + features_name + " variances\n(red line is selected threshold)")
         plt.xlabel("Variance of Feature")
         plt.ylabel("Num features with specified variance (log)")
-        plt.vlines(quant, colors="red", ymin=0, ymax=plt.gca().get_ylim()[1])
+        plt.vlines(threshold, colors="red", ymin=0, ymax=plt.gca().get_ylim()[1])
         plt.savefig(features_name + "_variance.png")
 
-    sel = feature_selection.VarianceThreshold(threshold=quant)
+    sel = feature_selection.VarianceThreshold(threshold=threshold)
 
     feature_only_df = feature_df.drop(columns=["case_id"])
     sel.fit(feature_only_df)

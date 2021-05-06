@@ -206,7 +206,7 @@ gexp_df = pd.read_csv(gexp_tsv, sep="\t")
 print("-- 2. Variance Thresholding Feature Selection --")
 
 print("Num total features:", gexp_df.shape[1])
-gexp_df2 = fs.remove_low_variance_features(gexp_df, quantile=0.85, features_name="gene_expression")
+gexp_df2 = fs.remove_low_variance_features(gexp_df, quantile=0.95, features_name="gene_expression")
 print("Num selected features:", gexp_df2.shape[1])
 
 
@@ -216,13 +216,13 @@ def coxnet_lasso_gexp_experiment():
     dataset = CoxRegressionDataset(gexp_df2, clinical_df)
     print("L1 ratio = 1.0, alpha_min_ratio = 0.01")
     coxnet_model = sk_lm.CoxnetSurvivalAnalysis(l1_ratio=1.0, alpha_min_ratio=0.01)
-    basic_train_and_test(dataset, coxnet_model, model_file="output/cox_model_lasso_gexp_exp1.tsv")
+    basic_train_and_test(dataset, coxnet_model, model_file="output/cox_model_lasso_gexp_exp2.tsv")
 # coxnet_lasso_gexp_experiment()
 
 def coxnet_lasso_gexp_feature_selection():
     model_df = pd.read_csv("output/cox_model_lasso_gexp_exp1.tsv", sep="\t", index_col=0)
     gexp_df3 = fs.select_features_from_cox_coef(model_df, gexp_df2, num_features=75)
-    gexp_df3.to_csv("processed_data/selected_lasso_83_gexp_matrix.tsv", sep="\t")
+    gexp_df3.to_csv("processed_data/selected_lasso_83_gexp_matrix2.tsv", sep="\t")
 # coxnet_lasso_gexp_feature_selection()
 
 
@@ -245,13 +245,15 @@ def coxnet_elastic_net_feature_selection():
 print("-- 5. Run Cox Regression Cross-Validated Experiment with Selected Features --")
 
 def cox_experiment_with_selected_gexp_features():
-    gexp_df3 = pd.read_csv("processed_data/selected_elastic_77_gexp_matrix.tsv", sep="\t")
+    # gexp_df3 = pd.read_csv("processed_data/selected_elastic_77_gexp_matrix.tsv", sep="\t")
     # gexp_df3 = pd.read_csv("processed_data/selected_lasso_83_gexp_matrix.tsv", sep="\t")
+    gexp_df3 = pd.read_csv("processed_data/selected_lasso_83_gexp_matrix2.tsv", sep="\t")  # 0.95 quantile var thresholding
     print("Num selected features:", gexp_df3.shape[1])
     dataset = CoxRegressionDataset(gexp_df3, clinical_df, standardize=True)
 
-    alphas = list(range(8, 25, 1))
+    # alphas = list(range(8, 25, 1))
     # alphas = list(range(3, 15, 1))
+    alphas = [0.001, 0.01, 0.1, 1, 3, 5, 10]
     models = [sk_lm.CoxPHSurvivalAnalysis(alpha=a) for a in alphas]
     scores = [model_selection.cross_val_score(model, dataset.X, dataset.y) for model in models]
     score_means, score_vars = [np.mean(sc) for sc in scores], [np.var(sc) for sc in scores]
@@ -263,8 +265,8 @@ def cox_experiment_with_selected_gexp_features():
     model = models[argmax_score]
     model.fit(dataset.X, dataset.y)
     print("Using alpha=%s:\nAverage Cross-Validation Score=\t%s\nTest Score=\t\t\t%s" % (
-        alphas[argmax_score], score, model.score(dataset.X_test, dataset.y_test)) )
+        alphas[argmax_score], max_score, model.score(dataset.X_test, dataset.y_test)) )
 
-# cox_experiment_with_selected_gexp_features()
+cox_experiment_with_selected_gexp_features()
 
 
