@@ -58,8 +58,13 @@ class CoxRegressionExp(object):
 
     def save_model(self, output_file="cox_model_exp1.tsv"):
         features = self.feature_df.drop(columns=["case_id"]).columns
-        coefficients = np.array([self.model.coef_])
-        model_df = pd.DataFrame(data=coefficients, columns=features)
+        if len(self.model.coef_) == 1:
+            coefficients = np.array([self.model.coef_])
+            model_df = pd.DataFrame(data=coefficients, columns=features)
+        else:
+            coefficients = self.model.coef_.transpose()
+            indeces = self.model.alphas_
+            model_df = pd.DataFrame(data=coefficients, index=indeces, columns=features)
         model_df.to_csv(output_file, sep="\t")
         print("Model parameters saved to " + output_file)
 
@@ -76,10 +81,13 @@ class CoxRegressionExp(object):
         print("Concordance Index Censored for Training Dataset:", train_score)
         print("Concordance Index Censored for Test Dataset:", test_score)
 
-        self.save_model()
+        self.save_model(model_file)
 
         return test_score
 
+
+
+print("-- 1. Reading Data --")
 
 mutation_tsv = "processed_data/mutations_matrix.tsv"
 gexp_tsv = "processed_data/gene_expression_matrix.tsv"
@@ -93,24 +101,40 @@ def read_data(mutation_tsv, gexp_tsv, clinical_tsv):
     clin_df = pd.read_csv(clinical_tsv, sep="\t")
     return mut_df, gexp_df, clin_df
 
-print("-- Reading Data --")
 mutation_df, gexp_df, clinical_df = read_data(mutation_tsv, gexp_tsv, clinical_tsv)
 
-print("-- Some Basic Feature Selection --")
+
+
+print("-- 2. Some Basic Feature Selection --")
+
 print("Num total features:", mutation_df.shape[1])
-mutation_sel_df = fs.remove_low_variance_features(mutation_df, quantile=0.85)
+mutation_df2 = fs.remove_low_variance_features(mutation_df, quantile=0.85)
 print("Num selected features:", mutation_sel_df.shape[1])
 
-print("-- Running Experiment --")
+
+
+print("-- 3. Feature Selection based on Coefficients of Lasso-Regularized Cox Regression --")
+
+# Reference: https://scikit-survival.readthedocs.io/en/latest/user_guide/coxnet.html#LASSO
+
 def basic_cox_experiment():
-    cox_experiment = CoxRegressionExp(mutation_sel_df, clinical_df)
-    mut_test_score = cox_experiment.run_experiment(model_file="cox_model_exp2.tsv")
+    cox_experiment = CoxRegressionExp(mutation_df2, clinical_df)
+    cox_experiment.run_experiment(model_file="cox_model_exp2.tsv")
 # basic_cox_experiment()
 
 def coxnet_lasso_experiment():
     print("L1 ratio = 1.0, alpha_min_ratio = 0.01")
-    coxnet_model = CoxnetSurvivalAnalysis(l1_ratio=1.0, alpha_min_ratio=0.01)
-    cox_experiment = CoxRegressionExp(mutation_sel_df, clinical_df, model=coxnet_model)
-    mut_test_score = cox_experiment.run_experiment(model_file="cox_model_lasso_exp2.tsv")
+    coxnet_model = sk_lm.CoxnetSurvivalAnalysis(l1_ratio=1.0, alpha_min_ratio=0.01)
+    cox_experiment = CoxRegressionExp(mutation_df2, clinical_df, model=coxnet_model)
+    cox_experiment.run_experiment(model_file="cox_model_lasso_exp2.tsv")
+# coxnet_lasso_experiment()
+
+model_df = pd.read_csv("cox_model_lasso_exp2.tsv", sep="\t", index_col=0)
+mutation_df3 = fs.select_features_from_cox_coef(model_df, mutation_df2)
+mutation_df3.to_csv("processed_data/selected_mutations_matrix.tsv", sep="\t")
+
+
+
+
 
 
