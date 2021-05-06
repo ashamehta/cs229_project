@@ -1,0 +1,580 @@
+case_id	primary_diagnosis	figo_stage	age_at_index	normalized_age_at_index	age_at_diagnosis	days_to_birth	days_to_last_follow_up	days_to_death	race	vital_status
+b63cad1b-b4c7-4e50-8acb-5cee4e9ce4a9	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	21945.0	-21945.0	923.0	1919.0	white	Dead
+195ecf43-06bd-4ffe-8d8b-a766f3f7179b	Serous cystadenocarcinoma, NOS	Stage IIIC	68	0.6666666666666666	24842.0	-24842.0	243.0		white	Alive
+196f4600-b6c9-4652-9f77-65c92883f8c1	Serous cystadenocarcinoma, NOS	Stage IV	51	0.3968253968253968	18635.0	-18635.0	2369.0		white	Alive
+3491d67a-4f83-4f67-8085-bbb9fe942be5	Serous cystadenocarcinoma, NOS	Stage IV	45	0.30158730158730157	16689.0	-16689.0	479.0	479.0	white	Dead
+9446e349-71e6-455a-aa8f-53ec96597146	Serous cystadenocarcinoma, NOS	Stage IIIC	77	0.8095238095238095	28433.0	-28433.0	356.0	446.0	white	Dead
+ff844242-7559-4b07-b09e-69ea40e5ac6b	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25627.0	-25627.0	760.0	760.0	white	Dead
+2ee36d9d-128b-4761-aa1a-a637da106f3d	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26602.0	-26602.0	365.0	395.0	white	Dead
+3b81ec7c-0934-4649-9231-9919dd26dd15	Serous cystadenocarcinoma, NOS	Stage IIIB	58	0.5079365079365079	21432.0	-21432.0	1721.0	1721.0	white	Dead
+15fc17cd-d073-4f81-a4a2-2db3cb9d7069	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20498.0	-20498.0	763.0		white	Alive
+13f5814c-1f99-4ffa-84a4-3bbd8979faae	Serous cystadenocarcinoma, NOS	Stage IV	49	0.36507936507936506	18111.0	-18111.0	1662.0	1662.0	white	Dead
+bc84c5c5-1785-4edd-b732-8987f862063e	Papillary serous cystadenocarcinoma	Stage IIC	61	0.5555555555555556	22438.0	-22438.0	361.0		black or african american	Alive
+35916942-e7aa-45db-ad27-03cba67d4d5b	Serous cystadenocarcinoma, NOS	Stage IIIC	79	0.8412698412698413	29045.0	-29045.0		608.0	white	Dead
+e8372916-7ac7-4535-ae97-0248208224f5	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19466.0	-19466.0	1509.0	1509.0	white	Dead
+47681e4b-01e8-4779-b966-ce57aff4b712	Serous cystadenocarcinoma, NOS	Stage IIC	71	0.7142857142857143	25961.0	-25961.0	1844.0		white	Alive
+206ce0ed-36a4-47ab-ac8e-f6fca6ac5c18	Serous cystadenocarcinoma, NOS	Stage IIIC	77	0.8095238095238095	28201.0	-28201.0	679.0	679.0	white	Dead
+8ac6ce06-ab50-4ab4-a469-9f8bf01be963	Serous cystadenocarcinoma, NOS	Stage IV	52	0.4126984126984127	19052.0	-19052.0	468.0		white	Alive
+6f25001a-f890-4fd0-a994-e62a9ea5c6f3	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	21940.0	-21940.0	1900.0		white	Alive
+5f60bc2d-738f-43fc-a3fb-61ec6e80e3d4	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	18189.0	-18189.0	1785.0		white	Alive
+f0c353fd-947c-41e2-b643-3ecc0d69796c	Serous cystadenocarcinoma, NOS	Stage IV	81	0.873015873015873	29695.0	-29695.0	1919.0		white	Alive
+da274941-3edd-420b-9262-bbd959923c67	Serous cystadenocarcinoma, NOS	Stage IIIC	30	0.06349206349206349	11146.0	-11146.0	918.0		not reported	Alive
+b867e933-e3e3-4491-9bb6-b18c48d6f173	Serous cystadenocarcinoma, NOS	Stage IV	68	0.6666666666666666	25191.0	-25191.0	2049.0	2049.0	white	Dead
+ae5fa7cb-1984-423f-aa88-571314860943	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22210.0	-22210.0	116.0		white	Alive
+e43d3769-e25f-4fb7-9080-ea26defaf094	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18383.0	-18383.0	3619.0		white	Alive
+94769f2c-b6fd-48ec-af34-b41165340b7c	Serous cystadenocarcinoma, NOS	Stage IIIC	40	0.2222222222222222	14754.0	-14754.0	699.0		white	Alive
+838778c3-0b33-4fc5-97fc-5da163475485	Serous cystadenocarcinoma, NOS	Stage IC	48	0.3492063492063492	17545.0	-17545.0	819.0		white	Alive
+92badeb5-a50e-4a62-a67e-6a8a59c948ab	Serous cystadenocarcinoma, NOS	'--	85	0.9365079365079365	31215.0	-31215.0	33.0		white	Alive
+bc3e0b74-ea09-46a5-9f61-16bd15ffd883	Serous cystadenocarcinoma, NOS	Stage IIC	63	0.5873015873015873	23111.0	-23111.0	16.0		white	Alive
+c183d3fb-2eee-44f8-890e-b9bf907141e6	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21072.0	-21072.0	1573.0		white	Alive
+ef5e85cf-2d82-4d52-a02c-fed5c76e4cec	Serous cystadenocarcinoma, NOS	Stage IIC	63	0.5873015873015873	23272.0	-23272.0	751.0		white	Alive
+59b3fbfe-0b7c-41e5-b756-ee7e23730df5	Serous cystadenocarcinoma, NOS	Stage IIA	68	0.6666666666666666	25019.0	-25019.0	1357.0		white	Alive
+914f84bf-578b-4f4d-93cb-378228ea58f6	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23238.0	-23238.0	1998.0		white	Alive
+260723bf-9620-450d-bf31-f3a45543f9db	Papillary serous cystadenocarcinoma	Stage IIIB	48	0.3492063492063492	17580.0	-17580.0	1207.0		black or african american	Alive
+2038fd65-d8f1-4b16-af90-b1c8f9a379a7	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18757.0	-18757.0	3746.0		white	Alive
+bc2591b0-65d7-48c3-a5cc-783f67b65869	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26200.0	-26200.0	1558.0	1583.0	white	Dead
+f7dece2a-d12c-4363-b8c3-2683c32d8271	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20187.0	-20187.0	0.0		not reported	Not Reported
+9ec86cbd-8c74-4697-90da-529ab91ab835	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24469.0	-24469.0	106.0		white	Alive
+ed21615c-0de3-421c-9e8d-8996026c4431	Serous cystadenocarcinoma, NOS	Stage IIIC	47	0.3333333333333333	17263.0	-17263.0	643.0		white	Alive
+ab3dbbbe-eed6-4a35-a505-1815225e86c9	Serous cystadenocarcinoma, NOS	Stage IB	60	0.5396825396825397	21963.0	-21963.0		55.0	black or african american	Dead
+4ea50685-3b63-440a-b037-597ef2529e7d	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093			731.0	731.0	white	Dead
+ae914f23-87b9-4169-a7f7-a3483078c902	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23772.0	-23772.0	1212.0		white	Alive
+f8a5547f-f1bc-4c01-8b68-25b5ee0caeab	Serous cystadenocarcinoma, NOS	Stage IIIB	49	0.36507936507936506	17988.0	-17988.0		1380.0	white	Dead
+7d82ce56-32eb-4107-aa5c-c568764805c9	Serous cystadenocarcinoma, NOS	Stage IIIC	52	0.4126984126984127	19151.0	-19151.0	885.0		white	Alive
+0a48873a-092a-4b25-822b-b0b3c18c08a8	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26476.0	-26476.0	1769.0	1769.0	black or african american	Dead
+0d15e5aa-2483-4f81-973a-ff469296c911	Serous cystadenocarcinoma, NOS	Stage IV	63	0.5873015873015873	23367.0	-23367.0	191.0	773.0	white	Dead
+44e840c9-ea54-4dba-9b2a-264ef1f2c304	Serous cystadenocarcinoma, NOS	Stage IIIC	77	0.8095238095238095	28147.0	-28147.0	454.0		white	Alive
+9815ab87-454d-4dfc-8b3d-4b35af32d764	Serous cystadenocarcinoma, NOS	Stage IIC	54	0.4444444444444444	20076.0	-20076.0	184.0		not reported	Alive
+66c92b9e-de3c-4d1a-bb69-46ffbc6caf33	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20945.0	-20945.0	493.0	493.0	white	Dead
+6c43727d-631a-40fb-b1a1-242a12889eaa	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19571.0	-19571.0		642.0	white	Dead
+ff33db70-91d4-4dbb-a4fc-d81a128d0f32	Serous cystadenocarcinoma, NOS	Stage IIIC	69	0.6825396825396826	25387.0	-25387.0		1451.0	white	Dead
+16829472-5666-4fba-9bf9-360ec1689aa0	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968			3532.0		white	Alive
+446ce2a3-d328-443c-a419-3344baad0e16	Serous cystadenocarcinoma, NOS	Stage IIIC	44	0.2857142857142857	16086.0	-16086.0	377.0	377.0	white	Dead
+42b3dfa3-152f-4ab7-ac9f-988c7f473bea	Serous cystadenocarcinoma, NOS	Stage IIIC	68	0.6666666666666666	25013.0	-25013.0		3622.0	white	Dead
+9fb1ba57-2007-4477-b000-2d36f163efd2	Serous cystadenocarcinoma, NOS	Stage IIIC	42	0.25396825396825395	15383.0	-15383.0	1658.0		white	Alive
+cddbac56-2861-46a5-98a3-df32ab69d5da	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23611.0	-23611.0	16.0		asian	Alive
+242943fe-1fa0-4a12-8f7e-9c6c4af1194d	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18770.0	-18770.0	145.0		white	Alive
+996313ef-11e7-459d-ba5f-ac1a4d0de513	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21833.0	-21833.0	1285.0		white	Alive
+1aea3c25-d2bc-4ff5-bc27-32e939944e9d	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20417.0	-20417.0	1053.0	1104.0	white	Dead
+61feee94-3ac9-42fe-aaa3-dc6a3efe563c	Serous cystadenocarcinoma, NOS	Stage IIIC	52	0.4126984126984127	19064.0	-19064.0	204.0		asian	Alive
+05eb8bd5-d31b-4595-921a-366e53ea5a8b	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23410.0	-23410.0	3419.0		white	Alive
+8e107f4b-1912-4d3e-814a-b863e2d65ed7	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17784.0	-17784.0	2469.0		white	Alive
+7a08efd0-f984-430e-a8eb-1881047214b6	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27256.0	-27256.0	197.0	197.0	white	Dead
+f3af727e-b592-4828-94f5-22008666cf8c	Serous cystadenocarcinoma, NOS	Stage IV	52	0.4126984126984127	19178.0	-19178.0	1877.0	1877.0	white	Dead
+e3712e5a-4575-440f-89d1-8db9498baa88	Serous cystadenocarcinoma, NOS	Stage IV	75	0.7777777777777778	27674.0	-27674.0	1881.0	2894.0	white	Dead
+56c4bd48-ab15-4b49-ae2f-968653052b50	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21554.0	-21554.0	2434.0		white	Alive
+4a2ca7b8-729d-4fab-a6f3-a5d1e5d1f4f3	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22344.0	-22344.0	914.0	914.0	white	Dead
+8c47ae58-91c7-4247-b420-50f31f5eb00d	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21719.0	-21719.0	500.0	500.0	white	Dead
+514aa64e-a58d-48c2-aff9-498604cc11d6	Serous cystadenocarcinoma, NOS	Stage IV	60	0.5396825396825397	22088.0	-22088.0	346.0	346.0	white	Dead
+538acb2a-c4ca-4656-a91c-841a42dbf15f	Serous cystadenocarcinoma, NOS	Stage IIIB	55	0.4603174603174603	20271.0	-20271.0	1495.0		white	Alive
+9e48a4b1-6917-4625-9d78-e4832eb816a5	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21698.0	-21698.0	4077.0		white	Alive
+be03bfec-5bb6-4cab-9dd2-bee590bd45f1	Serous cystadenocarcinoma, NOS	Stage IC	49	0.36507936507936506	18182.0	-18182.0	146.0		white	Alive
+2e05cd3a-a55f-43b8-b2a9-72fb742b89c9	Serous cystadenocarcinoma, NOS	Stage IC	69	0.6825396825396826	25480.0	-25480.0	188.0		white	Alive
+bbad2efe-e9c7-4f8f-924b-ebbbe4c181d4	Serous cystadenocarcinoma, NOS	Stage IIIC	46	0.31746031746031744	17009.0	-17009.0	148.0		white	Alive
+15c84da3-16e5-4909-aea9-cb5894b0f8af	Serous cystadenocarcinoma, NOS	Stage IIIC	44	0.2857142857142857	16304.0	-16304.0	1678.0	1678.0	white	Dead
+bbbf1184-1e19-479a-b31f-daa692d52e02	Serous cystadenocarcinoma, NOS	Stage IIIC	75	0.7777777777777778	27527.0	-27527.0	439.0	439.0	white	Dead
+a09f0626-002a-48fd-8b2d-c66b8285cf23	Serous cystadenocarcinoma, NOS	Stage IIIC	52	0.4126984126984127	19256.0	-19256.0	1484.0	1484.0	white	Dead
+3c8b5986-f9d5-4e7e-9dd4-3ad301451279	Serous cystadenocarcinoma, NOS	Stage IIIC	79	0.8412698412698413	29075.0	-29075.0	249.0	1552.0	asian	Dead
+2a924999-1fbf-470a-97bd-fd2276a9a366	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25763.0	-25763.0	3388.0		white	Alive
+f2dcf4cc-609d-4532-a90d-6ae2bbb53365	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18896.0	-18896.0	2534.0		white	Alive
+e35b2813-427e-4e83-95f6-4f0281f42a59	Cystadenocarcinoma, NOS	Stage IIB	55	0.4603174603174603	20211.0	-20211.0	420.0		black or african american	Alive
+15556b28-c6bd-455a-87b6-4b7b3e33d0e4	Serous cystadenocarcinoma, NOS	Stage IIIC	75	0.7777777777777778	27749.0	-27749.0	1081.0	1091.0	white	Dead
+708eec28-2348-4e15-b98c-8c6f9d057b1e	Serous cystadenocarcinoma, NOS	Stage IV	58	0.5079365079365079				65.0	white	Dead
+7ebc776e-bde1-4563-adb1-8bd441872733	Serous cystadenocarcinoma, NOS	Stage IC	55	0.4603174603174603	20263.0	-20263.0		624.0	black or african american	Dead
+29dccd25-4c4a-463b-a353-38a193337f38	Serous cystadenocarcinoma, NOS	Stage IV	49	0.36507936507936506	18218.0	-18218.0	224.0	868.0	white	Dead
+32d4d200-1fdf-44ed-b81f-1954a9c93926	Serous cystadenocarcinoma, NOS	Stage IIC	61	0.5555555555555556	22306.0	-22306.0	1882.0		white	Alive
+3445c524-5a37-40b6-8614-956d76eed939	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	27778.0	-27778.0	915.0		not reported	Alive
+8783e4b0-2b62-45d5-8cd9-f5a71cc0138e	Serous cystadenocarcinoma, NOS	Stage IV	42	0.25396825396825395	15705.0	-15705.0	3887.0		white	Alive
+25a0a9e6-4f5b-45d8-8f34-abfd31d5ff1b	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26865.0	-26865.0	1993.0		white	Alive
+f58e49fc-9641-4b46-be4c-766445ec70a3	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16485.0	-16485.0	1053.0		black or african american	Alive
+47feba88-1ec9-4904-b0e2-3718f294badb	Serous cystadenocarcinoma, NOS	Stage IB	89	1.0	32853.0	-32853.0	19.0		white	Alive
+fdd4adb8-9295-480a-9352-305b5eb51187	Serous cystadenocarcinoma, NOS	Stage IV	37	0.1746031746031746	13606.0	-13606.0	943.0	943.0	white	Dead
+700e91bb-d675-41b2-bbbd-935767c7b447	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16471.0	-16471.0	2616.0		white	Alive
+c11cae7e-91cd-4470-a9d8-188a4f6b8fa1	Serous cystadenocarcinoma, NOS	Stage IIIC	40	0.2222222222222222	14729.0	-14729.0	3602.0		white	Alive
+9af2248a-d86a-4277-93b4-8eba5a39bd3c	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24407.0	-24407.0	1736.0	1736.0	white	Dead
+b3511675-fd68-4745-8020-e290ca0fd115	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20622.0	-20622.0	1815.0	1815.0	black or african american	Dead
+90118207-8f11-4784-ac1b-0deec2e7af3a	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21380.0	-21380.0	1184.0	1224.0	white	Dead
+f5033d52-ec36-4e67-88d8-b6d898b81b2f	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20939.0	-20939.0	1492.0	1492.0	white	Dead
+7248cd60-be22-44bc-bc58-f644db0940a2	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25768.0	-25768.0	2521.0	2553.0	white	Dead
+1592af8e-8d11-4325-8a2b-e0c690b15b58	Serous cystadenocarcinoma, NOS	Stage IV	58	0.5079365079365079	21523.0	-21523.0		759.0	white	Dead
+02594e5e-8751-47c1-9245-90c66984b665	Serous cystadenocarcinoma, NOS	Stage IIIC	42	0.25396825396825395	15650.0	-15650.0	1919.0		white	Alive
+7ab3765f-910a-41c9-86cc-08534d2a4e4b	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23204.0	-23204.0	952.0		white	Alive
+d2c0d320-d1c5-4eed-af4f-15540e60db0b	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19537.0	-19537.0		1189.0	white	Dead
+8a98a6e6-b763-4824-858b-fd2738e6c9a3	Serous cystadenocarcinoma, NOS	Stage IIIC	43	0.2698412698412698	15818.0	-15818.0	1025.0	1032.0	white	Dead
+0724f800-e873-45d0-bc56-809d0ec4f6e9	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27103.0	-27103.0	1058.0	1058.0	white	Dead
+0e475b3d-be3c-431a-ab12-5a867ea8f6cd	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20972.0	-20972.0	1684.0		white	Alive
+cbcf6922-a3c0-43a1-826e-642918b0a635	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23416.0	-23416.0	886.0		white	Alive
+f7e01929-733b-420a-ab2b-051dd4a992e5	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24495.0	-24495.0	738.0	738.0	white	Dead
+48e66676-dbed-48a4-9a7f-a6d247b15c17	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24304.0	-24304.0	679.0		white	Alive
+28ed2d42-5b4c-4bca-b2b2-6b2a6d3c42cf	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25831.0	-25831.0	25.0	25.0	white	Dead
+1d0225b5-f515-4197-bba7-3dc17e502b88	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20861.0	-20861.0	11.0	11.0	white	Dead
+378f7ea2-86b4-4072-80b8-e12d67193106	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27081.0	-27081.0	2547.0		white	Alive
+01ea6354-137b-47f3-9021-a01a382b1147	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27359.0	-27359.0	1190.0	1199.0	white	Dead
+9c744ff8-1cde-4176-b6d7-0ab62bf42620	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18306.0	-18306.0	529.0		white	Alive
+eec69ea9-ceb8-456a-aff4-41fb8a261e36	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	27897.0	-27897.0	24.0	24.0	white	Dead
+8e7f1c74-7cb3-43c0-b07c-bf69b780053f	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22511.0	-22511.0	1587.0		white	Alive
+8a6d2ce3-cc57-451b-9b07-8263782aa23f	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	23005.0	-23005.0		1768.0	white	Dead
+23771dab-2aab-4d2b-95e2-9af7092cee6b	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20440.0	-20440.0		1757.0	white	Dead
+7e01f23a-0b0e-46a2-9f30-c3a9d2c779d2	Serous cystadenocarcinoma, NOS	Stage IIIC	36	0.15873015873015872	13187.0	-13187.0	1442.0	1442.0	white	Dead
+034825d0-e8b7-4ac0-be31-25f6038cb04a	Serous cystadenocarcinoma, NOS	Stage IV	62	0.5714285714285714	22965.0	-22965.0	944.0	1881.0	white	Dead
+63a75e0b-9241-4f0e-9236-01a2e2c05b7e	Serous cystadenocarcinoma, NOS	Stage IIIC	39	0.20634920634920634	14538.0	-14538.0	3260.0	3260.0	white	Dead
+dce71741-ccbe-40b7-a0b8-2048d07187a4	Serous cystadenocarcinoma, NOS	Stage IV	71	0.7142857142857143	26267.0	-26267.0	821.0	821.0	white	Dead
+f9c835db-2ab6-4bf5-826f-48723493c0ec	Serous cystadenocarcinoma, NOS	Stage IIIC	47	0.3333333333333333	17530.0	-17530.0	555.0	555.0	white	Dead
+f2ce00e4-0d4f-4faa-bee1-ddf1b306e97b	Serous cystadenocarcinoma, NOS	Stage IIIB	74	0.7619047619047619	27112.0	-27112.0	1100.0	1100.0	white	Dead
+c040df8a-9d6d-43bd-911a-17a7b4e1ec74	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23074.0	-23074.0	193.0	193.0	white	Dead
+3c037acf-f453-4513-a6dd-129163ddde2a	Serous cystadenocarcinoma, NOS	Stage IIA	65	0.6190476190476191	23987.0	-23987.0	2163.0		white	Alive
+a2319490-b85d-4219-a1b0-fa1ec432d5c8	Serous cystadenocarcinoma, NOS	Stage IIIC	75	0.7777777777777778	27417.0	-27417.0	2621.0	2621.0	white	Dead
+c7cf6755-8856-435b-a443-174b22a25b07	Serous cystadenocarcinoma, NOS	Stage IIA	78	0.8253968253968254	28623.0	-28623.0	576.0		black or african american	Alive
+a22c1451-7841-4fa3-b2f2-5d5cd8aa67d3	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21543.0	-21543.0	2339.0		white	Alive
+0a2d29de-869a-4dc8-ad11-6ee0d0a3a895	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16613.0	-16613.0	1484.0	1484.0	white	Dead
+09820a33-80b1-42d0-8366-a0ddaf94b122	Serous cystadenocarcinoma, NOS	Stage IV	68	0.6666666666666666	25032.0	-25032.0	1158.0	1158.0	white	Dead
+6fb71a0c-bc50-48c8-acfa-db94be1e151a	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26300.0	-26300.0	3096.0		white	Alive
+30b8f4cd-9245-4496-a8a8-c3e59093bc0a	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18577.0	-18577.0	3145.0		white	Alive
+cbd87697-7708-4b69-9e50-9ee474feabe1	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21285.0	-21285.0	637.0	637.0	black or african american	Dead
+71faa2c1-0d5b-4dcc-bdf9-f2405f29907c	Serous cystadenocarcinoma, NOS	Stage IIC	53	0.42857142857142855	19722.0	-19722.0	676.0	676.0	white	Dead
+a9d3a7b0-faf8-4e56-8600-d9e6882a4f23	Serous cystadenocarcinoma, NOS	Stage IIIC	81	0.873015873015873	29874.0	-29874.0	128.0	531.0	white	Dead
+eb7c3b35-7a5e-4621-b31f-9775c51f9a23	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	22876.0	-22876.0	1993.0		white	Alive
+808eb134-9c7d-43bb-b86c-2f3259193954	Serous cystadenocarcinoma, NOS	Stage IV	71	0.7142857142857143	26060.0	-26060.0	565.0	565.0	white	Dead
+c9524775-6b50-4793-8858-24b6a6d3e4e6	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27170.0	-27170.0	789.0		white	Alive
+97ad0360-3be4-401a-a94c-7f2800a1b519	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27356.0	-27356.0	2143.0		white	Alive
+d8d13aa4-45d5-4e1a-a6cf-895bdf05e7b2	Serous cystadenocarcinoma, NOS	Stage IV	63	0.5873015873015873	23036.0	-23036.0	351.0	351.0	white	Dead
+c8acee1b-6854-409b-86ab-bf69dbe22ab6	Serous cystadenocarcinoma, NOS	Stage IIIC	43	0.2698412698412698	15949.0	-15949.0	163.0		white	Alive
+7a75d318-b301-4f77-a97f-4d6784d27216	Serous cystadenocarcinoma, NOS	Stage IV	65	0.6190476190476191	24042.0	-24042.0	347.0	347.0	white	Dead
+b923ac70-70ea-4a82-8466-46350c5803bf	Serous cystadenocarcinoma, NOS	Stage IV	45	0.30158730158730157	16484.0	-16484.0	1446.0	1446.0	white	Dead
+4160e048-f0b0-40f5-805b-e277a5893a3b	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25874.0	-25874.0	379.0	379.0	white	Dead
+005a6517-2e5a-4ea3-ab36-531522723607	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26169.0	-26169.0	74.0	74.0	white	Dead
+512de609-757b-42be-8b30-c414f71af422	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18788.0	-18788.0		36.0	white	Dead
+da56dfbe-35ae-4bd7-9a11-d9bbb02b1833	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21384.0	-21384.0	638.0		not reported	Alive
+263e85e2-7b6f-453f-8fd0-e5ea1409fece	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	27006.0	-27006.0	239.0	1162.0	white	Dead
+94bd4c68-4bfc-4db3-9365-97c867747133	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20583.0	-20583.0	837.0		white	Alive
+0d23fa5b-95f8-4626-a4d2-c72ad3cc553b	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17799.0	-17799.0	1355.0	1355.0	white	Dead
+d7925dfc-18ce-46ab-a47b-9d06eacc96d0	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873				1046.0	white	Dead
+88d61634-913c-435a-8d25-e019c8dab7da	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24298.0	-24298.0	548.0	840.0	white	Dead
+07fbdb3c-8337-4319-8255-f2363f8a031e	Serous cystadenocarcinoma, NOS	Stage IV	59	0.5238095238095238	21582.0	-21582.0	848.0		white	Alive
+d7f82e34-5b34-4e8c-a0cf-d7561bcea43c	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21572.0	-21572.0	2196.0		white	Alive
+314e446d-3a57-4c91-ac2e-4fc211456ee6	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27165.0	-27165.0	1966.0		white	Alive
+6beaa1cb-a9f1-4127-898c-7aff2273788e	Serous cystadenocarcinoma, NOS	Stage IC	56	0.47619047619047616	20663.0	-20663.0	1776.0		white	Alive
+b31d85cc-d2e2-4bd1-9986-d6bbe30e657f	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23273.0	-23273.0	2182.0		white	Alive
+05ba5839-e00a-4a9e-8ba3-ecb490781e62	Serous cystadenocarcinoma, NOS	Stage IIIC	82	0.8888888888888888	30234.0	-30234.0	23.0	23.0	black or african american	Dead
+062982f8-9f49-425a-99e9-008af5ed9040	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23855.0	-23855.0	857.0	857.0	white	Dead
+8fe44099-b313-4bfd-a94a-27e72f2a818c	Serous cystadenocarcinoma, NOS	Stage IIIC	42	0.25396825396825395	15571.0	-15571.0	651.0	1725.0	white	Dead
+d73a0a33-e4e8-44bd-9580-2038ab06583a	Serous cystadenocarcinoma, NOS	Stage IV	62	0.5714285714285714	22982.0	-22982.0	820.0	820.0	white	Dead
+14c58def-60ee-48e0-a74b-da4eb77ef344	Serous cystadenocarcinoma, NOS	Stage IIIC	42	0.25396825396825395	15669.0	-15669.0	2028.0	2028.0	white	Dead
+6ea9877f-eb8d-4ee9-af4c-32a78474d9a6	Serous cystadenocarcinoma, NOS	Stage IIIB	83	0.9047619047619048	30592.0	-30592.0	260.0		not reported	Alive
+dc5a6ce7-01e5-408d-812e-e3e0ddc1cde5	Serous cystadenocarcinoma, NOS	Stage IIIC	40	0.2222222222222222	14900.0	-14900.0	629.0	629.0	white	Dead
+55153632-1673-487a-85c0-f156377db1fc	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19628.0	-19628.0		1102.0	white	Dead
+ee0a4a13-613e-4c5d-96c3-8083a013702d	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20770.0	-20770.0	4424.0		white	Alive
+6a1be87b-c4e0-4fd4-b050-50a245b22038	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26687.0	-26687.0	9.0	9.0	white	Dead
+cd6e5d3d-1c86-40dd-9cb3-b2e2075dec56	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	25937.0	-25937.0	277.0		white	Alive
+44493c23-82e9-4d9f-8e3c-7b3f9ae44970	Serous cystadenocarcinoma, NOS	Stage IV	41	0.23809523809523808	15119.0	-15119.0	162.0	984.0	white	Dead
+52386f66-2877-4c75-894e-5c1dc03e6ef4	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24274.0	-24274.0	1451.0	1451.0	black or african american	Dead
+1db60f09-7f5a-4f21-8003-06a6abc781db	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16523.0	-16523.0		1187.0	white	Dead
+c75c915f-ef4b-4c19-8ace-995e6c6015fd	Serous cystadenocarcinoma, NOS	Stage IV	57	0.49206349206349204	20987.0	-20987.0		1686.0	black or african american	Dead
+16ced1b8-64d5-4498-82df-4d37bfe5b310	Serous cystadenocarcinoma, NOS	Stage IIIB	76	0.7936507936507936	27762.0	-27762.0	1024.0	1024.0	white	Dead
+ba68f2cf-9271-41fd-9655-1fac7681f588	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	27004.0	-27004.0	594.0	594.0	white	Dead
+a4a3fca9-723a-47f5-a49d-b3acb71c04a7	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18943.0	-18943.0	376.0		white	Alive
+b1e11e94-646b-4c44-9d33-1ca67d8356fb	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24403.0	-24403.0	596.0	619.0	white	Dead
+077079c3-6877-467b-b9cc-5c650aae4f07	Serous cystadenocarcinoma, NOS	Stage IIIC	81	0.873015873015873	29615.0	-29615.0	549.0	730.0	white	Dead
+13d6c31a-6899-4119-a5c2-90adcb5bd20c	Serous cystadenocarcinoma, NOS	Stage IC	62	0.5714285714285714	22929.0	-22929.0	1381.0		white	Alive
+42ebd30b-175e-4ece-a806-e55cb7e40e96	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	22933.0	-22933.0	949.0	949.0	white	Dead
+867f9563-16c9-45a8-b519-6df61ba1b6b7	Serous cystadenocarcinoma, NOS	Stage IV	58	0.5079365079365079	21246.0	-21246.0		2717.0	white	Dead
+c70228cc-79c0-4c00-8926-6671c1474701	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	18012.0	-18012.0	1914.0		white	Alive
+41178cbc-db73-4007-b5d8-febebf7f578d	Serous cystadenocarcinoma, NOS	Stage IV	49	0.36507936507936506	18162.0	-18162.0		2342.0	white	Dead
+13319c20-02f6-4b5f-b24f-3d8f4084094c	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	19755.0	-19755.0	1064.0	1064.0	white	Dead
+5ed14506-f69a-4da8-9965-72d3270b9f72	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20862.0	-20862.0	53.0	53.0	white	Dead
+09643c0d-efdb-46b4-94df-018bd6134a88	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26142.0	-26142.0	262.0	262.0	white	Dead
+49e5ee61-a1c9-4038-84ac-92683e573a65	Serous cystadenocarcinoma, NOS	Stage IIIC	85	0.9365079365079365	31232.0	-31232.0	84.0		white	Alive
+390eed6b-50af-48a9-9fd6-3a68a2bbb7f9	Serous cystadenocarcinoma, NOS	Stage IIIC	52	0.4126984126984127	19087.0	-19087.0	2661.0		white	Alive
+5ced5b58-fab4-4bcd-b706-d6e49ce0cfc5	Serous cystadenocarcinoma, NOS	Stage IIIC	47	0.3333333333333333	17356.0	-17356.0	374.0		white	Alive
+0f7ac6ca-7806-4b2a-9d37-94ff74fcd010	Serous cystadenocarcinoma, NOS	Stage IV	60	0.5396825396825397	22256.0	-22256.0		256.0	black or african american	Dead
+5554a003-da6f-4ddf-9f05-6785987ac46c	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27093.0	-27093.0	143.0		white	Alive
+65ddccd2-70a7-48b3-88e1-9d6fd1dcd11b	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18602.0	-18602.0	119.0	204.0	white	Dead
+246404ae-3bc4-4db7-aee3-0346ca3f7322	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	18205.0	-18205.0	135.0		asian	Alive
+a9abe7a7-4126-414b-87d2-a6d25abcf1fa	Serous cystadenocarcinoma, NOS	Stage IV	72	0.7301587301587301	26342.0	-26342.0	83.0	83.0	white	Dead
+15f1a992-0724-4d76-a71a-702ac7753a41	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21550.0	-21550.0	455.0	455.0	white	Dead
+ea605be2-6578-4e01-8ec3-bbd84c0b7f1d	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26433.0	-26433.0	1209.0		white	Alive
+7592a659-7175-486f-a16e-24a4b4365a36	Serous cystadenocarcinoma, NOS	Stage IIB	50	0.38095238095238093	18517.0	-18517.0	2148.0	2148.0	white	Dead
+63c6a89b-b28c-434a-a632-5de6545db731	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24332.0	-24332.0	2237.0	3819.0	white	Dead
+d77ef9cf-f8e6-4ee9-8d4f-1106885f6b06	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24668.0	-24668.0	787.0	787.0	white	Dead
+49d2c0cf-a3f3-4519-a755-0a5f769df2ea	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21107.0	-21107.0	1324.0	1324.0	white	Dead
+b25b3379-df8f-4900-9bce-0f8df50f549b	Serous surface papillary carcinoma	Stage IIIC	53	0.42857142857142855	19463.0	-19463.0	475.0	475.0	white	Dead
+611600a6-43ec-4029-9682-cd6d6a3312ec	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22342.0	-22342.0	895.0	895.0	white	Dead
+914d8613-3c25-4a10-be50-28b42f4d3a5d	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26786.0	-26786.0	1977.0	1977.0	white	Dead
+6b2a9f9a-fe96-4311-a330-925c4ad36fe7	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23171.0	-23171.0	98.0		white	Alive
+374ea8df-ecc4-44b0-b519-33efa5078018	Serous cystadenocarcinoma, NOS	Stage IIIC	80	0.8571428571428571	29337.0	-29337.0	517.0	528.0	asian	Dead
+48f831b0-5d91-44ae-bc4e-db57ca84fe46	Serous cystadenocarcinoma, NOS	Stage IV	54	0.4444444444444444	19775.0	-19775.0	238.0		white	Alive
+b520aae5-65a6-4b27-bc2a-10b02c7b1aeb	Serous cystadenocarcinoma, NOS	Stage IV	62	0.5714285714285714	22646.0	-22646.0	91.0	91.0	white	Dead
+92960f76-0242-4a1c-bf7d-014c2f720219	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21193.0	-21193.0	2872.0	2872.0	white	Dead
+7c466a5f-a6b4-4d1a-a0f5-ddcd7ef90ff1	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	23002.0	-23002.0	1562.0	1562.0	white	Dead
+e1158102-06f2-47bb-9fe0-49b57f070755	Serous cystadenocarcinoma, NOS	Stage IIIB	60	0.5396825396825397	22100.0	-22100.0	1342.0		white	Alive
+5e90e1ed-cbfd-44ba-a6ff-63ff576b3c73	Serous cystadenocarcinoma, NOS	Stage IV	40	0.2222222222222222	14708.0	-14708.0	3263.0		white	Alive
+f34aa3b6-e966-49c6-bc55-130545772c53	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18583.0	-18583.0	1646.0	1646.0	black or african american	Dead
+8449955f-42d9-46f6-919a-5cc5d59e6284	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18628.0	-18628.0	690.0	690.0	white	Dead
+9a30dee8-962a-49db-a85a-c39515c91b68	Serous cystadenocarcinoma, NOS	Stage IV	53	0.42857142857142855	19595.0	-19595.0	1264.0	1264.0	white	Dead
+f553e953-6464-421f-8933-26ca82cb79d3	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20378.0	-20378.0	1038.0	1038.0	white	Dead
+0740321b-f8a5-4e1d-b390-ca6187598fac	Serous cystadenocarcinoma, NOS	Stage IV	73	0.746031746031746	26886.0	-26886.0	2099.0	3128.0	white	Dead
+29d26e7e-f4ae-4476-9a3f-27d5ec2ccb8a	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26066.0	-26066.0	563.0	563.0	white	Dead
+78777a80-cc6c-46c9-a14a-837ac7943719	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24199.0	-24199.0		61.0	white	Dead
+f4b56568-a74a-4a2e-89d9-11722ecf5948	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18449.0	-18449.0	2387.0		white	Alive
+62efb5ae-43dc-4a4c-a898-6cd9c6dba027	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19387.0	-19387.0	2467.0	2467.0	white	Dead
+34f285ab-6c31-4865-a0a7-a57af3567df0	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22287.0	-22287.0		701.0	white	Dead
+b4225c44-b9b6-46c5-aabf-7b0d9a9fe20b	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18664.0	-18664.0	1435.0	1470.0	white	Dead
+184aac07-44c1-47f1-8adf-50acbcc1762c	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23043.0	-23043.0		138.0	white	Dead
+66dc6379-a98b-498f-8109-e3a811d043ea	Serous cystadenocarcinoma, NOS	Stage IIIC	78	0.8253968253968254	28556.0	-28556.0	178.0		white	Alive
+756f6768-e69a-4fe9-aa41-7c58aabe4577	Serous cystadenocarcinoma, NOS	Stage IV	52	0.4126984126984127	19258.0	-19258.0	119.0	1650.0	asian	Dead
+662d77d1-1a43-427a-813b-e11edd30868e	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23932.0	-23932.0	481.0	518.0	white	Dead
+3438c018-9856-4628-ae59-7d365713647f	Serous cystadenocarcinoma, NOS	Stage IIIC	37	0.1746031746031746	13739.0	-13739.0		2279.0	white	Dead
+2ae65a06-df0f-4de1-a536-537cae0cc260	Serous cystadenocarcinoma, NOS	Stage IIIC	47	0.3333333333333333	17168.0	-17168.0	637.0	637.0	white	Dead
+9f096022-e3ec-4f63-8c52-03ef24c018f3	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21045.0	-21045.0	492.0		white	Alive
+32960bc7-839a-42c5-9460-3917fa578ffc	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20134.0	-20134.0	946.0	949.0	white	Dead
+619b14f3-b8cc-4c0a-8304-6719853d592a	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21664.0	-21664.0	598.0		white	Dead
+60014a6e-6a13-4f92-bbfd-eeeee9632f98	Serous cystadenocarcinoma, NOS	Stage IIIA	57	0.49206349206349204	21147.0	-21147.0	547.0		white	Alive
+7b042fb2-8f53-4fb1-8a44-40cd2128b279	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	28093.0	-28093.0	686.0		white	Alive
+6b06281b-d3a9-440e-a86c-ee7db003352a	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24319.0	-24319.0	1360.0	1448.0	white	Dead
+20ac688c-04c1-45a6-823a-6b523002ce92	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26092.0	-26092.0	1066.0		not reported	Alive
+5d8abed4-62b3-4e17-a8ce-9f6028e97103	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746				1363.0	white	Dead
+76cc2d21-eebc-4f09-9bc7-dbf7af0aafa8	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21167.0	-21167.0	346.0	346.0	black or african american	Dead
+e9b5336e-d724-4e7d-8c81-1147abd0a80d	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17671.0	-17671.0	24.0		not reported	Alive
+c3e443b9-5dc5-4793-91e3-534f21485268	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24545.0	-24545.0	183.0		white	Alive
+e20ea417-7296-4da8-9fdb-71cd1f45153a	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24682.0	-24682.0	4624.0	4624.0	white	Dead
+a3898640-0d85-441d-a000-b5b8ff857399	Serous cystadenocarcinoma, NOS	Stage IIIB	54	0.4444444444444444	20007.0	-20007.0	105.0		white	Alive
+e08a619d-8a55-435d-8c41-a77a112ed889	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26621.0	-26621.0	907.0		white	Alive
+f6ebf3a7-31c6-4f4c-9a0b-74cf35bfedf6	Serous cystadenocarcinoma, NOS	Stage IIIC	69	0.6825396825396826	25404.0	-25404.0	255.0		white	Alive
+fe0e3851-d8cb-4533-9536-b4826cd25f87	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21130.0	-21130.0	16.0	1106.0	white	Dead
+0aa020cb-69d2-4235-a609-c279a133d8bb	Serous cystadenocarcinoma, NOS	Stage IV	42	0.25396825396825395	15515.0	-15515.0	1364.0		white	Alive
+b783f33b-734a-4801-bf39-b559a2035c6f	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21473.0	-21473.0	3548.0		white	Alive
+5d603bba-62e6-48fb-b8fc-401109abcaee	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21404.0	-21404.0	1103.0	1103.0	white	Dead
+bdd792e7-d75f-4aa3-b38e-f0708e112075	Serous cystadenocarcinoma, NOS	'--	47	0.3333333333333333	17235.0	-17235.0	506.0	506.0	white	Dead
+e5a329ec-e50e-4786-901d-b58474f8ea65	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23993.0	-23993.0	129.0	129.0	white	Dead
+219f54ef-4235-482d-b799-f2fa9930105c	Serous cystadenocarcinoma, NOS	Stage IV	51	0.3968253968253968	18835.0	-18835.0	3337.0	3337.0	white	Dead
+5e447cbc-9bc9-4e1a-9b43-06cf619e5aa9	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23706.0	-23706.0	624.0		not reported	Alive
+d48fff14-9413-40a7-a09c-41f12bbe0aa9	Serous surface papillary carcinoma	Stage IIIC	55	0.4603174603174603	20390.0	-20390.0	2201.0	2201.0	white	Dead
+8ae56ffc-960c-46c2-bd6c-1dcff33875d0	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20771.0	-20771.0	1024.0	1024.0	white	Dead
+acb7ec56-8a47-495f-a11b-2c9fb5d8fe95	Serous cystadenocarcinoma, NOS	Stage IV	59	0.5238095238095238	21561.0	-21561.0	9.0	9.0	white	Dead
+bc4bc342-20bf-40c3-af26-2c6f942da93d	Serous cystadenocarcinoma, NOS	Stage IIIC	47	0.3333333333333333	17528.0	-17528.0	3871.0		white	Alive
+12581634-eebb-4841-8498-71dc9d78c546	Serous cystadenocarcinoma, NOS	Stage IIIB	53	0.42857142857142855	19608.0	-19608.0	695.0	695.0	white	Dead
+f8e9d538-7291-4fe7-b3f2-d01676a027f9	Serous cystadenocarcinoma, NOS	Stage IIIC	75	0.7777777777777778	27486.0	-27486.0		1169.0	white	Dead
+e07a61e2-bcd2-4a96-80df-97e04aafbd32	Serous cystadenocarcinoma, NOS	Stage IIIC	44	0.2857142857142857	16262.0	-16262.0	982.0	1000.0	white	Dead
+2cdd5154-ee5c-4d67-b2eb-947dfaa56be2	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22009.0	-22009.0	276.0		white	Alive
+5075cdc1-1b7c-4e25-98ea-fb568bd35f2d	Serous cystadenocarcinoma, NOS	Stage IIIC	39	0.20634920634920634	14595.0	-14595.0	788.0		not reported	Alive
+88180134-710f-46ea-9b06-5e5d860d6d9f	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20718.0	-20718.0	1354.0	1354.0	white	Dead
+644a88a7-dc56-468a-af5c-60278aab7642	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18733.0	-18733.0		304.0	white	Dead
+4eac2c98-86d2-4ee6-a1d3-157d013c78dc	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21066.0	-21066.0	1752.0		white	Alive
+dac96910-0cb2-44ea-b108-2d6d51b07112	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	22708.0	-22708.0	78.0	1359.0	white	Dead
+fe402983-70da-44db-b7b1-c32702ddde26	Serous cystadenocarcinoma, NOS	Stage IV	64	0.6031746031746031	23481.0	-23481.0	2438.0		white	Alive
+d1976840-35f7-4423-8458-12fb32a52b33	Serous cystadenocarcinoma, NOS	Stage IV	73	0.746031746031746	26715.0	-26715.0	68.0	84.0	black or african american	Dead
+f9824a6e-7a97-445c-8846-df8d8cddedaa	Serous cystadenocarcinoma, NOS	Stage IV	46	0.31746031746031744	17159.0	-17159.0	37.0	37.0	not reported	Dead
+7d1e9451-7a6a-4086-af7f-3ed57505daf0	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22394.0	-22394.0	75.0	75.0	white	Dead
+499a9b57-ee1a-4012-bbab-c6ad955b5e0a	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19661.0	-19661.0	1579.0	1579.0	white	Dead
+7413c891-f74e-456f-bc70-69c83fb53c70	Serous cystadenocarcinoma, NOS	Stage IV	75	0.7777777777777778	27667.0	-27667.0	31.0	31.0	white	Dead
+5d7027f5-60a0-47ab-a79d-667c9acc0e54	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20785.0	-20785.0	1163.0	1163.0	white	Dead
+20cf00ea-d7da-42bb-bce7-f005f0b952eb	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238			5481.0		white	Alive
+0e6c9433-289c-4744-a0c1-47ec67774047	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22605.0	-22605.0	360.0	653.0	white	Dead
+9bdbaccf-b43b-4ec3-8b9b-dff65215eb00	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22035.0	-22035.0	2587.0	2587.0	white	Dead
+de548bdd-14ca-486b-bd16-a6fbdd5b50d2	Serous cystadenocarcinoma, NOS	Stage IIIC	52	0.4126984126984127	19311.0	-19311.0	875.0		not reported	Alive
+3db7ecdd-315f-4475-a375-f6044a4b0070	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24823.0	-24823.0		45.0	american indian or alaska native	Dead
+2a3a6222-f477-4198-ab9e-cdf527c1a6cf	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21014.0	-21014.0	1073.0	1074.0	white	Dead
+0fc8777c-8f12-472f-a0ea-085139b35d1f	Serous cystadenocarcinoma, NOS	Stage IC	50	0.38095238095238093	18596.0	-18596.0	2967.0		not reported	Alive
+04abcf51-c52a-4e74-a5f4-4bc4fb444902	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22333.0	-22333.0	897.0		not reported	Alive
+23d32627-9fd2-4312-bcda-ee7409e3983f	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20210.0	-20210.0	163.0		white	Alive
+fdf83fdf-dfbb-4306-9a1b-b4487d18b402	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22148.0	-22148.0	130.0		white	Alive
+0484a929-7a7f-4926-8d25-470ddab082ec	Serous cystadenocarcinoma, NOS	Stage IIIB	87	0.9682539682539683	31925.0	-31925.0	947.0		white	Alive
+c5355491-e1e8-46a4-a05e-bafcaf2e7459	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	27898.0	-27898.0	2648.0	2648.0	white	Dead
+0f4a4ad1-e394-45c4-9aa9-aadf2bff0628	Serous cystadenocarcinoma, NOS	Stage IIIC	46	0.31746031746031744	16942.0	-16942.0		1946.0	white	Dead
+4c18d9cf-4af4-4a86-8b1c-f78795fbbd7e	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24747.0	-24747.0	1384.0	1384.0	white	Dead
+a285786d-120e-4c88-b48b-8111f4413988	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26172.0	-26172.0	425.0	425.0	white	Dead
+7dcc809b-e33a-4453-b92a-c00786f48cb0	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	17943.0	-17943.0	1213.0	1213.0	white	Dead
+1c0318d9-0472-4840-add4-46bb9f914a30	Serous cystadenocarcinoma, NOS	Stage IV	38	0.19047619047619047	13894.0	-13894.0	338.0		white	Alive
+a36a4440-15ef-4837-904b-380a964d16f1	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23542.0	-23542.0	113.0		white	Alive
+7e4e7914-ec23-4c55-98d6-3c5eecffa8e4	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20453.0	-20453.0	1620.0	1620.0	white	Dead
+a3e26259-732b-49fb-bc95-2f0ec7a0494e	Serous cystadenocarcinoma, NOS	Stage IIC	53	0.42857142857142855	19365.0	-19365.0	1329.0	1329.0	white	Dead
+8727855e-120a-4216-a803-8cc6cd1159be	Serous cystadenocarcinoma, NOS	Stage IV	80	0.8571428571428571	29501.0	-29501.0		563.0	white	Dead
+3f917550-89a6-404b-94df-938c99121411	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24488.0	-24488.0	627.0	627.0	white	Dead
+94030805-8beb-441a-af73-11a80768edb5	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18755.0	-18755.0	581.0		white	Alive
+bc873b2a-35b7-4365-a2cc-e6a83063556e	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20525.0	-20525.0	1751.0	1751.0	white	Dead
+3018efe7-13a1-47ae-a726-8fc967c73841	Serous cystadenocarcinoma, NOS	Stage IIIC	68	0.6666666666666666	24939.0	-24939.0	863.0	863.0	white	Dead
+f2ec64f5-a414-4c34-99c7-d59bc4e831e0	Serous cystadenocarcinoma, NOS	Stage IIIC	69	0.6825396825396826	25460.0	-25460.0	1746.0	1746.0	white	Dead
+80f85c54-e12f-4afa-8fa5-5f3e083b6f95	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22294.0	-22294.0		1024.0	white	Dead
+3768d34f-1527-40db-b116-cd80cee5ec3a	Serous cystadenocarcinoma, NOS	Stage IV	50	0.38095238095238093	18285.0	-18285.0		1069.0	asian	Dead
+f9793a4b-c0e7-4475-bf80-69543b7ee2f6	Serous cystadenocarcinoma, NOS	Stage IV	34	0.12698412698412698	12772.0	-12772.0	194.0		white	Alive
+c0c3caab-9277-4a31-a96c-c607e38d5ccc	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20409.0	-20409.0	2089.0	2089.0	white	Dead
+86b513ba-df09-485d-92d4-fb9e888f7350	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20737.0	-20737.0	514.0	515.0	white	Dead
+79e6e31c-22a1-481c-903b-ab5499cbd450	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	19894.0	-19894.0	1748.0	2182.0	white	Dead
+e9483296-cb91-497a-b955-39a3c3289dac	Serous cystadenocarcinoma, NOS	Stage IIIA	45	0.30158730158730157	16725.0	-16725.0		1720.0	white	Dead
+1e14f098-17b2-4f54-8e4f-e38088008df7	Serous cystadenocarcinoma, NOS	Stage IV	55	0.4603174603174603	20109.0	-20109.0	189.0	189.0	white	Dead
+9bbc01b4-056c-4ddc-aca4-ff20718646d0	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24473.0	-24473.0		547.0	native hawaiian or other pacific islander	Dead
+502e8d02-2953-4514-a2e1-6179dd94da73	Serous cystadenocarcinoma, NOS	Stage IIIC	77	0.8095238095238095	28445.0	-28445.0	145.0	1993.0	white	Dead
+fbb45305-de8d-4baf-8bd0-047b29c2e9d9	Serous cystadenocarcinoma, NOS	Stage IV	45	0.30158730158730157	16670.0	-16670.0	2614.0		white	Alive
+1ede8063-e0e9-466d-891c-ac8916f1b5fa	Serous cystadenocarcinoma, NOS	Stage IIIC	79	0.8412698412698413	28878.0	-28878.0	260.0		white	Alive
+cddce77f-21e6-4124-9f03-96fb5ca7cefa	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	21113.0	-21113.0		871.0	white	Dead
+c9e58844-9d61-44a2-aee6-1760bc19711b	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17588.0	-17588.0	966.0	976.0	white	Dead
+6d10d4ee-6331-4bba-93bc-a7b64cc0b22a	Serous cystadenocarcinoma, NOS	Stage IIIC	78	0.8253968253968254	28848.0	-28848.0	1224.0	1336.0	white	Dead
+49bfd0fe-48ce-49db-9f76-ce2310410950	Serous cystadenocarcinoma, NOS	Stage IV	48	0.3492063492063492	17642.0	-17642.0	629.0	629.0	white	Dead
+62379be5-13f0-474b-94d3-6f944ec4ee96	Serous cystadenocarcinoma, NOS	Stage IIIC	77	0.8095238095238095	28129.0	-28129.0	1259.0	1259.0	white	Dead
+f64ebc7f-0e5a-42b4-af57-6cdb90d24f90	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22281.0	-22281.0	190.0		white	Alive
+31872f6a-d225-4f91-b38d-4505d19e406c	Serous cystadenocarcinoma, NOS	Stage IIIC	78	0.8253968253968254	28789.0	-28789.0	1418.0		white	Alive
+33dc48d8-2e01-482b-944c-ac10da727ec9	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19605.0	-19605.0	122.0		white	Alive
+818dc159-aba4-46bc-a4ed-68ee0f8c4461	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22127.0	-22127.0	396.0	396.0	american indian or alaska native	Dead
+561968ce-da9a-4d69-8bc2-bc87b9550f93	Serous cystadenocarcinoma, NOS	Stage IV	50	0.38095238095238093	18393.0	-18393.0	999.0	1314.0	white	Dead
+fd4740db-76a8-4362-be71-7b609479bb67	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26267.0	-26267.0	1369.0	1369.0	white	Dead
+99a61986-7b23-46b5-99a4-efba6bad3766	Serous cystadenocarcinoma, NOS	Stage IIB	58	0.5079365079365079	21293.0	-21293.0	1446.0	1446.0	white	Dead
+5d1a54fe-e0df-4c17-b623-b649a136dc82	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20287.0	-20287.0		1688.0	white	Dead
+f7752d6e-f9cd-4dc9-ab01-3ab87acb21e4	Serous cystadenocarcinoma, NOS	Stage IIIB	44	0.2857142857142857	16236.0	-16236.0		1483.0	white	Dead
+85a85a11-7200-4e96-97af-6ba26d680d59	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	24064.0	-24064.0	420.0	1484.0	white	Dead
+7ca97692-0bf5-4bbd-81ce-10a051d04bd5	Serous cystadenocarcinoma, NOS	Stage IIIC	80	0.8571428571428571	29558.0	-29558.0	604.0	636.0	white	Dead
+2cb50c2d-e749-4172-b101-d975507435c5	Serous cystadenocarcinoma, NOS	Stage IIIB	54	0.4444444444444444	19843.0	-19843.0	524.0	524.0	white	Dead
+3ac45a71-c463-4f0f-b030-58c475a34418	Serous cystadenocarcinoma, NOS	Stage IIC	40	0.2222222222222222	14791.0	-14791.0	932.0		asian	Alive
+d1e974e7-dd68-40cc-ad06-2b57d964e5a1	Serous cystadenocarcinoma, NOS	Stage IIIC	78	0.8253968253968254	28626.0	-28626.0		61.0	white	Dead
+f007fa7a-7da9-4cb0-8aea-623af1a122c5	Serous cystadenocarcinoma, NOS	Stage IIIC	75	0.7777777777777778	27588.0	-27588.0	89.0		white	Alive
+a88b7e66-5f12-4023-a7e2-fcfbd1f25977	Serous cystadenocarcinoma, NOS	Stage IIIC	42	0.25396825396825395	15690.0	-15690.0		1013.0	white	Dead
+ad2b1a0a-153f-483d-b228-5763eba3f6cc	Serous cystadenocarcinoma, NOS	Stage IIIC	80	0.8571428571428571	29373.0	-29373.0	608.0	608.0	white	Dead
+afd92922-b8dc-48bd-a9c0-bc8d95855eb7	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18671.0	-18671.0	1341.0	1341.0	white	Dead
+75f2d97a-b96c-403f-8055-5c5c8083e856	Serous cystadenocarcinoma, NOS	Stage IIC	56	0.47619047619047616	20779.0	-20779.0	1127.0		white	Alive
+931738a7-4b5b-46dc-b69f-72600862d8af	Serous cystadenocarcinoma, NOS	Stage IIIC	43	0.2698412698412698	16016.0	-16016.0	61.0		white	Alive
+6f592f17-e00b-4d04-a45b-d9d4cf4c3075	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17725.0	-17725.0		1487.0	white	Dead
+838693d5-1ae0-4d75-834b-e1b89b96b0ed	Serous cystadenocarcinoma, NOS	Stage IV	50	0.38095238095238093	18396.0	-18396.0	950.0	952.0	white	Dead
+a6eb0cd0-fe57-41b0-8593-776208684293	Serous cystadenocarcinoma, NOS	Stage IIIC	40	0.2222222222222222	14782.0	-14782.0	956.0		white	Alive
+cd49126a-ec15-43fa-9e43-3f7460d43f2b	Serous cystadenocarcinoma, NOS	Stage IIIC	68	0.6666666666666666	25008.0	-25008.0	504.0	1059.0	white	Dead
+3250e604-d12a-4922-aaca-6f0cae095842	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20897.0	-20897.0	431.0		not reported	Alive
+5495b18a-10ec-427b-83b8-03ef4b587b13	Serous cystadenocarcinoma, NOS	Stage IV	59	0.5238095238095238	21879.0	-21879.0	2606.0	2634.0	white	Dead
+54cf3bfe-51c0-4cca-9054-bf76b05a9371	Serous cystadenocarcinoma, NOS	Stage IIIC	81	0.873015873015873	29685.0	-29685.0	1334.0	1334.0	white	Dead
+b7715ff6-57a6-4513-9447-aa8bc93f16d4	Serous cystadenocarcinoma, NOS	Stage IV	72	0.7301587301587301	26428.0	-26428.0		361.0	white	Dead
+e0502c47-3234-4609-a8d5-730a9e6eb5b8	Serous cystadenocarcinoma, NOS	Stage IA	65	0.6190476190476191	23993.0	-23993.0			not reported	Alive
+1c86e4e5-ecc9-4f6d-a557-77bf396a653b	Serous cystadenocarcinoma, NOS	Stage IA	48	0.3492063492063492	17768.0	-17768.0	1265.0		white	Alive
+f65f2e78-c001-4ef3-ae88-3e4f83c7aceb	Serous cystadenocarcinoma, NOS	Stage IV	63	0.5873015873015873	23329.0	-23329.0	847.0		asian	Alive
+7bd1851f-7e2e-4dbc-9f0e-7cb2863371e1	Serous cystadenocarcinoma, NOS	Stage IIIC	69	0.6825396825396826	25416.0	-25416.0	1007.0	1007.0	white	Dead
+c9e28934-8379-4511-817c-d787f2c4ca3a	Serous cystadenocarcinoma, NOS	Stage IV	74	0.7619047619047619	27176.0	-27176.0	681.0	681.0	white	Dead
+f0ca8205-0754-4bd8-a6a8-31901040c5e7	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23509.0	-23509.0	1398.0		white	Alive
+5d36676e-4140-44b5-aa0e-b2af092b7dc0	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18404.0	-18404.0	2692.0	2692.0	white	Dead
+7472b3ba-9b15-4d97-8708-a2dd82ca0f45	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23016.0	-23016.0	360.0		black or african american	Alive
+ac2e88ff-8b1e-4691-9a96-5a581f98d827	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	24006.0	-24006.0	772.0		white	Alive
+b120b701-c194-43d7-a491-3206fac38ec1	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16764.0	-16764.0	181.0		white	Alive
+ea6405c4-0fe4-4f37-bef2-275072f91e39	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	22864.0	-22864.0	379.0		white	Alive
+2bb96e1e-6992-434d-83e5-2f03713b3911	Serous cystadenocarcinoma, NOS	Stage IIIC	47	0.3333333333333333	17469.0	-17469.0	1167.0	1167.0	white	Dead
+cf1e86ec-4bcb-403c-831b-d67bddef14eb	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27048.0	-27048.0	312.0	312.0	white	Dead
+460616ec-f66f-483b-88c1-757edd86261d	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21284.0	-21284.0	220.0		white	Alive
+07a859fc-6f78-4905-9035-90e2403dbe8d	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22339.0	-22339.0	945.0	1249.0	white	Dead
+87cdf9a8-0579-4d3e-b4df-0f8eef63d7f4	Serous cystadenocarcinoma, NOS	Stage IIIB	60	0.5396825396825397	21972.0	-21972.0	1321.0	1321.0	white	Dead
+b0839f46-8c82-4619-be3d-c857a1759463	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21352.0	-21352.0	684.0		white	Alive
+7aadc24b-3de2-478f-b9e5-aca44424f514	Serous cystadenocarcinoma, NOS	Stage IIIB	59	0.5238095238095238	21902.0	-21902.0	657.0		asian	Alive
+19427350-619b-4b9c-a3ba-37f667bb2843	Serous cystadenocarcinoma, NOS	Stage IIIB	53	0.42857142857142855	19681.0	-19681.0	2742.0	2742.0	white	Dead
+2cb82948-7cbe-4b6c-8414-c02f662de2d0	Serous cystadenocarcinoma, NOS	Stage IV	45	0.30158730158730157	16493.0	-16493.0		1516.0	white	Dead
+9bf16a89-2fc7-4c08-93bc-3105eec5c3cc	Serous cystadenocarcinoma, NOS	Stage IV	46	0.31746031746031744	16961.0	-16961.0	81.0		white	Alive
+c88502e9-0bc6-47c3-adc4-d98b63c7797b	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26779.0	-26779.0	945.0	945.0	white	Dead
+c9226204-cb61-40b8-8a94-a7e71c14ea3a	Serous cystadenocarcinoma, NOS	Stage IIIA	50	0.38095238095238093	18582.0	-18582.0	1947.0	1947.0	white	Dead
+4ca9c0e8-75a7-4665-9d88-6dd2bb44b1e1	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	28100.0	-28100.0	571.0		white	Alive
+6ad8bc89-d8e9-48c2-bc25-c8e51f972b4d	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23987.0	-23987.0	1033.0	1033.0	white	Dead
+7d03ddb6-f3fe-4b50-8bba-514aa65e7d0e	Serous cystadenocarcinoma, NOS	Stage IIB	77	0.8095238095238095	28231.0	-28231.0	186.0		asian	Alive
+5201ee13-2aed-4641-9169-4d5ee07a23da	Serous cystadenocarcinoma, NOS	Stage IIIA	54	0.4444444444444444	19901.0	-19901.0	1364.0	1364.0	white	Dead
+ad2939e6-b8b8-475a-90e2-6a369c3d3167	Serous cystadenocarcinoma, NOS	Stage IIIC	44	0.2857142857142857	16400.0	-16400.0	1579.0	1579.0	white	Dead
+3bc8a74f-49bd-46b6-a3a4-68ca838e83c6	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23711.0	-23711.0	90.0	90.0	white	Dead
+9d25cd0e-0a3e-4ee0-b1a3-58ffab348c9d	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	27010.0	-27010.0		1266.0	white	Dead
+8652ddee-98f4-4584-b450-e6f2f5c9d7ec	Serous cystadenocarcinoma, NOS	Stage IIC	62	0.5714285714285714	22855.0	-22855.0		1499.0	white	Dead
+20c6be4d-7baf-4ea0-93e2-a5212f2e9b9c	Serous cystadenocarcinoma, NOS	Stage IIC	81	0.873015873015873	29830.0	-29830.0	932.0		white	Alive
+0b2ea4b7-98bb-4190-b682-2c75b447c90a	Serous cystadenocarcinoma, NOS	Stage IV	42	0.25396825396825395	15462.0	-15462.0	974.0	1004.0	white	Dead
+602e2934-223a-44db-8c33-06eb05d72f94	Serous cystadenocarcinoma, NOS	'--	63	0.5873015873015873	23062.0	-23062.0	761.0		white	Alive
+0dd95368-0713-45f0-84f4-c91af9cbba74	Serous cystadenocarcinoma, NOS	Stage IIIB	52	0.4126984126984127	19060.0	-19060.0	44.0		white	Alive
+778ce436-a825-4689-81c1-b7c965404163	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	19797.0	-19797.0		1875.0	white	Dead
+f9f44f86-10c7-4473-b156-5afbfa9a2ad0	Serous cystadenocarcinoma, NOS	Stage IV	56	0.47619047619047616	20527.0	-20527.0	1933.0	1933.0	white	Dead
+5c127332-5ca0-45f1-a5ac-4876ad94e491	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	27789.0	-27789.0	1278.0	1278.0	white	Dead
+6209e80d-a115-4f8e-bf0d-18461401a1c6	Serous cystadenocarcinoma, NOS	Stage IV	48	0.3492063492063492	17791.0	-17791.0		949.0	white	Dead
+99407c1d-40b5-4ded-ba29-1e40dfd65be4	Serous cystadenocarcinoma, NOS	Stage IC	74	0.7619047619047619	27203.0	-27203.0	564.0		white	Alive
+6485b68f-caa7-45cd-9bc5-78c2add8191d	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23960.0	-23960.0	3400.0		white	Alive
+b3df9c0a-420c-4cc2-a3e0-56df1ed7e997	Serous cystadenocarcinoma, NOS	Stage IB	55	0.4603174603174603	20381.0	-20381.0	396.0		white	Alive
+6264e699-d40b-4ebc-b443-0a0edcb220dc	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26145.0	-26145.0	92.0	92.0	white	Dead
+82e96c6c-a88c-4e52-be56-7f24f6c7b835	Serous cystadenocarcinoma, NOS	Stage IIC	59	0.5238095238095238	21635.0	-21635.0	1946.0	2025.0	white	Dead
+955c80be-53df-4565-9303-a7abf96a2f81	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	28093.0	-28093.0	90.0	457.0	white	Dead
+6e84e89d-4f35-43b8-b47d-b1343b8c1ab9	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20881.0	-20881.0	260.0	260.0	white	Dead
+b0585c7a-7205-4dac-9d54-6da89674accb	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21392.0	-21392.0	1372.0		white	Alive
+4e6f88de-7624-4719-8234-4c9e5b2e2988	Serous cystadenocarcinoma, NOS	Stage IV	50	0.38095238095238093	18599.0	-18599.0	92.0		white	Alive
+31b997dd-aaea-4003-a64d-11d3e19b0bbc	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26606.0	-26606.0	141.0	1483.0	white	Dead
+067c5c61-d147-4b08-ab8a-32c30969d564	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	19890.0	-19890.0	414.0	414.0	white	Dead
+d1eeaca3-52c0-4a0c-916a-fd64cec911d9	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19579.0	-19579.0	233.0	233.0	white	Dead
+1d192835-524e-429d-bf74-3c4727acb446	Serous cystadenocarcinoma, NOS	Stage IIC	59	0.5238095238095238	21745.0	-21745.0		1348.0	white	Dead
+384170fc-e8be-426a-a54e-bf1ca61f2986	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24758.0	-24758.0	583.0	583.0	white	Dead
+d2ccefea-c1d6-465f-97b1-e51e29c5f1f8	Serous cystadenocarcinoma, NOS	Stage IIIC	87	0.9682539682539683	31900.0	-31900.0	972.0	972.0	white	Dead
+2956e414-f167-438f-8747-a46fe0723622	Serous cystadenocarcinoma, NOS	Stage IV	75	0.7777777777777778	27438.0	-27438.0	76.0	76.0	white	Dead
+ce871097-a6e9-4139-897e-642ee24ee123	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21199.0	-21199.0	1161.0	1161.0	white	Dead
+00630714-7ab3-44e1-afff-186300edae44	Serous cystadenocarcinoma, NOS	Stage IV	51	0.3968253968253968	18697.0	-18697.0	1036.0	1156.0	white	Dead
+22178c3c-6b04-46d8-8041-dc83fa195029	Serous cystadenocarcinoma, NOS	Stage IIIC	38	0.19047619047619047	14184.0	-14184.0	883.0	883.0	american indian or alaska native	Dead
+56a30462-2819-4c18-95be-8e73880a4921	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26820.0	-26820.0	1144.0	2012.0	white	Dead
+cb090048-9af1-489d-9ebe-7efaa3dc4e85	Serous cystadenocarcinoma, NOS	Stage IIIC	52	0.4126984126984127	18997.0	-18997.0	349.0		white	Alive
+3fc8f799-5bd3-4f48-baf0-c458ce86ab7e	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18846.0	-18846.0	192.0		white	Alive
+7016714b-6af8-45dd-8341-1493927e5515	Serous cystadenocarcinoma, NOS	Stage IIIC	69	0.6825396825396826	25454.0	-25454.0	1089.0	1123.0	black or african american	Dead
+6746533a-8d0b-4ebc-87ec-49c8738121a8	Serous cystadenocarcinoma, NOS	Stage IIC	80	0.8571428571428571	29262.0	-29262.0		887.0	white	Dead
+58427bce-6b81-4083-aeda-25f59e292bbc	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20331.0	-20331.0	1126.0	1279.0	white	Dead
+0ba7b6cc-e5f5-47d7-859a-24e31aa336ab	Serous cystadenocarcinoma, NOS	Stage IV	58	0.5079365079365079	21422.0	-21422.0	1364.0	1843.0	white	Dead
+d0673efd-3315-4dd5-8ab6-912bfa07dceb	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24798.0	-24798.0		1511.0	white	Dead
+1cc02c64-a34e-46ae-9bc7-5d50f2fefb31	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16734.0	-16734.0	134.0	1039.0	white	Dead
+2c69f3a4-c26c-4fbb-a1c0-b1f57554c43a	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	25999.0	-25999.0	340.0	340.0	white	Dead
+295231ab-477b-4077-a368-db34f867102c	Serous cystadenocarcinoma, NOS	Stage IIIC	36	0.15873015873015872	13346.0	-13346.0	297.0		white	Alive
+bff84539-7862-45b2-b5fc-e77291fcca8b	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21243.0	-21243.0	2506.0		white	Alive
+563853a2-9ac2-48be-adf3-1e547ee2b274	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21406.0	-21406.0	1366.0	1366.0	white	Dead
+74dcdfb4-a637-4111-9a22-4b4bc7bbc8f7	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22046.0	-22046.0	1498.0	2749.0	white	Dead
+c7c3fe4a-327a-4b7e-a259-989b72971209	Serous cystadenocarcinoma, NOS	Stage IV	60	0.5396825396825397	22225.0	-22225.0	575.0	575.0	white	Dead
+09c77947-a333-4392-b18d-a6c1f08764a1	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	18227.0	-18227.0	253.0		white	Alive
+107bd8af-13e6-4c6a-9bdc-83c08eaaff90	Serous cystadenocarcinoma, NOS	Stage IC	78	0.8253968253968254	28508.0	-28508.0	132.0	132.0	white	Dead
+8d1dcf21-efd3-4fbe-ad44-f43a19239383	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	25973.0	-25973.0	1993.0		black or african american	Alive
+2ebb738c-4829-4720-931a-96c0fd117e2a	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26086.0	-26086.0		542.0	white	Dead
+30c7efdd-5a86-4418-a33c-a5d27fe56e42	Serous cystadenocarcinoma, NOS	Stage IIIC	26	0.0	9760.0	-9760.0	724.0		white	Alive
+fef1696c-a8f4-4db6-8615-e486522baaaa	Serous cystadenocarcinoma, NOS	Stage IIIC	78	0.8253968253968254	28529.0	-28529.0	232.0		black or african american	Alive
+b25570ed-baca-4e3f-87c6-2ef18119ba49	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20668.0	-20668.0	3500.0		white	Alive
+f3cd0ca3-8e5d-481b-b28c-619a4123dcd0	Serous cystadenocarcinoma, NOS	Stage IIIA	42	0.25396825396825395	15444.0	-15444.0	557.0		not reported	Alive
+9e7d3dea-5d81-4f10-819c-1c2a68ddd150	Serous cystadenocarcinoma, NOS	Stage IIIC	46	0.31746031746031744	17130.0	-17130.0	1955.0	1955.0	white	Dead
+2517ca7a-6057-4c19-b7e1-f6d078e9881a	Serous cystadenocarcinoma, NOS	Stage IIIC	79	0.8412698412698413	29050.0	-29050.0	1059.0	1059.0	white	Dead
+99f1ae02-86ec-4d93-8cd4-650bf6f02c10	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25737.0	-25737.0	1011.0	1040.0	white	Dead
+02d9aa2e-b16a-48ea-a420-5daed9fd51a6	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21423.0	-21423.0	147.0		not reported	Alive
+6cf9f872-2e59-45cf-bb5e-ebd7fa1b3caf	Serous cystadenocarcinoma, NOS	Stage IIIC	78	0.8253968253968254	28498.0	-28498.0	2141.0	2811.0	white	Dead
+d38ca631-ed5c-4182-a647-625060726fa7	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22207.0	-22207.0		848.0	white	Dead
+27920e1e-b9ab-4587-970a-0cba7025becb	Serous cystadenocarcinoma, NOS	Stage IIIC	41	0.23809523809523808	15333.0	-15333.0	589.0		asian	Alive
+20336269-5a5b-4ba7-8fe8-665a1f9af738	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23407.0	-23407.0	1843.0	1891.0	white	Dead
+2222b629-02ab-4ead-997f-09d91c6f7cf4	Serous cystadenocarcinoma, NOS	Stage IA	71	0.7142857142857143				2437.0	not reported	Dead
+c3f9ee36-d34f-472b-ac7f-801a0d400aa4	Serous cystadenocarcinoma, NOS	Stage IV	57	0.49206349206349204	20950.0	-20950.0	2464.0		white	Alive
+0c1a2e7d-e7e4-481e-a012-ef214c444497	Serous cystadenocarcinoma, NOS	Stage IIIB	52	0.4126984126984127	19263.0	-19263.0		2561.0	white	Dead
+18e0e996-8f23-4f53-94a5-dde38b550863	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26836.0	-26836.0	208.0	1742.0	white	Dead
+8e1b8811-1eb2-4337-852c-c19eaa0ee418	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23850.0	-23850.0	1722.0		not reported	Alive
+7e34d3c1-1fab-4326-9a69-4260d2bac558	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	27021.0	-27021.0	1073.0	1073.0	white	Dead
+c8febeef-8e7e-459e-88cb-8086692dc559	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20262.0	-20262.0	1595.0	1595.0	asian	Dead
+45957be6-e4df-4245-acf8-39dfc118ee19	Serous cystadenocarcinoma, NOS	Stage IIIC	52	0.4126984126984127	19337.0	-19337.0	2571.0		white	Alive
+94efd4f9-69b0-4efa-8a0c-61106e898fdd	Serous cystadenocarcinoma, NOS	Stage IIIC	80	0.8571428571428571	29555.0	-29555.0	176.0		white	Alive
+4c099644-047c-42a3-8187-bfcbfe6662e4	Serous cystadenocarcinoma, NOS	Stage IV	59	0.5238095238095238	21581.0	-21581.0	365.0	365.0	white	Dead
+91de8a74-a1e6-46b6-a06e-70aedf2c3eaf	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24724.0	-24724.0	4665.0		white	Alive
+8628f1b2-3763-4ba9-a375-083874bb18f2	Papillary serous cystadenocarcinoma	Stage IV	55	0.4603174603174603	20274.0	-20274.0		24.0	black or african american	Dead
+ff530f28-0ec0-4494-bb54-44bb055bae1c	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23094.0	-23094.0	1204.0	1204.0	white	Dead
+95e58015-a7c0-4bdc-bf64-7617d24d0784	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23276.0	-23276.0	354.0	354.0	white	Dead
+b1c90c69-6149-4105-8182-ab9212f196be	Serous cystadenocarcinoma, NOS	Stage IIIA	54	0.4444444444444444	20052.0	-20052.0	928.0		white	Alive
+5503b3a1-7d03-41b2-9ec8-e478c5414d67	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21810.0	-21810.0	568.0	568.0	white	Dead
+5abb6d80-fc39-49a4-8db5-3db24543feb6	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	20015.0	-20015.0	741.0		white	Alive
+73b63d07-0c1d-4bf2-bf11-b183e090e200	Serous cystadenocarcinoma, NOS	Stage IIIC	85	0.9365079365079365	31211.0	-31211.0	68.0	68.0	not reported	Dead
+b6b607cd-67b8-4c04-a212-a4e8c0743f05	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26369.0	-26369.0	168.0		white	Alive
+cbc5b936-ead5-4858-ab90-e639402789b0	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16745.0	-16745.0	508.0		white	Alive
+5e18b17d-4626-4b6d-8ac6-e560cee0376c	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	22659.0	-22659.0	239.0		white	Alive
+e294b940-2828-499c-be24-47ef6c2e9035	Serous cystadenocarcinoma, NOS	Stage IIC	43	0.2698412698412698	15804.0	-15804.0	783.0		asian	Alive
+b4b49027-7815-4813-9769-a3fe3a26a37a	Serous cystadenocarcinoma, NOS	Stage IIIC	81	0.873015873015873	29585.0	-29585.0	1157.0	1157.0	white	Dead
+4d71dd15-cd01-4dae-ad70-6dc325140207	Serous cystadenocarcinoma, NOS	Stage IIIC	46	0.31746031746031744	16889.0	-16889.0	268.0		white	Alive
+40635bf3-d8ba-4833-b623-547e55e5d07e	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22089.0	-22089.0	1977.0		white	Alive
+4309ca23-1cf9-40a2-a01c-ccee90f958b2	Serous cystadenocarcinoma, NOS	Stage IIIC	79	0.8412698412698413	29156.0	-29156.0		421.0	white	Dead
+8cad4217-5699-4735-9be3-fc0015a8d262	Serous cystadenocarcinoma, NOS	Stage IV	55	0.4603174603174603	20276.0	-20276.0	843.0	1355.0	white	Dead
+dfb7dc5d-92f4-4a3a-9667-db38efcc9fdb	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	19852.0	-19852.0	1278.0		white	Alive
+5c159ab5-8475-4d93-89b8-b6befed4a5b3	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22395.0	-22395.0	2097.0	2097.0	white	Dead
+9e18238f-ae85-4b75-ae87-d92da9731a40	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23826.0	-23826.0	1233.0		white	Alive
+a85f6f9c-1e1d-44fc-85eb-3b2d96cfbc61	Serous cystadenocarcinoma, NOS	Stage IV	59	0.5238095238095238	21726.0	-21726.0	2154.0	2154.0	white	Dead
+26558703-a659-43f2-86cb-0695989bc14e	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23801.0	-23801.0	919.0	919.0	white	Dead
+b5e64bdb-24f1-400d-aaf7-8fda8ab6fd3c	Serous cystadenocarcinoma, NOS	Stage IC	52	0.4126984126984127	19026.0	-19026.0	866.0		white	Alive
+1fe19c6b-71d0-4b07-923b-74ea32210db0	Serous cystadenocarcinoma, NOS	Stage IV	60	0.5396825396825397	21939.0	-21939.0		885.0	black or african american	Dead
+33d36b64-4688-40a7-9a4f-7cd3d4cc683d	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	22895.0	-22895.0	24.0	1229.0	white	Dead
+8516d4f2-0b98-4847-99c6-4d7269fa4af2	Serous cystadenocarcinoma, NOS	Stage IIIB	48	0.3492063492063492	17575.0	-17575.0	1488.0		white	Alive
+45baebac-32ae-4093-9eba-488b95c1a58d	Serous cystadenocarcinoma, NOS	Stage IV	64	0.6031746031746031	23689.0	-23689.0	8.0	8.0	white	Dead
+92a1a8f3-54f2-4983-bb14-dcb73658d897	Serous cystadenocarcinoma, NOS	Stage IIIC	38	0.19047619047619047	13885.0	-13885.0	1004.0		asian	Alive
+82093ed9-a3c8-4e34-931f-4ec7ae745711	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	18134.0	-18134.0	442.0		white	Alive
+05263959-c4f5-4540-b6d2-d8c8a128861f	Serous cystadenocarcinoma, NOS	Stage IIC	53	0.42857142857142855	19432.0	-19432.0	2338.0		white	Alive
+90f4b65c-cfd4-4066-a5b9-842885c172e2	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26185.0	-26185.0	462.0	462.0	white	Dead
+6fee41dc-b8a9-4347-8085-b7e05f813ad0	Serous cystadenocarcinoma, NOS	Stage IIIC	47	0.3333333333333333	17207.0	-17207.0	1386.0		white	Alive
+4261267c-7042-4c6e-83ed-12fb401003fc	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	19969.0	-19969.0	889.0	951.0	white	Dead
+e732f81c-9b7d-44bd-a905-ff53fbed5009	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26999.0	-26999.0	257.0	1784.0	white	Dead
+2ab32e11-80d6-4ed0-a42e-da612219bbdd	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20487.0	-20487.0	1699.0	1699.0	white	Dead
+cbc7f427-5f7b-4267-ad56-055d8880a4cc	Serous cystadenocarcinoma, NOS	Stage IV	61	0.5555555555555556	22562.0	-22562.0	1114.0	1114.0	white	Dead
+7922df77-f09a-488c-a1be-58646ceb9b3e	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	17961.0	-17961.0	792.0	1447.0	white	Dead
+0750ebcc-348a-4ea9-9dd2-6274d5e6eeaa	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18654.0	-18654.0	1240.0		white	Alive
+f4d95c8e-fb84-46ca-acc0-827015cc9d0a	Serous cystadenocarcinoma, NOS	Stage IIIA	40	0.2222222222222222			165.0		asian	Alive
+97efb80d-4f46-4aef-b95e-20d260de01b2	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27042.0	-27042.0	298.0		white	Alive
+b45c543a-40d9-423a-a7fa-98e4b325b487	Serous cystadenocarcinoma, NOS	Stage IIIC	77	0.8095238095238095	28126.0	-28126.0	336.0	336.0	white	Dead
+a5030259-cf9c-4a58-8710-b9da8ee59320	Serous cystadenocarcinoma, NOS	Stage IIIC	44	0.2857142857142857	16222.0	-16222.0	460.0	608.0	white	Dead
+21f6bf91-dfc6-4a59-8b76-88a0f95c7b47	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26141.0	-26141.0	820.0	820.0	black or african american	Dead
+f1cb3d48-1415-408d-89d1-dfdcc5924963	Papillary serous cystadenocarcinoma	Stage IIIC	66	0.6349206349206349	24161.0	-24161.0	984.0	1088.0	black or african american	Dead
+35b1bb47-b32b-4acd-8e5e-fe6bd56c0289	Serous cystadenocarcinoma, NOS	Stage IIIC	81	0.873015873015873	29692.0	-29692.0	256.0		white	Alive
+81005bae-686a-4598-8994-49d90ebac56f	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18983.0	-18983.0	194.0		not reported	Alive
+dac8d825-dd47-47ed-a426-0ee75feb76f3	Serous cystadenocarcinoma, NOS	'--	56	0.47619047619047616	20498.0	-20498.0	1463.0	1463.0	white	Dead
+774ce281-96b2-467a-9170-079797ee10f7	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18574.0	-18574.0	869.0	1389.0	white	Dead
+04ecaf38-0232-4dcd-9242-308a22cc1331	Serous cystadenocarcinoma, NOS	Stage IIIC	71	0.7142857142857143	26180.0	-26180.0	967.0		white	Alive
+2dfd8a0e-e642-49b3-abd7-f0334927eebb	Serous cystadenocarcinoma, NOS	Stage IIIC	64	0.6031746031746031	23686.0	-23686.0	3953.0		white	Alive
+b9418c6d-94f7-4db4-a1e4-f384b09d54cb	Serous cystadenocarcinoma, NOS	Stage IIIC	44	0.2857142857142857	16171.0	-16171.0	2535.0		asian	Alive
+2d8b42fb-b12c-454e-a5a5-22c91913386f	Serous cystadenocarcinoma, NOS	Stage IIC	64	0.6031746031746031	23379.0	-23379.0	349.0		not reported	Alive
+ead71c90-cc5e-42ce-8754-c3cf15a41134	Serous cystadenocarcinoma, NOS	Stage IIIC	62	0.5714285714285714	22698.0	-22698.0	2982.0	3785.0	white	Dead
+e641aed9-1dd8-4c30-b231-f12b20a76df0	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23307.0	-23307.0	788.0	788.0	white	Dead
+91a6f311-c758-4e40-9abb-cc0f6584b9c9	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20626.0	-20626.0	477.0	477.0	white	Dead
+b46263ab-c3ca-4fda-a895-74c7e6e6fe22	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25786.0	-25786.0	1247.0	1247.0	white	Dead
+ef653772-e5d2-46ec-8610-f81d75d7353c	Serous cystadenocarcinoma, NOS	Stage IIIB	51	0.3968253968253968	18963.0	-18963.0	176.0		black or african american	Alive
+15170c7f-5880-4fb6-82ce-68d3df0dfb68	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17573.0	-17573.0	1319.0	1319.0	black or african american	Dead
+36595b52-2b5f-4e87-80eb-37c29109e92a	Serous cystadenocarcinoma, NOS	Stage IIB	78	0.8253968253968254	28694.0	-28694.0	797.0		white	Alive
+0b519c08-9f23-4ceb-9a13-e16509ca55d7	Serous cystadenocarcinoma, NOS	Stage IIIC	63	0.5873015873015873	23278.0	-23278.0	1470.0	1532.0	white	Dead
+3ea880f4-7a78-4cb7-bfe4-54b3c30a812e	Serous cystadenocarcinoma, NOS	Stage IIIB	37	0.1746031746031746	13681.0	-13681.0	763.0		not reported	Alive
+c435627c-159d-4a6d-a819-30abac24bf4d	Serous cystadenocarcinoma, NOS	Stage IV	68	0.6666666666666666	24993.0	-24993.0	1732.0	1799.0	white	Dead
+1d9893c8-0de3-4b07-b0ba-a53019b23eb4	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20705.0	-20705.0		1082.0	white	Dead
+58d34254-4f5b-40a4-9e9f-7160062fb2a4	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21427.0	-21427.0	1036.0	1145.0	white	Dead
+70fe08bd-a0b4-4a88-b82e-813b176f8e40	Serous cystadenocarcinoma, NOS	Stage IIIC	83	0.9047619047619048	30464.0	-30464.0	139.0	592.0	white	Dead
+0f530b3e-5b6d-4892-9ebd-9138d76fdca7	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	17956.0	-17956.0	655.0		white	Alive
+3867e193-c82f-4693-9b32-bac76b5f4d06	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	20042.0	-20042.0	748.0	748.0	white	Dead
+72c40fba-f502-489b-ad87-843f52655894	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	21965.0	-21965.0	1089.0	1089.0	black or african american	Dead
+d86adfac-56be-4a69-9315-5a90b4113e65	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	28101.0	-28101.0		969.0	white	Dead
+1858b58f-fdf4-413c-9c29-96ae85b88a74	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	18049.0	-18049.0	1249.0	1249.0	white	Dead
+cbe3309e-9b7b-4f62-87b5-0f5ed4218ada	Serous cystadenocarcinoma, NOS	Stage IIIC	73	0.746031746031746	26784.0	-26784.0	11.0	394.0	white	Dead
+48f8afa8-7712-4428-b0d0-d8c3340504b6	Serous cystadenocarcinoma, NOS	Stage IIIC	68	0.6666666666666666	25098.0	-25098.0	1078.0	1078.0	white	Dead
+e3ea5137-76b8-4afc-9b80-ed74714e7172	Serous cystadenocarcinoma, NOS	Stage IIIC	46	0.31746031746031744	17122.0	-17122.0	2788.0		white	Alive
+186d40cd-624c-4016-a497-b30c892d393c	Serous cystadenocarcinoma, NOS	Stage IV	49	0.36507936507936506	18247.0	-18247.0	67.0		white	Alive
+8fac8e40-beac-4059-9d54-7ee530598cfd	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21635.0	-21635.0	180.0	1680.0	white	Dead
+e978a457-92ff-4eab-b759-ec6e74d973e8	Serous cystadenocarcinoma, NOS	Stage IV	44	0.2857142857142857				679.0	not reported	Dead
+565d06a1-3640-4274-8fb3-8cad7e578876	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17855.0	-17855.0	168.0		white	Alive
+d3164236-c14a-4230-b527-ecd1a3992f02	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20993.0	-20993.0	1470.0	1470.0	white	Dead
+18d21132-a795-4551-83ba-66483de423a2	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19611.0	-19611.0	2078.0		black or african american	Alive
+05019013-7ea5-4905-ac79-901146ba2ee2	Serous cystadenocarcinoma, NOS	Stage IIIC	39	0.20634920634920634	14574.0	-14574.0	2400.0	2400.0	white	Dead
+66face4a-f35c-4364-90e5-8f28e6372606	Serous cystadenocarcinoma, NOS	Stage IV	69	0.6825396825396826	25537.0	-25537.0	31.0	31.0	white	Dead
+5c6f3cd4-19c5-418d-b1be-d3fbf63e99db	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22031.0	-22031.0	1708.0	2012.0	white	Dead
+869c9aae-85eb-4faa-8893-b3f487e8981c	Serous cystadenocarcinoma, NOS	Stage IIIB	58	0.5079365079365079	21498.0	-21498.0	1652.0	1652.0	white	Dead
+46395c3d-5e51-477f-946e-e58b87cc7baa	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	24018.0	-24018.0	1124.0	1155.0	white	Dead
+12b032ed-ff92-4bfe-b980-eb273ae8ae17	Serous cystadenocarcinoma, NOS	Stage IIIC	76	0.7936507936507936	28045.0	-28045.0	1991.0		white	Alive
+ef57bc45-858f-4d4e-8407-b7eadfa43be5	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16552.0	-16552.0	3525.0		white	Alive
+0e1598d8-cbe5-4113-95f1-4bcda061239b	Serous cystadenocarcinoma, NOS	Stage IIIC	84	0.9206349206349206	30910.0	-30910.0	568.0	728.0	white	Dead
+91a17d40-c8cb-4cce-b306-966382a8fe4a	Serous cystadenocarcinoma, NOS	Stage IV	61	0.5555555555555556	22517.0	-22517.0	3825.0		white	Alive
+ebe677e6-94b6-45be-a58d-eaae4cf63d12	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24223.0	-24223.0	2661.0		white	Alive
+67f526f1-def5-43b4-bc89-154baae190fc	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16534.0	-16534.0	133.0		not reported	Alive
+171f7917-69eb-4a3f-9cc0-0e1dffd412c1	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25734.0	-25734.0	2218.0	2218.0	white	Dead
+7621ed77-98bc-4b4e-8011-e18fcd014071	Serous cystadenocarcinoma, NOS	Stage IIIC	70	0.6984126984126984	25703.0	-25703.0		288.0	white	Dead
+499645bd-e33e-4f89-8526-50460e8bb884	Serous cystadenocarcinoma, NOS	Stage IIIC	40	0.2222222222222222	14782.0	-14782.0	483.0	483.0	white	Dead
+ceb19678-b453-4529-b6cb-d02f9cb101b4	Serous cystadenocarcinoma, NOS	Stage IIIC	60	0.5396825396825397	22081.0	-22081.0	36.0		white	Alive
+93095c36-2263-438f-a619-a4a4d6ae13c7	Serous cystadenocarcinoma, NOS	Stage IIA	55	0.4603174603174603	20144.0	-20144.0	1293.0		white	Alive
+d7b3156d-672a-4a55-868d-9ca6a09fcb0f	Serous cystadenocarcinoma, NOS	Stage IIIC	57	0.49206349206349204	20902.0	-20902.0	676.0	676.0	black or african american	Dead
+cce34351-1700-405b-818f-a598f63a33e8	Serous cystadenocarcinoma, NOS	Stage IIIC	43	0.2698412698412698	15926.0	-15926.0	1293.0		white	Alive
+242da7d0-8c6a-4395-9a0d-aa36e7c25ce6	Serous cystadenocarcinoma, NOS	Stage IIC	43	0.2698412698412698	16021.0	-16021.0	2032.0		black or african american	Alive
+0d5e232d-5aa2-4f6f-be58-ffd5f15ee0b8	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17697.0	-17697.0	331.0	2345.0	white	Dead
+098acb76-0bf5-44e5-bcae-f919cf5fa5e5	Serous cystadenocarcinoma, NOS	Stage IIIC	74	0.7619047619047619	27307.0	-27307.0	1373.0	1373.0	white	Dead
+419a486f-7fa5-4fbd-9e98-2f8f4c6d5081	Serous cystadenocarcinoma, NOS	Stage IC	62	0.5714285714285714			882.0		not reported	Alive
+17181157-c9e2-4bd6-8653-f5dce56f9053	Serous cystadenocarcinoma, NOS	Stage IIIA	68	0.6666666666666666	24957.0	-24957.0	1354.0	1354.0	white	Dead
+933dbfbd-4697-403e-bd73-c17cb300c94b	Serous cystadenocarcinoma, NOS	Stage IIIC	65	0.6190476190476191	23982.0	-23982.0	2478.0	2490.0	not reported	Dead
+df53c3c0-3605-4d2b-bdc7-96d9beab27ea	Serous cystadenocarcinoma, NOS	Stage IIIC	43	0.2698412698412698	16018.0	-16018.0	1503.0		white	Alive
+d3dd5e69-9752-4b50-9b1f-814afbc2c3dd	Serous cystadenocarcinoma, NOS	Stage IIIC	82	0.8888888888888888	29991.0	-29991.0	527.0		white	Alive
+0de910b1-edaf-47e4-a265-727ee12ac1c3	Serous cystadenocarcinoma, NOS	Stage IIIC	49	0.36507936507936506	18051.0	-18051.0	2121.0		white	Alive
+4b930a10-4b12-4428-84f9-3255b4a3bc4f	Serous cystadenocarcinoma, NOS	Stage IV	69	0.6825396825396826	25213.0	-25213.0		656.0	white	Dead
+eeb9d147-608d-4692-8adf-2f601d23a8ff	Serous cystadenocarcinoma, NOS	Stage IIIC	48	0.3492063492063492	17847.0	-17847.0	686.0		asian	Alive
+65435f50-a35d-49e3-a36e-b95d9e274ca0	Serous cystadenocarcinoma, NOS	Stage IIIC	66	0.6349206349206349	24471.0	-24471.0	2688.0	2688.0	white	Dead
+85bb4987-51e7-40fe-ad59-2aa56754eca9	Serous cystadenocarcinoma, NOS	Stage IIIC	46	0.31746031746031744	17115.0	-17115.0	547.0		white	Alive
+feda41d8-ca56-425d-b149-4d5485328107	Serous cystadenocarcinoma, NOS	Stage IIIB	52	0.4126984126984127	18999.0	-18999.0			not reported	Alive
+79fd602b-3e8e-4353-aa78-4f5f170b607d	Serous cystadenocarcinoma, NOS	Stage IIIC	38	0.19047619047619047	13911.0	-13911.0	1979.0	2009.0	white	Dead
+b8c3d99c-429b-42a3-b486-6fbcb90cc2e0	Serous cystadenocarcinoma, NOS	Stage IIIC	46	0.31746031746031744	16812.0	-16812.0	252.0	1399.0	black or african american	Dead
+60cce7ac-d27d-44a6-9873-ecf91da5e906	Serous cystadenocarcinoma, NOS	Stage IIIC	59	0.5238095238095238	21552.0	-21552.0		1018.0	white	Dead
+872d2922-7292-4681-adb7-d3b267eccbe7	Serous cystadenocarcinoma, NOS	Stage IIIC	87	0.9682539682539683	31977.0	-31977.0	562.0	562.0	white	Dead
+a6aad7f9-8444-4c2f-8e4b-b19fd453544f	Serous cystadenocarcinoma, NOS	Stage IIIB	57	0.49206349206349204	20860.0	-20860.0	989.0		white	Alive
+c6ede8ae-881c-47a0-a0ef-745ed4b7764a	Serous cystadenocarcinoma, NOS	Stage IIIC	45	0.30158730158730157	16442.0	-16442.0	816.0		white	Alive
+58f5a54e-de50-4cca-afa1-cc331d8b3479	Serous cystadenocarcinoma, NOS	Stage IV	65	0.6190476190476191	23895.0	-23895.0	186.0	186.0	white	Dead
+3e8a51bf-7e1f-4eab-af83-3c60d04db1bf	Serous cystadenocarcinoma, NOS	Stage IIIC	53	0.42857142857142855	19573.0	-19573.0	3325.0		white	Alive
+29949b65-2913-4c86-bbd7-b85c5df6f15e	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24723.0	-24723.0	441.0		white	Alive
+f50ee039-1da9-43d9-ac01-657ec77a7f32	Serous cystadenocarcinoma, NOS	Stage IV	43	0.2698412698412698	15993.0	-15993.0	1162.0	2856.0	white	Dead
+a8c4a333-6b67-44c8-9000-516f8ccea788	Serous cystadenocarcinoma, NOS	Stage IIIC	55	0.4603174603174603	20399.0	-20399.0	962.0	962.0	asian	Dead
+a782352e-c4bb-4c3e-ba82-456a47c3689a	Serous cystadenocarcinoma, NOS	Stage IIIC	42	0.25396825396825395	15599.0	-15599.0	116.0		white	Alive
+654d02ab-05b4-4863-99d9-04d087ff91b4	Serous cystadenocarcinoma, NOS	Stage IV	61	0.5555555555555556	22377.0	-22377.0	287.0	880.0	white	Dead
+66a0df9b-096b-4e8e-9b9c-54bf8637720b	Serous cystadenocarcinoma, NOS	Stage IIIC	54	0.4444444444444444	19758.0	-19758.0	137.0		asian	Alive
+2b14123b-8fcd-402c-9399-4e7c47f20252	Serous cystadenocarcinoma, NOS	Stage IIIC	56	0.47619047619047616	20530.0	-20530.0	1102.0	1102.0	white	Dead
+0adadf17-c4b6-48b0-a326-21450de3e144	Serous cystadenocarcinoma, NOS	Stage IIC	50	0.38095238095238093	18424.0	-18424.0	2061.0		white	Alive
+6a57948c-0dc5-4ea2-8043-380f26763752	Serous cystadenocarcinoma, NOS	Stage IIIC	58	0.5079365079365079	21417.0	-21417.0	663.0	663.0	white	Dead
+eef62876-7d17-496a-8971-2c7008d77014	Serous cystadenocarcinoma, NOS	Stage IIIC	75	0.7777777777777778	27510.0	-27510.0	722.0		white	Alive
+1098441d-fb10-4590-a302-0a7cc2332798	Serous cystadenocarcinoma, NOS	Stage IIIC	61	0.5555555555555556	22481.0	-22481.0	1579.0	1579.0	white	Dead
+f3618472-32dc-4c90-a407-90050f68be85	Serous cystadenocarcinoma, NOS	Stage IIIC	67	0.6507936507936508	24743.0	-24743.0	2143.0		black or african american	Alive
+21966708-4e66-4211-add0-f1515b09e362	Serous cystadenocarcinoma, NOS	Stage IV	45	0.30158730158730157	16529.0	-16529.0	343.0		white	Alive
+34f545ab-d420-4dd2-8db4-3159896efd23	Serous cystadenocarcinoma, NOS	Stage IIIC	51	0.3968253968253968	18652.0	-18652.0	3224.0	3224.0	white	Dead
+08c64000-d320-4e4d-974b-da503d48890c	Serous cystadenocarcinoma, NOS	Stage IIIB	53	0.42857142857142855	19393.0	-19393.0	1767.0	1767.0	white	Dead
+b8023162-5e82-40e6-ad8c-8acf81821f01	Serous cystadenocarcinoma, NOS	Stage IIIC	72	0.7301587301587301	26418.0	-26418.0	245.0	304.0	black or african american	Dead
+758e6b52-062e-4ca0-84d1-ea38477414ac	Serous cystadenocarcinoma, NOS	Stage IIIC	78	0.8253968253968254				286.0	white	Dead
+2724109f-7d5a-402c-a915-741e43c6f7f9	Serous cystadenocarcinoma, NOS	Stage IV	57	0.49206349206349204	20965.0	-20965.0	227.0	317.0	white	Dead
+7fd6ab8a-201e-431d-a886-6ab553b6ca36	Serous cystadenocarcinoma, NOS	Stage IIC	41	0.23809523809523808	15017.0	-15017.0	1277.0		white	Alive
+533f5ff9-466c-4cdb-9c46-b841c2626775	Serous cystadenocarcinoma, NOS	Stage IIIC	82	0.8888888888888888	29992.0	-29992.0	737.0	737.0	not reported	Dead
+635f5335-b008-428e-b005-615776a6643f	Serous cystadenocarcinoma, NOS	Stage IIIC	50	0.38095238095238093	18263.0	-18263.0	1553.0	1583.0	white	Dead

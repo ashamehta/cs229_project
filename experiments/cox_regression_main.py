@@ -15,16 +15,16 @@ class CoxRegressionExp(object):
     STATUS = "status"
     STATUS_TIME = "status_time"
 
-    def __init__(self, feature_df, clinical_df):
+    def __init__(self, feature_df, clinical_df, learning_rate=0.0001):
         self.feature_df = feature_df
         self.labels_df = self.get_labels(clinical_df)
-        self.model = CoxPHSurvivalAnalysis()
+        self.model = CoxPHSurvivalAnalysis(alpha=learning_rate)
 
     def get_labels(self, clinical_df):
         # Get only the relevant columns.
         labels_df = clinical_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
 
-        # Construct STATUS, and STATUS column for the Cox Regression model to use.
+        # Construct STATUS column for the Cox Regression model to use.
         # The label for each sample should be a structured array (status, event).
         def get_event(row):
             if np.isnan(row["days_to_last_follow_up"]):
@@ -71,7 +71,7 @@ gexp_tsv = "processed_data/gene_expression_matrix.tsv"
 clinical_tsv = "processed_data/clinical_processed.tsv"
 
 def read_data(mutation_tsv, gexp_tsv, clinical_tsv):
-    # Read
+    # Read input data.
     mut_df = pd.read_csv(mutation_tsv, sep="\t")
     # gexp_df = pd.read_csv(gexp_tsv, sep="\t")
     gexp_df = None
