@@ -268,6 +268,8 @@ def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=7
     model.fit(dataset.X, dataset.y)
     test_score = model.score(dataset.X_test, dataset.y_test)
 
+    save_cox_model(model, selected_gexp_df, output_file="output/selected_coxnet_model3.tsv")
+
     print("Using alpha=%s:\nAverage Cross-Validation Score=\t%s\nTest Score=\t\t\t%s\n" % (
         alphas[argmax_score], max_score, test_score) )
 
@@ -281,26 +283,26 @@ def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=7
 
 gexp_df2 = pd.read_csv(gexp_top15_tsv, sep="\t")
 model_df = pd.read_csv(cox_elast_gexp, sep="\t", index_col=0)
-# cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=68)
+cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=77)
 
 
 # Iterative Feature Elimination/Addition
-num_nonzero_features = np.sum(np.sign(np.abs(np.asarray(model_df))), axis=1)
-
-f = open("test_log2.txt", "a")
-ave_cross_val_scores = []
-max_score, max_s = 0, None
-for num_f in num_nonzero_features[:70]:
-    if num_f > 0:
-        valid_score, train_score, test_score, alpha = \
-            cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=num_f)
-        ave_cross_val_scores.append((valid_score, train_score, test_score, alpha))
-        if valid_score > max_score:
-            max_score, max_s = valid_score, (num_f, valid_score, train_score, test_score, alpha)
-        f.write("\t".join([str(num_f), str(valid_score), str(train_score), str(test_score), str(alpha)]) + "\n")
-    print()
-f.close()
-
-# print(ave_cross_val_scores)
-print(max_score, max_s)
+# num_nonzero_features = np.sum(np.sign(np.abs(np.asarray(model_df))), axis=1)
+#
+# f = open("test_log3_lasso.txt", "a")
+# ave_cross_val_scores = []
+# max_score, max_s = 0, None
+# for num_f in num_nonzero_features[:70]:
+#     if num_f > 0:
+#         valid_score, train_score, test_score, alpha = \
+#             cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=num_f)
+#         ave_cross_val_scores.append((valid_score, train_score, test_score, alpha))
+#         if valid_score > max_score:
+#             max_score, max_s = valid_score, (num_f, valid_score, train_score, test_score, alpha)
+#         f.write("\t".join([str(num_f), str(valid_score), str(train_score), str(test_score), str(alpha)]) + "\n")
+#     print()
+# f.close()
+#
+# # print(ave_cross_val_scores)
+# print(max_score, max_s)
 
