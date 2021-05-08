@@ -112,16 +112,16 @@ print("-- 1. Reading Data --")
 mutation_tsv = "processed_data/mutations_matrix.tsv"
 clinical_tsv = "processed_data/clinical_processed.tsv"
 
-mutation_df = pd.read_csv(mutation_tsv, sep="\t")
-clinical_df = pd.read_csv(clinical_tsv, sep="\t")
+# mutation_df = pd.read_csv(mutation_tsv, sep="\t")
+# clinical_df = pd.read_csv(clinical_tsv, sep="\t")
 
 
 
 print("-- 2. Variance Thresholding Feature Selection --")
 
-print("Num total features:", mutation_df.shape[1])
-mutation_df2 = fs.remove_low_variance_features(mutation_df, quantile=0.85)
-print("Num selected features:", mutation_df2.shape[1])
+# print("Num total features:", mutation_df.shape[1])
+# mutation_df2 = fs.remove_low_variance_features(mutation_df, quantile=0.85)
+# print("Num selected features:", mutation_df2.shape[1])
 
 
 
@@ -199,20 +199,23 @@ print("\n###### Gene Expression Data #######")
 
 print("\n-- 1. Variance Thresholding Feature Selection --")
 
+clinical_tsv = "processed_data/clinical_processed.tsv"
+clinical_df = pd.read_csv(clinical_tsv, sep="\t")
+
 def variance_threshold(gexp_df, quantile=0.85, output_filename="gene_expression_top15_matrix.tsv"):
     print("Num total features:", gexp_df.shape[1])
-    gexp_df2 = fs.remove_low_variance_features(gexp_df, quantile=0.95, features_name="gene_expression")
+    gexp_df2 = fs.remove_low_variance_features(gexp_df, quantile=quantile, features_name="gene_expression")
     print("Num selected features:", gexp_df2.shape[1])
-    gexp_df2.to_csv(output_filename, sep="\t")
+    gexp_df2.to_csv(output_filename, sep="\t", index=False)
     print("Variance-selected feature matrix written to " + output_filename + ".")
     return gexp_df2
 
-# gexp_tsv = "processed_data/gene_expression_matrix.tsv"
-# gexp_df1 = pd.read_csv(gexp_tsv, sep="\t")
-# gexp_top05_tsv = "processed_data/gene_expression_top05_matrix.tsv"
-# gexp_df2 = variance_threshold(gexp_df1, quantile=0.95, output_filename=gexp_top05_tsv)
+gexp_tsv = "processed_data/gene_expression_matrix.tsv"
+gexp_df1 = pd.read_csv(gexp_tsv, sep="\t")
+gexp_top05_tsv = "processed_data/gene_expression_top05_matrix.tsv"
+gexp_df2 = variance_threshold(gexp_df1, quantile=0.95, output_filename=gexp_top05_tsv)
 gexp_top15_tsv = "processed_data/gene_expression_top15_matrix.tsv"
-# gexp_df2 = variance_threshold(gexp_df1, quantile=0.85, output_filename=gexp_top15_tsv)
+gexp_df2 = variance_threshold(gexp_df1, quantile=0.85, output_filename=gexp_top15_tsv)
 
 
 print("\n-- 2. Feature Ranking based on Coefficients of Lasso-Regularized Cox Regression --")
@@ -227,7 +230,7 @@ def coxnet_gexp_experiment(gexp_df, l1_ratio, output_filename="output/cox_model_
 exp_num = 3
 cox_lasso_gexp = "output/cox_model_lasso_gexp_exp%s.tsv" % exp_num
 cox_elast_gexp = "output/cox_model_elastic_gexp_exp%s.tsv" % exp_num
-# gexp_df2 = pd.read_csv(gexp_top15_tsv, sep="\t")
+# gexp_df2 = pd.read_csv(gexp_top05_tsv, sep="\t")
 # coxnet_gexp_experiment(gexp_df2, 1.0, output_filename=cox_lasso_gexp)
 # coxnet_gexp_experiment(gexp_df2, 0.9, output_filename=cox_elast_gexp)
 
@@ -268,7 +271,7 @@ def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=7
     model.fit(dataset.X, dataset.y)
     test_score = model.score(dataset.X_test, dataset.y_test)
 
-    save_cox_model(model, selected_gexp_df, output_file="output/selected_coxnet_model3.tsv")
+    # save_cox_model(model, selected_gexp_df, output_file="output/selected_coxnet_model3.tsv")
 
     print("Using alpha=%s:\nAverage Cross-Validation Score=\t%s\nTest Score=\t\t\t%s\n" % (
         alphas[argmax_score], max_score, test_score) )
@@ -281,28 +284,28 @@ def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=7
 
     return max_score, train_scores[argmax_score], test_score, alphas[argmax_score],
 
-gexp_df2 = pd.read_csv(gexp_top15_tsv, sep="\t")
+gexp_df2 = pd.read_csv(gexp_top05_tsv, sep="\t")
 model_df = pd.read_csv(cox_elast_gexp, sep="\t", index_col=0)
-cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=77)
+# cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=77)
 
 
 # Iterative Feature Elimination/Addition
-# num_nonzero_features = np.sum(np.sign(np.abs(np.asarray(model_df))), axis=1)
-#
-# f = open("test_log3_lasso.txt", "a")
-# ave_cross_val_scores = []
-# max_score, max_s = 0, None
-# for num_f in num_nonzero_features[:70]:
-#     if num_f > 0:
-#         valid_score, train_score, test_score, alpha = \
-#             cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=num_f)
-#         ave_cross_val_scores.append((valid_score, train_score, test_score, alpha))
-#         if valid_score > max_score:
-#             max_score, max_s = valid_score, (num_f, valid_score, train_score, test_score, alpha)
-#         f.write("\t".join([str(num_f), str(valid_score), str(train_score), str(test_score), str(alpha)]) + "\n")
-#     print()
-# f.close()
-#
-# # print(ave_cross_val_scores)
-# print(max_score, max_s)
+num_nonzero_features = np.sum(np.sign(np.abs(np.asarray(model_df))), axis=1)
+
+f = open("test_log4.txt", "a")
+ave_cross_val_scores = []
+max_score, max_s = 0, None
+for num_f in num_nonzero_features[:70]:
+    if num_f > 0:
+        valid_score, train_score, test_score, alpha = \
+            cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=num_f)
+        ave_cross_val_scores.append((valid_score, train_score, test_score, alpha))
+        if valid_score > max_score:
+            max_score, max_s = valid_score, (num_f, valid_score, train_score, test_score, alpha)
+        f.write("\t".join([str(num_f), str(valid_score), str(train_score), str(test_score), str(alpha)]) + "\n")
+    print()
+f.close()
+
+# print(ave_cross_val_scores)
+print(max_score, max_s)
 

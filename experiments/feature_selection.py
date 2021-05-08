@@ -16,7 +16,7 @@ def remove_low_variance_features(feature_df, threshold=None, quantile=0.85, feat
     print("Variance threshold:", threshold)
 
     if features_name is not None:
-        plt.hist(variances, bins=50)
+        plt.hist(variances, bins=100)
         plt.yscale("log")
         plt.title("Histogram of " + features_name + " variances\n(red line is selected threshold)")
         plt.xlabel("Variance of Feature")
@@ -76,12 +76,15 @@ def select_features_from_cox_coef(coef_df, feature_df, num_features=75):
     return selected_df
 
 # # Test out variance thresholding.
-# mutation_tsv = "processed_data/mutations_matrix.tsv"
-# gexp_tsv = "processed_data/gene_expression_matrix.tsv"
-# clinical_tsv = "processed_data/clinical_processed.tsv"
-#
+mutation_tsv = "processed_data/mutations_matrix.tsv"
+gexp_tsv = "processed_data/gene_expression_matrix.tsv"
+clinical_tsv = "processed_data/clinical_processed.tsv"
+
 # raw_mut_df = pd.read_csv(mutation_tsv, sep="\t")
 # mut_df = remove_low_variance_features(raw_mut_df, features_name="mutation_feature")
+
+# raw_gexp_df = pd.read_csv(gexp_tsv, sep="\t")
+# gexp_df = remove_low_variance_features(raw_gexp_df, quantile=0.95, features_name="gene_expression_feature")
 
 
 # # Select features based on feature coefficients from Cox Regression with lasso regularization.
