@@ -35,6 +35,13 @@ def main():
     clinical_df['days_to_last_follow_up'] = pd.to_numeric(clinical_df['days_to_last_follow_up'], errors='coerce')
     clinical_df['days_to_death'] = pd.to_numeric(clinical_df['days_to_death'], errors='coerce')
 
+    #convert figo_stage to numerical value
+    clinical_df['figo_stage'] = clinical_df['figo_stage'].replace({'Stage IA': 1, 'Stage IB': 1, 'Stage IC': 1,
+                                                                   'Stage IIA': 2, 'Stage IIB': 2, 'Stage IIC': 2,
+                                                                   'Stage IIIA': 3, 'Stage IIIB': 3, 'Stage IIIC': 3,
+                                                                   'Stage IV': 4, "'--": np.nan})
+    clinical_df = clinical_df.dropna(axis=0, subset=['figo_stage'])
+
     #min-max normalized age to produce value between 0 and 1
     normalized_age = (clinical_df['age_at_index']-clinical_df['age_at_index'].min())/(clinical_df['age_at_index'].max()-clinical_df['age_at_index'].min())
     clinical_df.insert(4, 'normalized_age_at_index', normalized_age)
@@ -44,7 +51,7 @@ def main():
     print('days to last follow up mean', clinical_df['days_to_last_follow_up'].mean()/365)
     print('days to last follow up SD', clinical_df['days_to_last_follow_up'].std() / 365)
 
-    clinical_df.to_csv('clinical_preprocessed.tsv', index=False, sep="\t", quoting=csv.QUOTE_NONE)
+    clinical_df.to_csv('clinical_processed.tsv', index=False, sep="\t", quoting=csv.QUOTE_NONE)
 
     # clinical_df['age_at_index'] = pd.cut(clinical_df['age_at_index'], bins=[20, 30, 40, 50, 60, 70, 80])
     # survived_5_yrs = clinical_df[clinical_df['days_to_last_follow_up'] >= 1825 and clinical_df['vital_status'] == 'Alive']
