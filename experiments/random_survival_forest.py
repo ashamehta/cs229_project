@@ -46,7 +46,6 @@ def get_labels(clinical_df):
 
 def merge(labels_df, feature_df):
     merged_df = labels_df.merge(feature_df, on="case_id")
-    print(merged_df)
 
     return merged_df
 
@@ -61,28 +60,32 @@ def get_x_and_y(merged_dataframe):
     return x_matrix, y_vector
 
 def split_x_and_Y(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=RANDOM_STATE)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=RANDOM_STATE)
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=RANDOM_STATE)
 
-    return X_train, X_test, y_train, y_test
+    return X_train, X_val, X_test, y_train, y_val, y_test
 
-def rsf_experiment(X_train, X_test, y_train, y_test):
-    rsf = RandomSurvivalForest(n_estimators=100,
-                           min_samples_split=10,
-                           min_samples_leaf=15,
+def rsf_experiment(X_train, X_test, y_train, y_test, best_params):
+    rsf = RandomSurvivalForest(n_estimators=best_params['n_estimators'],
+                           min_samples_split=best_params['min_samples_split'],
+                           max_depth=best_params['max_depth'],
+                           max_features=best_params['max_features'],
+                           min_samples_leaf=best_params['min_samples_leaf'],
                            random_state=RANDOM_STATE)
     rsf = rsf.fit(X_train, y_train)
 
     score = rsf.score(X_test, y_test)
     return score
 
-
-def rsf_experiment_random_search(X_train, X_test, y_train, y_test):
+def rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val):
     rsf = RandomSurvivalForest(random_state=RANDOM_STATE)
 
     # Hyperparameter tuning
     param_distributions = {
+        'n_estimators': randint(1, 100),
         'max_depth': uniform(1, 100),
-        'min_samples_leaf': uniform(0, 0.5),
+        'min_samples_split': uniform(0.0, 1.0),
+        'min_samples_leaf': randint(1, 10),
         'max_features': uniform(0, 1),
     }
 
@@ -92,35 +95,39 @@ def rsf_experiment_random_search(X_train, X_test, y_train, y_test):
     tuned_rsf = rsf_random_search.fit(X_train, y_train)
 
     print(
-        f"The c-index of random survival forest using a {tuned_rsf.__class__.__name__} is "
-        f"{tuned_rsf.score(X_test, y_test):.3f}")
+        f"Validation c index: "
+        f"{tuned_rsf.score(X_val, y_val):.3f}")
     print(
         f"The best set of parameters is: {tuned_rsf.best_params_}"
     )
+
+    return tuned_rsf.best_params_
 
 
 print("-- Reading Data --")
 mutation_df, gexp_df, clinical_df = read_data(mutation_tsv, gexp_tsv, clinical_tsv)
 labels_df = get_labels(clinical_df)
 
-
+"""
 print("\n###### Mutations Data #######")
 merged_df = merge(labels_df, mutation_df)
 X, y = get_x_and_y(merged_df)
-X_train, X_test, y_train, y_test = split_x_and_Y(X, y)
+X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
 
-score = rsf_experiment(X_train, X_test, y_train, y_test)
+best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
+score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
 print("Mutations Concordance Index: ", score)
-
-#score_random_search = rsf_experiment_random_search(X_train, X_test, y_train, y_test)
-#print("Mutations Concordance Index with Random Search: ", score_random_search)
 
 """
 print("\n###### Gene Expression Data #######")
 merged_df = merge(labels_df, gexp_df)
+print("merged")
 X, y = get_x_and_y(merged_df)
-X_train, X_test, y_train, y_test = split_x_and_Y(X, y)
+print("get x and y")
+X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
+print("split")
 
-score = rsf_experiment(X_train, X_test, y_train, y_test)
+best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
+score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
 print("Gene Expression Concordance Index: ", score)
-"""
+

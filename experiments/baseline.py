@@ -82,13 +82,13 @@ def rsf_experiment_random_search(X_train, X_test, y_train, y_test):
     #print("best score: ", model_random_search.best_score_)
     tuned_rsf = rsf_random_search.fit(X_train, y_train)
 
-    print(
-        f"The c-index of random survival forest using a {tuned_rsf.__class__.__name__} is "
-        f"{tuned_rsf.score(X_test, y_test):.3f}")
+    score = tuned_rsf.score(X_test, y_test)
+
     print(
         f"The best set of parameters is: {tuned_rsf.best_params_}"
     )
 
+    return score
 
 print("-- Reading Data --")
 clinical_df = read_data(clinical_tsv)
@@ -98,7 +98,7 @@ print("\n###### Mutations Data #######")
 X, y = get_x_and_y(labels_df)
 X_train, X_test, y_train, y_test = split_x_and_Y(X, y)
 
-score = rsf_experiment(X_train, X_test, y_train, y_test)
+score = rsf_experiment_random_search(X_train, X_test, y_train, y_test)
 print("Baseline Mutations Concordance Index: ", score) #score = 0.62950623611823
 
 #score_random_search = rsf_experiment_random_search(X_train, X_test, y_train, y_test)
