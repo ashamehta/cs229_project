@@ -202,7 +202,7 @@ print("\n-- 1. Variance Thresholding Feature Selection --")
 clinical_tsv = "processed_data/clinical_processed.tsv"
 clinical_df = pd.read_csv(clinical_tsv, sep="\t")
 
-def variance_threshold(gexp_df, quantile=0.85, output_filename="gene_expression_top15_matrix.tsv"):
+def variance_threshold(gexp_df, quantile=0.85, output_filename="gene_expression_top3_matrix.tsv"):
     print("Num total features:", gexp_df.shape[1])
     gexp_df2 = fs.remove_low_variance_features(gexp_df, quantile=quantile, features_name="gene_expression")
     print("Num selected features:", gexp_df2.shape[1])
@@ -216,6 +216,9 @@ gexp_top05_tsv = "processed_data/gene_expression_top05_matrix.tsv"
 gexp_df2 = variance_threshold(gexp_df1, quantile=0.95, output_filename=gexp_top05_tsv)
 gexp_top15_tsv = "processed_data/gene_expression_top15_matrix.tsv"
 gexp_df2 = variance_threshold(gexp_df1, quantile=0.85, output_filename=gexp_top15_tsv)
+gexp_top03_tsv = "processed_data/gene_expression_top03_matrix.tsv"
+gexp_df3 = variance_threshold(gexp_df1, quantile=0.97, output_filename=gexp_top03_tsv)
+
 
 
 print("\n-- 2. Feature Ranking based on Coefficients of Lasso-Regularized Cox Regression --")
