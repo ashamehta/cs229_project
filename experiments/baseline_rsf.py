@@ -42,7 +42,6 @@ def get_labels(clinical_df):
 
 def get_x_and_y(clinical_df):
     # Gets the X and Y matrices for the model to use.
-    print(clinical_df)
     y_dataframe = clinical_df[["status", "status_time"]]
     x_dataframe = clinical_df.drop(["case_id", "status", "status_time"], axis=1)
 
@@ -93,13 +92,11 @@ def rsf_experiment_random_search(X_train, X_test, y_train, y_test):
 print("-- Reading Data --")
 clinical_df = read_data(clinical_tsv)
 labels_df = get_labels(clinical_df)
-
-print("\n###### Mutations Data #######")
 X, y = get_x_and_y(labels_df)
 X_train, X_test, y_train, y_test = split_x_and_Y(X, y)
 
 score = rsf_experiment_random_search(X_train, X_test, y_train, y_test)
-print("Baseline Mutations Concordance Index: ", score) #score = 0.62950623611823
+print("Baseline Concordance Index: ", score) #score = 0.62950623611823
 
 #score_random_search = rsf_experiment_random_search(X_train, X_test, y_train, y_test)
 #print("Mutations Concordance Index with Random Search: ", score_random_search)

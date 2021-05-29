@@ -3,7 +3,7 @@ import pandas as pd
 
 import numpy as np
 import sklearn as sk
-from sklearn import decomposition, feature_selection, linear_model
+from sklearn import decomposition, feature_selection, linear_model, preprocessing
 
 import matplotlib.pyplot as plt
 
@@ -87,9 +87,15 @@ def select_genes_from_paper(feature_df):
     FBN1 - ENSG00000166147
     PTGER3 - ENSG00000050628
     """
-    gexp_df = feature_df[['case_id', 'ENSG00000168394.10', 'ENSG00000091656.14',
+    gexp_df_top5_raw = feature_df[['case_id', 'ENSG00000168394.10', 'ENSG00000091656.14',
                           'ENSG00000138755.5', 'ENSG00000166147.12', 'ENSG00000050628.19']]
-    return gexp_df
+    # Normalize expression data
+    scaler = preprocessing.StandardScaler()
+    gexp_df_top5_normalized = pd.DataFrame(scaler.fit_transform(gexp_df_top5_raw.iloc[:, 1:6]))
+    gexp_df_top5_normalized.insert(0, 'case_id', gexp_df_top5_raw['case_id'])
+    #gexp_df_top5 = gexp_df_top5_id.merge(pd.DataFrame(gexp_df_top5_normalized))
+
+    return gexp_df_top5_normalized
 
 # # Test out variance thresholding.
 mutation_tsv = "processed_data/mutations_matrix.tsv"

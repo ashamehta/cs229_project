@@ -30,7 +30,7 @@ def read_data(mutation_tsv, gexp_tsv, gexp_df_03, gexp_df_05, gexp_df_15, clinic
     clin_df = pd.read_csv(clinical_tsv, sep="\t")
     return mut_df, gexp_df, gexp_df_03, gexp_df_05, gexp_df_15, clin_df
 
-def standardize_data(X):
+def normalize_data(X):
     scaler = preprocessing.StandardScaler()
     X = scaler.fit_transform(X)
     return X
@@ -40,7 +40,7 @@ def get_labels(clinical_df):
     labels_df = clinical_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
 
     # Construct STATUS column for the RSF model to use.
-    # The label for each sample should be a structured array (status, event).
+    # The label for each sample should be a structured array (status, time of event or time of censoring).
     def get_event(row):
         if np.isnan(row["days_to_last_follow_up"]):
             if np.isnan(row["days_to_death"]):
@@ -120,7 +120,7 @@ print("-- Reading Data --")
 mutation_df, gexp_df, gexp_df_03, gexp_df_05, gexp_df_15, clinical_df = \
     read_data(mutation_tsv, gexp_tsv,gexp_tsv_variance_03, gexp_tsv_variance_05,gexp_tsv_variance_15, clinical_tsv)
 labels_df = get_labels(clinical_df)
-
+"""
 print("-- Mutations Data --")
 merged_df = merge(labels_df, mutation_df)
 X, y = get_x_and_y(merged_df)
@@ -134,7 +134,7 @@ print("\n###### Gene Expression Data - variance thresholding top 3% #######")
 merged_df = merge(labels_df, gexp_df_03)
 
 X, y = get_x_and_y(merged_df)
-X = standardize_data(X)
+X = normalize_data(X)
 X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
 
 best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
@@ -150,25 +150,26 @@ gexp_df.to_csv('gene_expression_top5_paper_normalized', sep="\t", index=False)
 
 merged_df = merge(labels_df, gexp_df)
 X, y = get_x_and_y(merged_df)
-X = standardize_data(X)
+X = normalize_data(X)
 
 X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
 
 best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
 score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
 print("Coxnet Gene Expression score : ", score)
-
+"""
 print("\n###### Gene Expression Data w/ random search & TAP1, ZFHX4, CXCL9, FBN1, PTGER3 #######")
 gexp_df = fs.select_genes_from_paper(gexp_df)
 
 # Save scaled gene dataframe to csv
-gexp_df.to_csv('gene_expression_top5_paper.tsv', sep="\t", index=False)
+# gexp_df.to_csv('gene_expression_top5_paper.tsv', sep="\t", index=False)
 
 merged_df = merge(labels_df, gexp_df)
 X, y = get_x_and_y(merged_df)
-X = standardize_data(X)
+X = normalize_data(X)
 
 X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
+print(len(X_train), len(X_val), len(X_test))
 
 best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
 score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
