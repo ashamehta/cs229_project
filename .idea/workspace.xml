@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f1a0b78-f9ff-4be4-9bad-ccd4b02c5380" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/random_survival_forest.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/random_survival_forest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/random_survival_forest_TVT.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/random_survival_forest_TVT.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/random_survival_forest_TVT.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1296">
-              <caret line="193" column="8" selection-start-line="193" selection-start-column="8" selection-end-line="193" selection-end-column="8" />
+            <state relative-caret-position="135">
+              <caret line="64" selection-start-line="64" selection-end-line="64" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -39,10 +37,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/experiments/processed_data/clinical_processed.tsv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-8">
+              <caret column="79" selection-start-column="56" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/experiments/feature_selection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1290">
-              <caret line="94" selection-start-line="94" selection-end-line="94" />
+            <state relative-caret-position="547">
+              <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
               <folding>
                 <element signature="e#1#20#0" expanded="true" />
               </folding>
@@ -61,7 +68,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ENSG00000168394</find>
       <find>ENSG00000091656</find>
       <find>ENSG00000138755</find>
       <find>ENSG00000166147</find>
@@ -69,7 +75,6 @@
       <find>--outpu</find>
       <find>output</find>
       <find>NSG00000050628</find>
-      <find>print</find>
       <find>read_data</find>
       <find>merge</find>
       <find>labels_df</find>
@@ -91,6 +96,8 @@
       <find>x_train</find>
       <find>x_train_id</find>
       <find>len(X</find>
+      <find>clinical_gexp_df</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -202,12 +209,12 @@
       <workItem from="1621871215176" duration="50626000" />
       <workItem from="1622231579838" duration="4644000" />
       <workItem from="1622249422035" duration="5915000" />
-      <workItem from="1622258809419" duration="2685000" />
+      <workItem from="1622258809419" duration="5510000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86905000" />
+    <option name="totallyTimeSpent" value="89730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -317,9 +324,6 @@
     <entry file="file://$PROJECT_DIR$/clinical/age_at_diagnosis_hist.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/clinical/clinical_preprocessed.tsv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -416,13 +420,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/processed_data/clinical_processed.tsv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="25" lean-forward="true" selection-start-column="25" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/processed_data/gene_expression_matrix.tsv">
       <provider selected="true" editor-type-id="LargeFileEditor">
         <state relative-caret-position="41070">
@@ -437,16 +434,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/experiments/feature_selection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1290">
-          <caret line="94" selection-start-line="94" selection-end-line="94" />
-          <folding>
-            <element signature="e#1#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/random_survival_forest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -457,10 +444,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/clinical/clinical_preprocessed.tsv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/feature_selection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="96" lean-forward="true" selection-start-line="96" selection-end-line="96" />
+          <folding>
+            <element signature="e#1#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/experiments/processed_data/clinical_processed.tsv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8">
+          <caret column="79" selection-start-column="56" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/miniconda3/lib/python3.8/site-packages/pandas/core/indexes/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="3081" selection-start-line="3081" selection-end-line="3081" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/experiments/random_survival_forest_TVT.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1296">
-          <caret line="193" column="8" selection-start-line="193" selection-start-column="8" selection-end-line="193" selection-end-column="8" />
+        <state relative-caret-position="135">
+          <caret line="64" selection-start-line="64" selection-end-line="64" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
