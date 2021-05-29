@@ -170,6 +170,8 @@ X = normalize_data(X)
 
 X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
 print(len(X_train), len(X_val), len(X_test))
+print(X_train)
+print(y_train)
 
 best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
 score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)

@@ -113,6 +113,8 @@ def rsf_hyperparameter_random_search(X_val, y_val):
 
     return tuned_rsf.best_params_
 
+# def baseline()
+
 # Read processed data into dataframes
 print("-- Reading Data --")
 clinical_df, mutation_df, gexp_df, coef_df, gexp_df_03 = read_data(clinical_tsv, mutation_tsv, gexp_tsv, coef_tsv, gexp_tsv_variance_03)
@@ -123,10 +125,10 @@ gexp_top5_df = fs.select_genes_from_paper(gexp_df)
 # coef = 100 samples
 # gexp and clinical = 376
 
-# Use only data that has gexp and/or mutation data
+# Use only data that has gexp data
 clinical_gexp_df = clinical_df.merge(gexp_df, how='inner', on='case_id')
-clinical_df = clinical_gexp_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
-labels_df = get_labels(clinical_df)
+clinical_gexp_df = clinical_gexp_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
+labels_df = get_labels(clinical_gexp_df)
 
 print("-- Get X and y --")
 X, y = get_x_and_y(labels_df)
@@ -136,18 +138,26 @@ print("-- Split X and y --")
 X_train_id, X_val_id, X_test_id, y_train, y_val, y_test = split_x_and_Y_id(X, y)
 
 print("-- TODO Characterize data --")
-"""
+""""
 print("-- Train RSF with Mutations Data, No Feature Selection --")
-X_train_mut, X_val_mut, X_test_mut = feature_train_val_test(X_train_id, X_val_id, X_test_id, mutation_df)
-print(len(X_train_mut), len(X_val_mut), len(X_test_mut))
-print(len(y_train), len(y_val), len(y_test))
+clinical_mut_df = clinical_df.merge(mutation_df, how='inner', on='case_id')
+clinical_mut_df = clinical_mut_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
+labels_df = get_labels(clinical_mut_df)
+X, y = get_x_and_y(labels_df)
 
-best_params = rsf_hyperparameter_random_search(X_train_mut, X_val_mut, y_train, y_val)
+X_train_id, X_val_id, X_test_id, y_train, y_val, y_test = split_x_and_Y_id(X, y)
+
+X_train_mut, X_val_mut, X_test_mut = feature_train_val_test(X_train_id, X_val_id, X_test_id, mutation_df)
+X_train_mut = X_train_mut.iloc[:, 1:]
+X_val_mut = X_val_mut.iloc[:, 1:]
+X_test_mut = X_test_mut.iloc[:, 1:]
+
+best_params = rsf_hyperparameter_random_search(X_val_mut, y_val)
 score = rsf_experiment(X_train_mut, X_test_mut, y_train, y_test, best_params)
 print("Mutations Concordance Index: ", score)
 """
+"""
 print("\n###### Gene Expression Data - variance thresholding top 3% #######")
-print(gexp_df_03)
 X_train_variance, X_val_variance, X_test_variance = feature_train_val_test(X_train_id, X_val_id, X_test_id, gexp_df_03)
 X_train_variance = X_train_variance.iloc[:, 1:]
 X_val_variance = X_val_variance.iloc[:, 1:]
@@ -179,4 +189,6 @@ X_test_top5 = X_test_top5.iloc[:, 1:]
 best_params = rsf_hyperparameter_random_search(X_val_top5, y_val)
 score = rsf_experiment(X_train_top5, X_test_top5, y_train, y_test, best_params)
 print("5 genes from paper, Gene Expression score : ", score)
-
+"""
+print("\n###### Baseline - Clinical Data w/ random search that also has gene expression data #######")
+baseline
