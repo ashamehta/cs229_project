@@ -163,15 +163,15 @@ clinical_mut_df = clinical_mut_df[["case_id", "vital_status", "days_to_last_foll
 labels_df = get_labels(clinical_mut_df)
 X, y = get_x_and_y(labels_df)
 
-X_train_id, X_val_id, X_test_id, y_train, y_val, y_test = split_x_and_Y_id(X, y)
+X_train_id_mut, X_val_id_mut, X_test_id_mut, y_train_mut, y_val_mut, y_test_mut = split_x_and_Y_id(X, y)
 
-X_train_mut, X_val_mut, X_test_mut = feature_train_val_test(X_train_id, X_val_id, X_test_id, mutation_df)
+X_train_mut, X_val_mut, X_test_mut = feature_train_val_test(X_train_id_mut, X_val_id_mut, X_test_id_mut, mutation_df)
 X_train_mut = X_train_mut.iloc[:, 1:]
 X_val_mut = X_val_mut.iloc[:, 1:]
 X_test_mut = X_test_mut.iloc[:, 1:]
 
-best_params = rsf_hyperparameter_random_search(X_val_mut, y_val)
-score = rsf_experiment(X_train_mut, X_test_mut, y_train, y_test, best_params)
+best_params = rsf_hyperparameter_random_search(X_val_mut, y_val_mut)
+score = rsf_experiment(X_train_mut, X_test_mut, y_train_mut, y_test_mut, best_params)
 print("Mutations Concordance Index: ", score)
 
 print("\n###### Gene Expression Data - variance thresholding top 3% #######")
