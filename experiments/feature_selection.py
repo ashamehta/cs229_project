@@ -3,12 +3,14 @@ import pandas as pd
 
 import numpy as np
 import sklearn as sk
-from sklearn import feature_selection
+from sklearn import decomposition, feature_selection, linear_model, preprocessing
 
 import matplotlib.pyplot as plt
 
+from genetic_selection import GeneticSelectionCV
 
-def remove_low_variance_features(feature_df, threshold=None, quantile=0.85, features_name=None):
+
+def remove_low_variance_features(feature_df, threshold=None, quantile=0.97, features_name=None):
     """Applies variance thresholding to feature_df, eliminating features with variance under the |quantile|."""
     variances = np.var(np.asarray(feature_df)[:,1:], axis=0)
     if threshold is None:
@@ -60,7 +62,7 @@ def plot_coefficients(coefs, n_highlight):
     ax.set_ylabel("coefficient")
 
 
-def select_features_from_cox_coef(coef_df, feature_df, num_features=75):
+def select_features_from_cox_coef(coef_df, feature_df, num_features):
     num_nonzero_features = np.sum(np.sign(np.abs(np.asarray(coef_df))), axis=1)
     for num, alpha in zip(num_nonzero_features, coef_df.index):
         if num >= num_features:
@@ -72,8 +74,28 @@ def select_features_from_cox_coef(coef_df, feature_df, num_features=75):
             selected_features.append(feature)
 
     desired_columns = ["case_id"] + selected_features
+    desired_columns.remove('Unnamed: 0')
     selected_df = feature_df.loc[:, desired_columns]
     return selected_df
+
+def select_genes_from_paper(feature_df):
+    """
+    Return gene expression matrix with only the following genes:
+    TAP1 - ENSG00000168394
+    ZFHX4 - ENSG00000091656
+    CXCL9 - ENSG00000138755
+    FBN1 - ENSG00000166147
+    PTGER3 - ENSG00000050628
+    """
+    gexp_df_top5_raw = feature_df[['case_id', 'ENSG00000168394.10', 'ENSG00000091656.14',
+                          'ENSG00000138755.5', 'ENSG00000166147.12', 'ENSG00000050628.19']]
+    # Normalize expression data
+    scaler = preprocessing.StandardScaler()
+    gexp_df_top5_normalized = pd.DataFrame(scaler.fit_transform(gexp_df_top5_raw.iloc[:, 1:6]))
+    gexp_df_top5_normalized.insert(0, 'case_id', gexp_df_top5_raw['case_id'])
+    #gexp_df_top5 = gexp_df_top5_id.merge(pd.DataFrame(gexp_df_top5_normalized))
+
+    return gexp_df_top5_normalized
 
 # # Test out variance thresholding.
 mutation_tsv = "processed_data/mutations_matrix.tsv"

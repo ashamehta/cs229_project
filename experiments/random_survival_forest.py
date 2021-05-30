@@ -2,36 +2,45 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-from sklearn.model_selection import train_test_split
+from scipy.stats import uniform, randint, zscore
+from sklearn.model_selection import RandomizedSearchCV, train_test_split
+from sklearn import preprocessing
 from sksurv.util import Surv
-
 from sksurv.ensemble import RandomSurvivalForest
+
+
+import feature_selection as fs
 
 
 mutation_tsv = "processed_data/mutations_matrix.tsv"
 gexp_tsv = "processed_data/gene_expression_matrix.tsv"
+gexp_tsv_variance_03 = "processed_data/gene_expression_top03_matrix.tsv"
+gexp_tsv_variance_05 = "processed_data/gene_expression_top05_matrix.tsv"
+gexp_tsv_variance_15 = "processed_data/gene_expression_top15_matrix.tsv"
 clinical_tsv = "processed_data/clinical_processed.tsv"
 
-RANDOM_STATE = 20
+RANDOM_STATE = 44
 
-def read_data(mutation_tsv, gexp_tsv, clinical_tsv):
-    # Read
+def read_data(mutation_tsv, gexp_tsv, gexp_df_03, gexp_df_05, gexp_df_15, clinical_tsv):
     mut_df = pd.read_csv(mutation_tsv, sep="\t")
     gexp_df = pd.read_csv(gexp_tsv, sep="\t")
-    # gexp_df = None
+    gexp_df_03 = pd.read_csv(gexp_tsv_variance_03, sep="\t")
+    gexp_df_05 = pd.read_csv(gexp_tsv_variance_05, sep="\t")
+    gexp_df_15 = pd.read_csv(gexp_tsv_variance_15, sep="\t")
     clin_df = pd.read_csv(clinical_tsv, sep="\t")
-    return mut_df, gexp_df, clin_df
+    return mut_df, gexp_df, gexp_df_03, gexp_df_05, gexp_df_15, clin_df
 
-def get_labels_and_merge(clinical_df, feature_df):
-    # Get only the relevant columns.
-    labels_df = clinical_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
+def normalize_data(X):
+    scaler = preprocessing.StandardScaler()
+    X = scaler.fit_transform(X)
+    return X
 
 def get_labels(clinical_df):
     # Get only the relevant columns.
     labels_df = clinical_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
 
     # Construct STATUS column for the RSF model to use.
-    # The label for each sample should be a structured array (status, event).
+    # The label for each sample should be a structured array (status, time of event or time of censoring).
     def get_event(row):
         if np.isnan(row["days_to_last_follow_up"]):
             if np.isnan(row["days_to_death"]):
@@ -60,44 +69,111 @@ def get_x_and_y(merged_dataframe):
 
     y_vector = Surv.from_dataframe("status", "status_time", y_dataframe)
     x_matrix = np.asarray(x_dataframe)
-    #print(x_matrix, y_vector)
+
     return x_matrix, y_vector
 
 def split_x_and_Y(X, y):
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=RANDOM_STATE)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=RANDOM_STATE)
+    X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.25, random_state=RANDOM_STATE)
 
-    return X_train, X_test, y_train, y_test
+    return X_train, X_val, X_test, y_train, y_val, y_test
 
-def rsf_experiment(X_train, X_test, y_train, y_test):
-    rsf = RandomSurvivalForest(n_estimators=50,
-                           min_samples_split=10,
-                           min_samples_leaf=15,
-                           n_jobs=-1,
+def rsf_experiment(X_train, X_test, y_train, y_test, best_params):
+    rsf = RandomSurvivalForest(n_estimators=best_params['n_estimators'],
+                           min_samples_split=best_params['min_samples_split'],
+                           max_depth=best_params['max_depth'],
+                           max_features=best_params['max_features'],
+                           min_samples_leaf=best_params['min_samples_leaf'],
                            random_state=RANDOM_STATE)
-    rsf.fit(X_train, y_train)
+    rsf = rsf.fit(X_train, y_train)
 
     score = rsf.score(X_test, y_test)
     return score
 
+def rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val):
+    rsf = RandomSurvivalForest(random_state=RANDOM_STATE, n_jobs=4)
 
+    param_distributions = {
+        'n_estimators': randint(1, 100),
+        'max_depth': uniform(1, 100),
+        'min_samples_split': uniform(0.0, 1.0),
+        'min_samples_leaf': randint(1, 10),
+        'max_features': uniform(0, 1),
+    }
+
+    rsf_random_search = RandomizedSearchCV(
+        rsf, param_distributions=param_distributions, n_iter=50, n_jobs=-1, cv=3, random_state=RANDOM_STATE)
+    #print("best score: ", model_random_search.best_score_)
+    tuned_rsf = rsf_random_search.fit(X_train, y_train)
+
+    print(
+        f"Validation c index: "
+        f"{tuned_rsf.score(X_val, y_val):.3f}")
+    print(
+        f"The best set of parameters is: {tuned_rsf.best_params_}"
+    )
+
+    return tuned_rsf.best_params_
+
+# Read processed data into dataframes
 print("-- Reading Data --")
-mutation_df, gexp_df, clinical_df = read_data(mutation_tsv, gexp_tsv, clinical_tsv)
+mutation_df, gexp_df, gexp_df_03, gexp_df_05, gexp_df_15, clinical_df = \
+    read_data(mutation_tsv, gexp_tsv,gexp_tsv_variance_03, gexp_tsv_variance_05,gexp_tsv_variance_15, clinical_tsv)
 labels_df = get_labels(clinical_df)
-print (clinical_df)
-
 """
-print("\n###### Mutations Data #######")
+print("-- Mutations Data --")
 merged_df = merge(labels_df, mutation_df)
 X, y = get_x_and_y(merged_df)
-X_train, X_test, y_train, y_test = split_x_and_Y(X, y)
+X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
 
-score = rsf_experiment(X_train, X_test, y_train, y_test)
+best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
+score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
 print("Mutations Concordance Index: ", score)
-"""
-print("\n###### Gene Expression Data #######")
+
+print("\n###### Gene Expression Data - variance thresholding top 3% #######")
+merged_df = merge(labels_df, gexp_df_03)
+
+X, y = get_x_and_y(merged_df)
+X = normalize_data(X)
+X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
+
+best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
+score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
+print("97th quantile Gene Expression score:", score)
+
+print("\n###### Gene Expression Data w/ random search & Coxnet #######")
+coef_df = pd.read_csv("~/Documents/Github/cs229_project/experiments/output/cox_model_elastic_gexp_exp3.tsv", sep="\t")
+gexp_df = fs.select_features_from_cox_coef(coef_df, gexp_df, 10)
+
+# Save scaled gene dataframe to csv
+gexp_df.to_csv('gene_expression_top5_paper_normalized', sep="\t", index=False)
+
 merged_df = merge(labels_df, gexp_df)
 X, y = get_x_and_y(merged_df)
-X_train, X_test, y_train, y_test = split_x_and_Y(X, y)
+X = normalize_data(X)
 
-score = rsf_experiment(X_train, X_test, y_train, y_test)
-print("Gene Expression Concordance Index: ", score)
+X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
+
+best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
+score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
+print("Coxnet Gene Expression score : ", score)
+"""
+print("\n###### Gene Expression Data w/ random search & TAP1, ZFHX4, CXCL9, FBN1, PTGER3 #######")
+gexp_df = fs.select_genes_from_paper(gexp_df)
+
+# Save scaled gene dataframe to csv
+# gexp_df.to_csv('gene_expression_top5_paper.tsv', sep="\t", index=False)
+
+merged_df = merge(labels_df, gexp_df)
+X, y = get_x_and_y(merged_df)
+X = normalize_data(X)
+
+X_train, X_val, X_test, y_train, y_val, y_test = split_x_and_Y(X, y)
+print(len(X_train), len(X_val), len(X_test))
+print(X_train)
+print(y_train)
+
+best_params = rsf_hyperparameter_random_search(X_train, X_val, y_train, y_val)
+score = rsf_experiment(X_train, X_test, y_train, y_test, best_params)
+print("5 genes from paper, Gene Expression score : ", score)
+
