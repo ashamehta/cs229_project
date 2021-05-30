@@ -13,13 +13,16 @@ import pandas as pd
 import cox_regression_main as cox
 import feature_selection as fs
 
-
+################################################################
+# Utility functions.
+################################################################
 
 def compute_riskset_matrix(time):
-    """Compute mask that represents each sample's risk set. Uses Breslow's method for tie-breakers."""
-    # The risk set would be a boolean (n_samples, n_samples) matrix where the `i`-th row denotes the
-    # risk set of the `i`-th instance, i.e. the indices `j` for which the observer time `y_j >= y_i`.
-
+    """
+    Compute mask that represents each sample's risk set. Uses Breslow's method for tie-breakers.
+    The risk set would be a boolean (n_samples, n_samples) matrix where the `i`-th row denotes the
+    risk set of the `i`-th instance, i.e. the indices `j` for which the observer time `y_j >= y_i`.
+    """
     # Sort in descending order.
     o = np.argsort(-time, kind="mergesort")
     n_samples = len(time)
@@ -34,7 +37,11 @@ def compute_riskset_matrix(time):
 
 
 def get_y_labels(y_event, y_time):
-    """Gets the Tensors needed for computing losses of the Cox NN."""
+    """
+    Formats the y_true labels to feed the Cox NN loss function.
+    The first column of y_true would be the |y_events|, the second column would be |y_time|,
+    and columns 3 through 3+num_samples would be the riskset matrix.
+    """
     riskset_matrix = compute_riskset_matrix(y_time)
     events = np.array([y_event]).T
     time = np.array([y_time]).T
@@ -42,7 +49,10 @@ def get_y_labels(y_event, y_time):
 
 
 def cox_ph_loss(y_true, y_pred):
-    """Computes the partial log likelihood of the Cox PH Regression model."""
+    """
+    Computes the partial log likelihood of the Cox PH Regression model.
+    Assumes y_true is formatted as done by get_y_labels() above.
+    """
     event, riskset = y_true[:,0:1], y_true[:,2:]    # tensors of shape [num_samples, 1] and [num_samples, num_samples]
     predictions = y_pred                            # tensor of shape [num_samples, 1]
     # option: normalize predictions
@@ -59,13 +69,21 @@ def cox_ph_loss(y_true, y_pred):
 
 
 def concordance_metric(y_true, y_pred):
+    """
+    Computes the concordance metric censored.
+    Assumes y_true is formatted as done by get_y_labels() above.
+    """
     event, time = tf.cast(y_true[:,0], bool), y_true[:,1]       # tensors of shape [num_samples, 1] and [num_samples, 1]
     predictions = y_pred[:,0]                                   # tensor of shape [num_samples, 1]
     return concordance_index_censored(event.numpy(), time.numpy(), predictions.numpy())[0]
 
 
 
-# One run of an experiment.
+
+################################################################
+# Experiment routines.
+################################################################
+
 def train_cox_nn_model(X_train, y_train, X_valid, y_valid, params):
     """
     Creates single-latent-layer neural network with a Cox PH loss, parameterized with |params|.
@@ -169,6 +187,11 @@ def run_trials(params, num_trials=10):
 
 
 
+
+################################################################
+# Experiment scripts.
+################################################################
+
 # Run 1: Uses only 79 top-ranked features, some basic regularization with 50 latent neurons.
 params1 = {
     "validation_split": 0.25,
@@ -206,71 +229,7 @@ params2 = {
 
 
 
-    
-    
 
-
-
-
-
-# Function for computing the the negative partial log likelihood under Cox PH Regression model.
-# This is our loss function for the neural net.
-# def coxph_loss(event, time, predictions):
-#     """Compute negative partial log-likelihood
-#     Parameters
-#     ----------
-#     w : array, shape = (n_features,)
-#         Estimate of coefficients
-#     Returns
-#     -------
-#     loss : float
-#         Average negative partial log-likelihood
-#     """
-#     # sort descending
-#     o = numpy.argsort(-time, kind="mergesort")
-#     self.x = X[o, :]
-#     self.event = event[o]
-#     self.time = time[o]
-#     self.alpha = alpha
-#     self.no_alpha = numpy.all(self.alpha < numpy.finfo(self.alpha.dtype).eps)
-#     if ties not in ("breslow", "efron"):
-#         raise ValueError("ties must be one of 'breslow', 'efron'")
-#     self._is_breslow = ties == "breslow"
-#
-#     time = self.time
-#     n_samples = self.x.shape[0]
-#     breslow = self._is_breslow
-#     xw = numpy.dot(self.x, w)
-#
-#     loss = 0
-#     risk_set = 0
-#     k = 0
-#     while k < n_samples:        # sorted descending
-#         ti = time[k]
-#         numerator = 0
-#         n_events = 0
-#         risk_set2 = 0
-#         while k < n_samples and ti == time[k]:
-#             if self.event[k]:
-#                 numerator += xw[k]
-#                 risk_set2 += numpy.exp(xw[k])
-#                 n_events += 1
-#             else:
-#                 risk_set += numpy.exp(xw[k])
-#             k += 1
-#
-#         if n_events > 0:
-#             if breslow:
-#                 risk_set += risk_set2
-#                 loss -= (numerator - n_events * numpy.log(risk_set)) / n_samples
-#             else:
-#                 numerator /= n_events
-#                 for _ in range(n_events):
-#                     risk_set += risk_set2 / n_events
-#                     loss -= (numerator - numpy.log(risk_set)) / n_samples
-#
-#     # add regularization term to log-likelihood
-#     return loss + numpy.sum(self.alpha * numpy.square(w)) / (2. * n_samples)
 
 
 
