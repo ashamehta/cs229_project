@@ -88,6 +88,9 @@ def select_features_from_cox_coef(coef_df, feature_df, num_features):
 
 
 def print_top_features_from_cox_coef(model_df, top_n=250, output_filename="output/cox_model_top_ranked_features.tsv"):
+    """
+    Orders features by model_df and write the ranking to output_filename.
+    """
     visited_features = set([])
     ranked_features = []
 
@@ -112,7 +115,7 @@ def print_top_features_from_cox_coef(model_df, top_n=250, output_filename="outpu
     for feat, rank in ranked_features:
         f.write("%s\t%s\n" % (feat, rank))
     f.close()
-
+    print("Features ranked by CoxNet written to " + output_filename)
 
 
 def select_genes_from_paper(feature_df):
@@ -135,7 +138,14 @@ def select_genes_from_paper(feature_df):
     return gexp_df_top5_normalized
 
 
+def select_features_from_si_ranking(si_ranking_tsv, feature_df, num_features):
+    rank_df = pd.read_csv(si_ranking_tsv, sep="\t")
+    top_feats = rank_df.iloc[0:int(num_features), 0]
+    # print(top_feats.shape)
 
+    selected_df = feature_df.loc[:,top_feats]
+    selected_df.insert(0, "case_id", feature_df["case_id"])
+    return selected_df
 
 
 
@@ -232,7 +242,7 @@ gexp_top05_train_tsv = staged_data_dir + "gene_expression_top05_train.tsv"
 # coxnet_gexp_experiment(gexp_df, clinical_df, 0.9, output_filename=cox_elast_gexp)     # Elastic
 
 # model_df = pd.read_csv(cox_elast_gexp, sep="\t", index_col=0)
-# print_top_features_from_cox_coef(model_df, top_n=250, output_filename="output/cox_model_top_ranked_features.tsv")
+# print_top_features_from_cox_coef(model_df, top_n=250, output_filename="output/cox_model_top_ranked_features5.tsv")
 
 
 
@@ -310,12 +320,21 @@ def sure_independence_ranking(train_gexp_df, train_clinical_df, top_n=250, outpu
     return f_utils
 
 
-# clinical_train_tsv = "processed_data/clinical_train.tsv"
-# gexp_top05_train_tsv = staged_data_dir + "gene_expression_top05_train.tsv"
+clinical_train_tsv = "processed_data/clinical_train.tsv"
+gexp_top05_train_tsv = staged_data_dir + "gene_expression_top05_train.tsv"
+gexp_df = pd.read_csv(gexp_top05_train_tsv, sep="\t")
+clinical_df = pd.read_csv(clinical_train_tsv, sep="\t")
 
-# gexp_df = pd.read_csv(gexp_top05_train_tsv, sep="\t")
-# clinical_df = pd.read_csv(clinical_train_tsv, sep="\t")
-# sure_independence_ranking(gexp_df, clinical_df)
+si_rank_tsv = "output/sure_independence_top05_ranking.tsv"
+# sure_independence_ranking(gexp_df, clinical_df, top_n=500, output_filename=si_rank_tsv)
+# selected_gexp_df = select_features_from_si_ranking(si_rank_tsv, gexp_df, 400)
+
+cox_elast_si_gexp = "output/cox_model_elastic_si_gexp_exp1.tsv"
+# coxnet_gexp_experiment(selected_gexp_df, clinical_df, 0.9, output_filename=cox_elast_si_gexp)
+
+# model_df = pd.read_csv(cox_elast_si_gexp, sep="\t", index_col=0)
+# print_top_features_from_cox_coef(model_df, top_n=250, output_filename="output/cox_si_model_top_ranked_features1.tsv")
+
 
 
 

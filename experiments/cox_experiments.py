@@ -21,11 +21,13 @@ def cox_experiment_with_selected_gexp_features(
     """
     # Select top |num_features| features based on Cox Net results as represented by |model_df|.
     print("Selecting a set of %s features from the coxnet results." % num_features)
-    selected_train_gexp_df = fs.select_features_from_cox_coef(model_df, train_gexp_df, num_features=num_features)
+    # selected_train_gexp_df = fs.select_features_from_cox_coef(model_df, train_gexp_df, num_features=num_features)
+    selected_train_gexp_df = fs.select_features_from_si_ranking("output/sure_independence_top05_ranking.tsv", train_gexp_df, num_features)
     train_dataset = cox.CoxRegressionDataset(
         selected_train_gexp_df, train_clinical_df, standardize=True, test_size=0.0)
 
-    selected_test_gexp_df = fs.select_features_from_cox_coef(model_df, test_gexp_df, num_features=num_features)
+    # selected_test_gexp_df = fs.select_features_from_cox_coef(model_df, test_gexp_df, num_features=num_features)
+    selected_test_gexp_df = fs.select_features_from_si_ranking("output/sure_independence_top05_ranking.tsv", test_gexp_df, num_features)
     test_dataset = cox.CoxRegressionDataset(
         selected_test_gexp_df, test_clinical_df, standardize=True, test_size=0.0)
 
@@ -106,18 +108,25 @@ test_gexp_top05_tsv = "processed_data/gene_expression_top05_test.tsv"
 train_clinical_tsv = "processed_data/clinical_train.tsv"
 test_clinical_tsv = "processed_data/clinical_test.tsv"
 
-# train_clinical_df, test_clinical_df = pd.read_csv(train_clinical_tsv, sep="\t"), pd.read_csv(test_clinical_tsv, sep="\t")
-# train_gexp_df, test_gexp_df = pd.read_csv(train_gexp_top05_tsv, sep="\t"), pd.read_csv(test_gexp_top05_tsv, sep="\t")
+train_clinical_df, test_clinical_df = pd.read_csv(train_clinical_tsv, sep="\t"), pd.read_csv(test_clinical_tsv, sep="\t")
+train_gexp_df, test_gexp_df = pd.read_csv(train_gexp_top05_tsv, sep="\t"), pd.read_csv(test_gexp_top05_tsv, sep="\t")
 
 
-# # cox_lasso_gexp = "output/cox_model_lasso_gexp_exp5.tsv"
-# # model_df = pd.read_csv(cox_lasso_gexp, sep="\t", index_col=0)
+# cox_lasso_gexp = "output/cox_model_lasso_gexp_exp5.tsv"
+# model_df = pd.read_csv(cox_lasso_gexp, sep="\t", index_col=0)
 # cox_elast_gexp = "output/cox_model_elastic_gexp_exp5.tsv"
 # model_df = pd.read_csv(cox_elast_gexp, sep="\t", index_col=0)
+cox_elast_si_gexp = "output/cox_model_elastic_si_gexp_exp1.tsv"
+model_df = pd.read_csv(cox_elast_si_gexp, sep="\t", index_col=0)
 
 # 7 - df
 # 8 - train1, test1, exp5 (8a = faulty, 8b = corrected+elastic, 8c = corrected+lasso)
 # 9 - train2, test2, exp6
 # 10 -train3, test3, exp7
+# 11 - train1, test1, si_exp1 (11a = si -> coxnet, 11b = si only)
 # cox_experiment_with_selected_gexp_features(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df, num_features=79)
-# iterative_model_selection(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df, "model_selection_run8b_log.txt")
+iterative_model_selection(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df, "cox_output/model_selection_run11b_log.txt")
+
+
+
+
