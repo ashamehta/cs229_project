@@ -44,6 +44,6 @@ def plot_feature_coefficients(model_filename, plot_filename="feature_coefficient
     plt.show()
 
 
-plot_num_features_vs_scores("model_selection_run6_log.txt", plot_filename="post_analysis/num_features_vs_scores_log6.png")
+plot_num_features_vs_scores("model_selection_run8c_log.txt", plot_filename="post_analysis/num_features_vs_scores_log8c.png")
 # plot_feature_coefficients("output/selected_coxnet_model3.tsv",
 #                           "post_analysis/selected_coxnet_model3_feature_coefficients_top25_2.png")
