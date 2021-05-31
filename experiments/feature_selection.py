@@ -80,7 +80,7 @@ def select_features_from_cox_coef(coef_df, feature_df, num_features):
             selected_features.append(feature)
 
     desired_columns = ["case_id"] + selected_features
-    if 'Unnamed: 0' in feature_df.columns:
+    if 'Unnamed: 0' in desired_columns:
         print("Extra column found in feature_df")
         desired_columns.remove('Unnamed: 0')
     selected_df = feature_df.loc[:, desired_columns]
