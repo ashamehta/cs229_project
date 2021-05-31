@@ -1,0 +1,114 @@
+case_id	primary_diagnosis	figo_stage	age_at_index	normalized_age_at_index	age_at_diagnosis	days_to_birth	days_to_last_follow_up	days_to_death	race	vital_status
+635f5335-b008-428e-b005-615776a6643f	Serous cystadenocarcinoma, NOS	3.0	50	0.3809523809523809	18263.0	-18263.0	1553.0	1583.0	white	Dead
+c435627c-159d-4a6d-a819-30abac24bf4d	Serous cystadenocarcinoma, NOS	4.0	68	0.6666666666666666	24993.0	-24993.0	1732.0	1799.0	white	Dead
+75f2d97a-b96c-403f-8055-5c5c8083e856	Serous cystadenocarcinoma, NOS	2.0	56	0.4761904761904762	20779.0	-20779.0	1127.0		white	Alive
+e20ea417-7296-4da8-9fdb-71cd1f45153a	Serous cystadenocarcinoma, NOS	3.0	67	0.6507936507936508	24682.0	-24682.0	4624.0	4624.0	white	Dead
+feda41d8-ca56-425d-b149-4d5485328107	Serous cystadenocarcinoma, NOS	3.0	52	0.4126984126984127	18999.0	-18999.0			not reported	Alive
+0724f800-e873-45d0-bc56-809d0ec4f6e9	Serous cystadenocarcinoma, NOS	3.0	74	0.7619047619047619	27103.0	-27103.0	1058.0	1058.0	white	Dead
+1db60f09-7f5a-4f21-8003-06a6abc781db	Serous cystadenocarcinoma, NOS	3.0	45	0.3015873015873016	16523.0	-16523.0		1187.0	white	Dead
+2038fd65-d8f1-4b16-af90-b1c8f9a379a7	Serous cystadenocarcinoma, NOS	3.0	51	0.3968253968253968	18757.0	-18757.0	3746.0		white	Alive
+c9e58844-9d61-44a2-aee6-1760bc19711b	Serous cystadenocarcinoma, NOS	3.0	48	0.3492063492063492	17588.0	-17588.0	966.0	976.0	white	Dead
+6cf9f872-2e59-45cf-bb5e-ebd7fa1b3caf	Serous cystadenocarcinoma, NOS	3.0	78	0.8253968253968254	28498.0	-28498.0	2141.0	2811.0	white	Dead
+c3f9ee36-d34f-472b-ac7f-801a0d400aa4	Serous cystadenocarcinoma, NOS	4.0	57	0.492063492063492	20950.0	-20950.0	2464.0		white	Alive
+0e475b3d-be3c-431a-ab12-5a867ea8f6cd	Serous cystadenocarcinoma, NOS	3.0	57	0.492063492063492	20972.0	-20972.0	1684.0		white	Alive
+15fc17cd-d073-4f81-a4a2-2db3cb9d7069	Serous cystadenocarcinoma, NOS	3.0	56	0.4761904761904762	20498.0	-20498.0	763.0		white	Alive
+29d26e7e-f4ae-4476-9a3f-27d5ec2ccb8a	Serous cystadenocarcinoma, NOS	3.0	71	0.7142857142857143	26066.0	-26066.0	563.0	563.0	white	Dead
+f3618472-32dc-4c90-a407-90050f68be85	Serous cystadenocarcinoma, NOS	3.0	67	0.6507936507936508	24743.0	-24743.0	2143.0		black or african american	Alive
+32960bc7-839a-42c5-9460-3917fa578ffc	Serous cystadenocarcinoma, NOS	3.0	55	0.4603174603174603	20134.0	-20134.0	946.0	949.0	white	Dead
+9af2248a-d86a-4277-93b4-8eba5a39bd3c	Serous cystadenocarcinoma, NOS	3.0	66	0.6349206349206349	24407.0	-24407.0	1736.0	1736.0	white	Dead
+12581634-eebb-4841-8498-71dc9d78c546	Serous cystadenocarcinoma, NOS	3.0	53	0.42857142857142855	19608.0	-19608.0	695.0	695.0	white	Dead
+2ebb738c-4829-4720-931a-96c0fd117e2a	Serous cystadenocarcinoma, NOS	3.0	71	0.7142857142857143	26086.0	-26086.0		542.0	white	Dead
+5495b18a-10ec-427b-83b8-03ef4b587b13	Serous cystadenocarcinoma, NOS	4.0	59	0.5238095238095238	21879.0	-21879.0	2606.0	2634.0	white	Dead
+8e1b8811-1eb2-4337-852c-c19eaa0ee418	Serous cystadenocarcinoma, NOS	3.0	65	0.6190476190476191	23850.0	-23850.0	1722.0		not reported	Alive
+20cf00ea-d7da-42bb-bce7-f005f0b952eb	Serous cystadenocarcinoma, NOS	3.0	59	0.5238095238095238			5481.0		white	Alive
+09c77947-a333-4392-b18d-a6c1f08764a1	Serous cystadenocarcinoma, NOS	3.0	49	0.36507936507936506	18227.0	-18227.0	253.0		white	Alive
+5d7027f5-60a0-47ab-a79d-667c9acc0e54	Serous cystadenocarcinoma, NOS	3.0	56	0.4761904761904762	20785.0	-20785.0	1163.0	1163.0	white	Dead
+644a88a7-dc56-468a-af5c-60278aab7642	Serous cystadenocarcinoma, NOS	3.0	51	0.3968253968253968	18733.0	-18733.0		304.0	white	Dead
+0f530b3e-5b6d-4892-9ebd-9138d76fdca7	Serous cystadenocarcinoma, NOS	3.0	49	0.36507936507936506	17956.0	-17956.0	655.0		white	Alive
+4a2ca7b8-729d-4fab-a6f3-a5d1e5d1f4f3	Serous cystadenocarcinoma, NOS	3.0	61	0.5555555555555556	22344.0	-22344.0	914.0	914.0	white	Dead
+f2dcf4cc-609d-4532-a90d-6ae2bbb53365	Serous cystadenocarcinoma, NOS	3.0	51	0.3968253968253968	18896.0	-18896.0	2534.0		white	Alive
+22178c3c-6b04-46d8-8041-dc83fa195029	Serous cystadenocarcinoma, NOS	3.0	38	0.19047619047619047	14184.0	-14184.0	883.0	883.0	american indian or alaska native	Dead
+dce71741-ccbe-40b7-a0b8-2048d07187a4	Serous cystadenocarcinoma, NOS	4.0	71	0.7142857142857143	26267.0	-26267.0	821.0	821.0	white	Dead
+196f4600-b6c9-4652-9f77-65c92883f8c1	Serous cystadenocarcinoma, NOS	4.0	51	0.3968253968253968	18635.0	-18635.0	2369.0		white	Alive
+21966708-4e66-4211-add0-f1515b09e362	Serous cystadenocarcinoma, NOS	4.0	45	0.3015873015873016	16529.0	-16529.0	343.0		white	Alive
+26558703-a659-43f2-86cb-0695989bc14e	Serous cystadenocarcinoma, NOS	3.0	65	0.6190476190476191	23801.0	-23801.0	919.0	919.0	white	Dead
+3018efe7-13a1-47ae-a726-8fc967c73841	Serous cystadenocarcinoma, NOS	3.0	68	0.6666666666666666	24939.0	-24939.0	863.0	863.0	white	Dead
+9e18238f-ae85-4b75-ae87-d92da9731a40	Serous cystadenocarcinoma, NOS	3.0	65	0.6190476190476191	23826.0	-23826.0	1233.0		white	Alive
+1d9893c8-0de3-4b07-b0ba-a53019b23eb4	Serous cystadenocarcinoma, NOS	3.0	56	0.4761904761904762	20705.0	-20705.0		1082.0	white	Dead
+b4225c44-b9b6-46c5-aabf-7b0d9a9fe20b	Serous cystadenocarcinoma, NOS	3.0	51	0.3968253968253968	18664.0	-18664.0	1435.0	1470.0	white	Dead
+d7925dfc-18ce-46ab-a47b-9d06eacc96d0	Serous cystadenocarcinoma, NOS	3.0	63	0.5873015873015873				1046.0	white	Dead
+1858b58f-fdf4-413c-9c29-96ae85b88a74	Serous cystadenocarcinoma, NOS	3.0	49	0.36507936507936506	18049.0	-18049.0	1249.0	1249.0	white	Dead
+7d03ddb6-f3fe-4b50-8bba-514aa65e7d0e	Serous cystadenocarcinoma, NOS	2.0	77	0.8095238095238095	28231.0	-28231.0	186.0		asian	Alive
+8652ddee-98f4-4584-b450-e6f2f5c9d7ec	Serous cystadenocarcinoma, NOS	2.0	62	0.5714285714285714	22855.0	-22855.0		1499.0	white	Dead
+0d23fa5b-95f8-4626-a4d2-c72ad3cc553b	Serous cystadenocarcinoma, NOS	3.0	48	0.3492063492063492	17799.0	-17799.0	1355.0	1355.0	white	Dead
+a782352e-c4bb-4c3e-ba82-456a47c3689a	Serous cystadenocarcinoma, NOS	3.0	42	0.25396825396825395	15599.0	-15599.0	116.0		white	Alive
+611600a6-43ec-4029-9682-cd6d6a3312ec	Serous cystadenocarcinoma, NOS	3.0	61	0.5555555555555556	22342.0	-22342.0	895.0	895.0	white	Dead
+533f5ff9-466c-4cdb-9c46-b841c2626775	Serous cystadenocarcinoma, NOS	3.0	82	0.8888888888888888	29992.0	-29992.0	737.0	737.0	not reported	Dead
+6f25001a-f890-4fd0-a994-e62a9ea5c6f3	Serous cystadenocarcinoma, NOS	3.0	60	0.5396825396825397	21940.0	-21940.0	1900.0		white	Alive
+3e8a51bf-7e1f-4eab-af83-3c60d04db1bf	Serous cystadenocarcinoma, NOS	3.0	53	0.42857142857142855	19573.0	-19573.0	3325.0		white	Alive
+6209e80d-a115-4f8e-bf0d-18461401a1c6	Serous cystadenocarcinoma, NOS	4.0	48	0.3492063492063492	17791.0	-17791.0		949.0	white	Dead
+58f5a54e-de50-4cca-afa1-cc331d8b3479	Serous cystadenocarcinoma, NOS	4.0	65	0.6190476190476191	23895.0	-23895.0	186.0	186.0	white	Dead
+a36a4440-15ef-4837-904b-380a964d16f1	Serous cystadenocarcinoma, NOS	3.0	64	0.6031746031746031	23542.0	-23542.0	113.0		white	Alive
+ebe677e6-94b6-45be-a58d-eaae4cf63d12	Serous cystadenocarcinoma, NOS	3.0	66	0.6349206349206349	24223.0	-24223.0	2661.0		white	Alive
+ad2939e6-b8b8-475a-90e2-6a369c3d3167	Serous cystadenocarcinoma, NOS	3.0	44	0.2857142857142857	16400.0	-16400.0	1579.0	1579.0	white	Dead
+a9d3a7b0-faf8-4e56-8600-d9e6882a4f23	Serous cystadenocarcinoma, NOS	3.0	81	0.873015873015873	29874.0	-29874.0	128.0	531.0	white	Dead
+8a98a6e6-b763-4824-858b-fd2738e6c9a3	Serous cystadenocarcinoma, NOS	3.0	43	0.2698412698412698	15818.0	-15818.0	1025.0	1032.0	white	Dead
+7e01f23a-0b0e-46a2-9f30-c3a9d2c779d2	Serous cystadenocarcinoma, NOS	3.0	36	0.15873015873015872	13187.0	-13187.0	1442.0	1442.0	white	Dead
+32d4d200-1fdf-44ed-b81f-1954a9c93926	Serous cystadenocarcinoma, NOS	2.0	61	0.5555555555555556	22306.0	-22306.0	1882.0		white	Alive
+b1e11e94-646b-4c44-9d33-1ca67d8356fb	Serous cystadenocarcinoma, NOS	3.0	66	0.6349206349206349	24403.0	-24403.0	596.0	619.0	white	Dead
+f8e9d538-7291-4fe7-b3f2-d01676a027f9	Serous cystadenocarcinoma, NOS	3.0	75	0.7777777777777778	27486.0	-27486.0		1169.0	white	Dead
+9ec86cbd-8c74-4697-90da-529ab91ab835	Serous cystadenocarcinoma, NOS	3.0	66	0.6349206349206349	24469.0	-24469.0	106.0		white	Alive
+71faa2c1-0d5b-4dcc-bdf9-f2405f29907c	Serous cystadenocarcinoma, NOS	2.0	53	0.42857142857142855	19722.0	-19722.0	676.0	676.0	white	Dead
+872d2922-7292-4681-adb7-d3b267eccbe7	Serous cystadenocarcinoma, NOS	3.0	87	0.9682539682539684	31977.0	-31977.0	562.0	562.0	white	Dead
+79e6e31c-22a1-481c-903b-ab5499cbd450	Serous cystadenocarcinoma, NOS	3.0	54	0.4444444444444444	19894.0	-19894.0	1748.0	2182.0	white	Dead
+ed21615c-0de3-421c-9e8d-8996026c4431	Serous cystadenocarcinoma, NOS	3.0	47	0.3333333333333333	17263.0	-17263.0	643.0		white	Alive
+76cc2d21-eebc-4f09-9bc7-dbf7af0aafa8	Serous cystadenocarcinoma, NOS	3.0	57	0.492063492063492	21167.0	-21167.0	346.0	346.0	black or african american	Dead
+ce871097-a6e9-4139-897e-642ee24ee123	Serous cystadenocarcinoma, NOS	3.0	58	0.5079365079365079	21199.0	-21199.0	1161.0	1161.0	white	Dead
+7e4e7914-ec23-4c55-98d6-3c5eecffa8e4	Serous cystadenocarcinoma, NOS	3.0	55	0.4603174603174603	20453.0	-20453.0	1620.0	1620.0	white	Dead
+0aa020cb-69d2-4235-a609-c279a133d8bb	Serous cystadenocarcinoma, NOS	4.0	42	0.25396825396825395	15515.0	-15515.0	1364.0		white	Alive
+05ba5839-e00a-4a9e-8ba3-ecb490781e62	Serous cystadenocarcinoma, NOS	3.0	82	0.8888888888888888	30234.0	-30234.0	23.0	23.0	black or african american	Dead
+8fe44099-b313-4bfd-a94a-27e72f2a818c	Serous cystadenocarcinoma, NOS	3.0	42	0.25396825396825395	15571.0	-15571.0	651.0	1725.0	white	Dead
+a2319490-b85d-4219-a1b0-fa1ec432d5c8	Serous cystadenocarcinoma, NOS	3.0	75	0.7777777777777778	27417.0	-27417.0	2621.0	2621.0	white	Dead
+a5030259-cf9c-4a58-8710-b9da8ee59320	Serous cystadenocarcinoma, NOS	3.0	44	0.2857142857142857	16222.0	-16222.0	460.0	608.0	white	Dead
+86b513ba-df09-485d-92d4-fb9e888f7350	Serous cystadenocarcinoma, NOS	3.0	56	0.4761904761904762	20737.0	-20737.0	514.0	515.0	white	Dead
+29949b65-2913-4c86-bbd7-b85c5df6f15e	Serous cystadenocarcinoma, NOS	3.0	67	0.6507936507936508	24723.0	-24723.0	441.0		white	Alive
+28ed2d42-5b4c-4bca-b2b2-6b2a6d3c42cf	Serous cystadenocarcinoma, NOS	3.0	70	0.6984126984126984	25831.0	-25831.0	25.0	25.0	white	Dead
+460616ec-f66f-483b-88c1-757edd86261d	Serous cystadenocarcinoma, NOS	3.0	58	0.5079365079365079	21284.0	-21284.0	220.0		white	Alive
+1d192835-524e-429d-bf74-3c4727acb446	Serous cystadenocarcinoma, NOS	2.0	59	0.5238095238095238	21745.0	-21745.0		1348.0	white	Dead
+5d1a54fe-e0df-4c17-b623-b649a136dc82	Serous cystadenocarcinoma, NOS	3.0	55	0.4603174603174603	20287.0	-20287.0		1688.0	white	Dead
+16829472-5666-4fba-9bf9-360ec1689aa0	Serous cystadenocarcinoma, NOS	3.0	51	0.3968253968253968			3532.0		white	Alive
+955c80be-53df-4565-9303-a7abf96a2f81	Serous cystadenocarcinoma, NOS	3.0	76	0.7936507936507936	28093.0	-28093.0	90.0	457.0	white	Dead
+b3511675-fd68-4745-8020-e290ca0fd115	Serous cystadenocarcinoma, NOS	3.0	56	0.4761904761904762	20622.0	-20622.0	1815.0	1815.0	black or african american	Dead
+7413c891-f74e-456f-bc70-69c83fb53c70	Serous cystadenocarcinoma, NOS	4.0	75	0.7777777777777778	27667.0	-27667.0	31.0	31.0	white	Dead
+85a85a11-7200-4e96-97af-6ba26d680d59	Serous cystadenocarcinoma, NOS	3.0	65	0.6190476190476191	24064.0	-24064.0	420.0	1484.0	white	Dead
+f9f44f86-10c7-4473-b156-5afbfa9a2ad0	Serous cystadenocarcinoma, NOS	4.0	56	0.4761904761904762	20527.0	-20527.0	1933.0	1933.0	white	Dead
+a9abe7a7-4126-414b-87d2-a6d25abcf1fa	Serous cystadenocarcinoma, NOS	4.0	72	0.7301587301587301	26342.0	-26342.0	83.0	83.0	white	Dead
+9bf16a89-2fc7-4c08-93bc-3105eec5c3cc	Serous cystadenocarcinoma, NOS	4.0	46	0.31746031746031744	16961.0	-16961.0	81.0		white	Alive
+ae914f23-87b9-4169-a7f7-a3483078c902	Serous cystadenocarcinoma, NOS	3.0	65	0.6190476190476191	23772.0	-23772.0	1212.0		white	Alive
+66face4a-f35c-4364-90e5-8f28e6372606	Serous cystadenocarcinoma, NOS	4.0	69	0.6825396825396826	25537.0	-25537.0	31.0	31.0	white	Dead
+1d0225b5-f515-4197-bba7-3dc17e502b88	Serous cystadenocarcinoma, NOS	3.0	57	0.492063492063492	20861.0	-20861.0	11.0	11.0	white	Dead
+c8acee1b-6854-409b-86ab-bf69dbe22ab6	Serous cystadenocarcinoma, NOS	3.0	43	0.2698412698412698	15949.0	-15949.0	163.0		white	Alive
+e43d3769-e25f-4fb7-9080-ea26defaf094	Serous cystadenocarcinoma, NOS	3.0	50	0.3809523809523809	18383.0	-18383.0	3619.0		white	Alive
+077079c3-6877-467b-b9cc-5c650aae4f07	Serous cystadenocarcinoma, NOS	3.0	81	0.873015873015873	29615.0	-29615.0	549.0	730.0	white	Dead
+33dc48d8-2e01-482b-944c-ac10da727ec9	Serous cystadenocarcinoma, NOS	3.0	53	0.42857142857142855	19605.0	-19605.0	122.0		white	Alive
+07fbdb3c-8337-4319-8255-f2363f8a031e	Serous cystadenocarcinoma, NOS	4.0	59	0.5238095238095238	21582.0	-21582.0	848.0		white	Alive
+de548bdd-14ca-486b-bd16-a6fbdd5b50d2	Serous cystadenocarcinoma, NOS	3.0	52	0.4126984126984127	19311.0	-19311.0	875.0		not reported	Alive
+bc2591b0-65d7-48c3-a5cc-783f67b65869	Serous cystadenocarcinoma, NOS	3.0	71	0.7142857142857143	26200.0	-26200.0	1558.0	1583.0	white	Dead
+1e14f098-17b2-4f54-8e4f-e38088008df7	Serous cystadenocarcinoma, NOS	4.0	55	0.4603174603174603	20109.0	-20109.0	189.0	189.0	white	Dead
+a6aad7f9-8444-4c2f-8e4b-b19fd453544f	Serous cystadenocarcinoma, NOS	3.0	57	0.492063492063492	20860.0	-20860.0	989.0		white	Alive
+dc5a6ce7-01e5-408d-812e-e3e0ddc1cde5	Serous cystadenocarcinoma, NOS	3.0	40	0.2222222222222222	14900.0	-14900.0	629.0	629.0	white	Dead
+c183d3fb-2eee-44f8-890e-b9bf907141e6	Serous cystadenocarcinoma, NOS	3.0	57	0.492063492063492	21072.0	-21072.0	1573.0		white	Alive
+7248cd60-be22-44bc-bc58-f644db0940a2	Serous cystadenocarcinoma, NOS	3.0	70	0.6984126984126984	25768.0	-25768.0	2521.0	2553.0	white	Dead
+93095c36-2263-438f-a619-a4a4d6ae13c7	Serous cystadenocarcinoma, NOS	2.0	55	0.4603174603174603	20144.0	-20144.0	1293.0		white	Alive
+9fb1ba57-2007-4477-b000-2d36f163efd2	Serous cystadenocarcinoma, NOS	3.0	42	0.25396825396825395	15383.0	-15383.0	1658.0		white	Alive
+e9b5336e-d724-4e7d-8c81-1147abd0a80d	Serous cystadenocarcinoma, NOS	3.0	48	0.3492063492063492	17671.0	-17671.0	24.0		not reported	Alive
+0ba7b6cc-e5f5-47d7-859a-24e31aa336ab	Serous cystadenocarcinoma, NOS	4.0	58	0.5079365079365079	21422.0	-21422.0	1364.0	1843.0	white	Dead
+16ced1b8-64d5-4498-82df-4d37bfe5b310	Serous cystadenocarcinoma, NOS	3.0	76	0.7936507936507936	27762.0	-27762.0	1024.0	1024.0	white	Dead
+67f526f1-def5-43b4-bc89-154baae190fc	Serous cystadenocarcinoma, NOS	3.0	45	0.3015873015873016	16534.0	-16534.0	133.0		not reported	Alive
+58427bce-6b81-4083-aeda-25f59e292bbc	Serous cystadenocarcinoma, NOS	3.0	55	0.4603174603174603	20331.0	-20331.0	1126.0	1279.0	white	Dead
+a6eb0cd0-fe57-41b0-8593-776208684293	Serous cystadenocarcinoma, NOS	3.0	40	0.2222222222222222	14782.0	-14782.0	956.0		white	Alive
+390eed6b-50af-48a9-9fd6-3a68a2bbb7f9	Serous cystadenocarcinoma, NOS	3.0	52	0.4126984126984127	19087.0	-19087.0	2661.0		white	Alive
+4ca9c0e8-75a7-4665-9d88-6dd2bb44b1e1	Serous cystadenocarcinoma, NOS	3.0	76	0.7936507936507936	28100.0	-28100.0	571.0		white	Alive
+9bbc01b4-056c-4ddc-aca4-ff20718646d0	Serous cystadenocarcinoma, NOS	3.0	67	0.6507936507936508	24473.0	-24473.0		547.0	native hawaiian or other pacific islander	Dead
+c9e28934-8379-4511-817c-d787f2c4ca3a	Serous cystadenocarcinoma, NOS	4.0	74	0.7619047619047619	27176.0	-27176.0	681.0	681.0	white	Dead
+48f831b0-5d91-44ae-bc4e-db57ca84fe46	Serous cystadenocarcinoma, NOS	4.0	54	0.4444444444444444	19775.0	-19775.0	238.0		white	Alive

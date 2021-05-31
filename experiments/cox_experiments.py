@@ -4,9 +4,7 @@ import feature_selection as fs
 
 import sklearn as sk
 from sklearn import model_selection
-from sklearn import preprocessing
 from sksurv import linear_model as sk_lm
-from sksurv.util import Surv
 
 import pandas as pd
 import numpy as np
@@ -14,69 +12,34 @@ import matplotlib.pyplot as plt
 
 
 
-clinical_tsv = "processed_data/clinical_processed.tsv"
-clinical_df = pd.read_csv(clinical_tsv, sep="\t")
-
-
-
-
-print("\n###### Gene Expression Data -- Cox Regression Experiment #######")
-
-print("\n-- 1. Variance Thresholding Feature Selection --")
-
-def variance_threshold(gexp_df, quantile=0.85, output_filename="gene_expression_top15_matrix.tsv"):
-    print("Num total features:", gexp_df.shape[1])
-    gexp_df2 = fs.remove_low_variance_features(gexp_df, quantile=quantile, features_name="gene_expression")
-    print("Num selected features:", gexp_df2.shape[1])
-    gexp_df2.to_csv(output_filename, sep="\t", index=False)
-    print("Variance-selected feature matrix written to " + output_filename + ".")
-    return gexp_df2
-
-gexp_tsv = "processed_data/gene_expression_matrix.tsv"
-# gexp_df1 = pd.read_csv(gexp_tsv, sep="\t")
-gexp_top05_tsv = "processed_data/gene_expression_top05_matrix.tsv"
-# gexp_df2 = variance_threshold(gexp_df1, quantile=0.95, output_filename=gexp_top05_tsv)
-gexp_top15_tsv = "processed_data/gene_expression_top15_matrix.tsv"
-# gexp_df2 = variance_threshold(gexp_df1, quantile=0.85, output_filename=gexp_top15_tsv)
-
-
-
-
-print("\n-- 2. Feature Ranking based on Coefficients of Lasso-Regularized Cox Regression --")
-
-def coxnet_gexp_experiment(gexp_df, l1_ratio, output_filename="output/cox_model_gexp_exp.tsv"):
-    print("Using Ridge Regression for Cox Regression (L1 Regularization) for feature selection.")
-    print("  L1 ratio = %s, alpha_min_ratio = 0.01" % l1_ratio)
-    dataset = cox.CoxRegressionDataset(gexp_df, clinical_df, standardize=True)
-    coxnet_model = sk_lm.CoxnetSurvivalAnalysis(l1_ratio=l1_ratio, alpha_min_ratio=0.01)
-    cox.basic_train_and_test(dataset, coxnet_model, model_file=output_filename)
-
-exp_num = 3
-cox_lasso_gexp = "output/cox_model_lasso_gexp_exp%s.tsv" % exp_num
-cox_elast_gexp = "output/cox_model_elastic_gexp_exp%s.tsv" % exp_num
-# gexp_df2 = pd.read_csv(gexp_top05_tsv, sep="\t")
-# coxnet_gexp_experiment(gexp_df2, 1.0, output_filename=cox_lasso_gexp)
-# coxnet_gexp_experiment(gexp_df2, 0.9, output_filename=cox_elast_gexp)
-
-
-print("\n-- 3. Select a feature set from list provided by previous Cox Regression feature selection process. --")
-
-def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=77, alpha_score_plot=None):
+def cox_experiment_with_selected_gexp_features(
+    train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df,
+    model_df, num_features=79, alpha_score_plot=None):
+    """
+    Train a Cox PH Regression model on |gexp_df| data using top |num_features| features as specified by |model_df|.
+    Uses cross-validation to tune the regularization hyperparameter alpha.
+    """
+    # Select top |num_features| features based on Cox Net results as represented by |model_df|.
     print("Selecting a set of %s features from the coxnet results." % num_features)
-    selected_gexp_df = fs.select_features_from_cox_coef(model_df, gexp_df, num_features=num_features)
-    dataset = cox.CoxRegressionDataset(selected_gexp_df, clinical_df, standardize=True)
+    selected_train_gexp_df = fs.select_features_from_cox_coef(model_df, train_gexp_df, num_features=num_features)
+    train_dataset = cox.CoxRegressionDataset(
+        selected_train_gexp_df, train_clinical_df, standardize=True, test_size=0.0)
+
+    selected_test_gexp_df = fs.select_features_from_cox_coef(model_df, test_gexp_df, num_features=num_features)
+    test_dataset = cox.CoxRegressionDataset(
+        selected_test_gexp_df, test_clinical_df, standardize=True, test_size=0.0)
 
     # Instead of picking arbitrary alphas, select range of alphas based on an initial coxnet run
     small_model = sk_lm.CoxnetSurvivalAnalysis(alpha_min_ratio=0.01, l1_ratio=0.95, max_iter=10000)
-    small_model.fit(dataset.X, dataset.y)
-    alphas = list(reversed(list(small_model.alphas_)[0::4]))  # select every 5th alpha in the range.
+    small_model.fit(train_dataset.X, train_dataset.y)
+    alphas = list(reversed(list(small_model.alphas_)[0::3]))  # select every 4th alpha in the range.
     print("Selected alphas for this run:", alphas)
 
-    # Train models on the different alpha values. Evaluate via cross-validation.
+    # Train models for each of the alpha values. Evaluate via cross-validation.
     models = [sk_lm.CoxnetSurvivalAnalysis(alphas=[a], l1_ratio=0.95) for a in alphas]
-    results = [model_selection.cross_validate(model, dataset.X, dataset.y, return_train_score=True) for model in models]
+    results = [model_selection.cross_validate(model, train_dataset.X, train_dataset.y, return_train_score=True) for model in models]
 
-    # Get scores and standard deviations.
+    # Get mean and standard deviation of the scores.
     valid_scores = [np.mean(result["test_score"]) for result in results]
     valid_stds = [np.std(result["test_score"]) for result in results]
     train_scores = [np.mean(result["train_score"]) for result in results]
@@ -84,7 +47,7 @@ def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=7
     print("Mean Cross-Validation Scores:", valid_scores)
     print("Std Dev Cross-Validation Scores:", valid_stds)
 
-    # Record metrics for each model.
+    # Keep track of best score seen.
     max_score, argmax_score = 0, None
     for i, score in enumerate(valid_scores):
         if score > max_score:
@@ -92,11 +55,11 @@ def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=7
 
     # Test score.
     model = models[argmax_score]
-    model.fit(dataset.X, dataset.y)
-    test_score = model.score(dataset.X_test, dataset.y_test)
+    model.fit(train_dataset.X, train_dataset.y)
+    test_score = model.score(test_dataset.X, test_dataset.y)
     # save_cox_model(model, selected_gexp_df, output_file="output/selected_coxnet_model3.tsv")
 
-    # Plot alpha vs validation score
+    # If needed, plot alpha vs validation score
     if alpha_score_plot is not None:
         plt.cla()
         plt.plot(alphas, valid_scores, c="blue")
@@ -105,32 +68,56 @@ def cox_experiment_with_selected_gexp_features(gexp_df, model_df, num_features=7
 
     print("Using alpha=%s:\nAverage Cross-Validation Score=\t%s\nTraining Score=\t\t\t%s\nTest Score=\t\t\t%s\n" % (
         alphas[argmax_score], max_score, train_scores[argmax_score], test_score) )
+
     return max_score, train_scores[argmax_score], test_score, alphas[argmax_score]
 
-gexp_df2 = pd.read_csv(gexp_top05_tsv, sep="\t")
-model_df = pd.read_csv(cox_elast_gexp, sep="\t", index_col=0)
-# cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=201)
 
-
-# Iterative Feature Elimination/Addition
-def iterative_model_selection(log_filename="model_selection_test_log.txt"):
+def iterative_model_selection(
+    train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df,
+    model_df, log_filename="model_selection_test_log.txt"):
+    """
+    Trains a Cox PH regression model on |gexp_df| and |clinical_df| for each set of top-N features according to |model_df|.
+    Writes results into |log_filename|.
+    """
     num_nonzero_features = np.sum(np.sign(np.abs(np.asarray(model_df))), axis=1)
 
     f = open(log_filename, "a")
+
     ave_cross_val_scores = []
     max_score, max_s = 0, None
     for num_f in num_nonzero_features[:70]:
-        if num_f > 201:
-            valid_score, train_score, test_score, alpha = \
-                cox_experiment_with_selected_gexp_features(gexp_df2, model_df, num_features=num_f)
+        if num_f > 0:
+            valid_score, train_score, test_score, alpha = cox_experiment_with_selected_gexp_features(
+                train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df, num_features=num_f)
+
             ave_cross_val_scores.append((valid_score, train_score, test_score, alpha))
             if valid_score > max_score:
                 max_score, max_s = valid_score, (num_f, valid_score, train_score, test_score, alpha)
+
             f.write("\t".join([str(num_f), str(valid_score), str(train_score), str(test_score), str(alpha)]) + "\n")
             print()
     f.close()
 
-iterative_model_selection("model_selection_run1_log.txt")
 
-# print(ave_cross_val_scores)
-# print(max_score, max_s)
+
+
+train_gexp_top05_tsv = "processed_data/gene_expression_top05_train.tsv"
+test_gexp_top05_tsv = "processed_data/gene_expression_top05_test.tsv"
+train_clinical_tsv = "processed_data/clinical_train.tsv"
+test_clinical_tsv = "processed_data/clinical_test.tsv"
+
+# train_clinical_df, test_clinical_df = pd.read_csv(train_clinical_tsv, sep="\t"), pd.read_csv(test_clinical_tsv, sep="\t")
+# train_gexp_df, test_gexp_df = pd.read_csv(train_gexp_top05_tsv, sep="\t"), pd.read_csv(test_gexp_top05_tsv, sep="\t")
+
+
+# # cox_lasso_gexp = "output/cox_model_lasso_gexp_exp5.tsv"
+# # model_df = pd.read_csv(cox_lasso_gexp, sep="\t", index_col=0)
+# cox_elast_gexp = "output/cox_model_elastic_gexp_exp5.tsv"
+# model_df = pd.read_csv(cox_elast_gexp, sep="\t", index_col=0)
+
+# 7 - df
+# 8 - train1, test1, exp5 (8a = faulty, 8b = corrected+elastic, 8c = corrected+lasso)
+# 9 - train2, test2, exp6
+# 10 -train3, test3, exp7
+# cox_experiment_with_selected_gexp_features(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df, num_features=79)
+# iterative_model_selection(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df, "model_selection_run8b_log.txt")
