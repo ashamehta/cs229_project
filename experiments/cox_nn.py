@@ -3,12 +3,14 @@
 
 import tensorflow as tf
 import keras as ks
-import numpy as np
 import sklearn as sk
 from sksurv.metrics import concordance_index_censored
 from sklearn import model_selection
 
+
+import numpy as np
 import pandas as pd
+import itertools
 
 import cox_regression_main as cox
 import feature_selection as fs
@@ -36,12 +38,15 @@ def compute_riskset_matrix(time):
     return risk_set
 
 
-def get_y_labels(y_event, y_time):
+def get_y_labels(y_raw):
     """
     Formats the y_true labels to feed the Cox NN loss function.
-    The first column of y_true would be the |y_events|, the second column would be |y_time|,
-    and columns 3 through 3+num_samples would be the riskset matrix.
+    The first column of y_true would be the events of |y_raw|, the second column would be the
+    times of |y_raw|, and columns 3 through 3+num_samples would be the riskset matrix.
     """
+    event_field, time_field = y_raw.dtype.names
+    y_event, y_time = y_raw[event_field], y_raw[time_field]
+
     riskset_matrix = compute_riskset_matrix(y_time)
     events = np.array([y_event]).T
     time = np.array([y_time]).T
@@ -55,7 +60,7 @@ def cox_ph_loss(y_true, y_pred):
     """
     event, riskset = y_true[:,0:1], y_true[:,2:]    # tensors of shape [num_samples, 1] and [num_samples, num_samples]
     predictions = y_pred                            # tensor of shape [num_samples, 1]
-    # option: normalize predictions
+    # option: "safe" normalize predictions
 
     event = tf.cast(event, predictions.dtype)
     riskset = tf.cast(riskset, predictions.dtype)
@@ -65,7 +70,7 @@ def cox_ph_loss(y_true, y_pred):
     assert rr.shape.as_list() == predictions.shape.as_list()
 
     losses = tf.math.multiply(event, rr - predictions)
-    return losses   # option: add L1 or L2 regularization term?
+    return losses
 
 
 def concordance_metric(y_true, y_pred):
@@ -84,7 +89,43 @@ def concordance_metric(y_true, y_pred):
 # Experiment routines.
 ################################################################
 
-def train_cox_nn_model(X_train, y_train, X_valid, y_valid, params):
+def get_raw_data(num_features=79, test=False):
+    """
+    Get the data to be used for the Cox Neural Network.
+    """
+    # The data files to be used.
+    suffix = "test" if test else "train"
+    clinical_tsv = "processed_data/clinical_%s.tsv" % suffix    
+    gexp_top05_tsv = "processed_data/gene_expression_top05_%s.tsv" % suffix
+    cox_elast_gexp_models = "output/cox_model_elastic_gexp_exp5.tsv"
+
+    # Read in the clinical and gene expression data.
+    clinical_df = pd.read_csv(clinical_tsv, sep="\t")
+    gexp_df = pd.read_csv(gexp_top05_tsv, sep="\t")
+    model_df = pd.read_csv(cox_elast_gexp_models, sep="\t", index_col=0)
+
+    # Select the top-N features as determined by the Cox Net process
+    if num_features != "top5percent":
+        gexp_df = fs.select_features_from_cox_coef(model_df, gexp_df, num_features=num_features)
+
+    # Format the survival data. Note that data already is in train/test splits, so need to split again.
+    cox_data = cox.CoxRegressionDataset(gexp_df, clinical_df, standardize=True, test_size=0.0)  
+    return cox_data.X, cox_data.y
+
+    # If handling test data, return X and get_y_labels(y)
+    # Else, split training data into train and validation data set and return that.
+    # if test:
+    #     return {"X_test": cox_data.X, "y_test": get_y_labels(cox_data.y)}
+    # else:
+    #     return {"X_train": cox_data.X, "y_train": get_y_labels(cox_data.y)}
+    #     # X_train, X_valid, y_raw_train, y_raw_valid =\
+    #     #     model_selection.train_test_split(cox_data.X, cox_data.y, test_size=params["validation_split"], shuffle=False)
+    #     # y_train, y_valid = get_y_labels(y_raw_train), get_y_labels(y_raw_valid)
+
+    #     # return {"X_train": X_train, "y_train": y_train, "X_valid": X_valid, "y_valid": y_valid}
+
+
+def train_cox_nn_model(X_train, y_labels_train, X_valid, y_labels_valid, params):
     """
     Creates single-latent-layer neural network with a Cox PH loss, parameterized with |params|.
     Trains the model on X_train,y_train, and validates the model with X_valid,y_valid.
@@ -92,7 +133,7 @@ def train_cox_nn_model(X_train, y_train, X_valid, y_valid, params):
     # Construct neural network model.
     tf.config.experimental_run_functions_eagerly(True)
     model = ks.models.Sequential()
-    model.add(ks.layers.GaussianNoise(0.01))
+    # model.add(ks.layers.GaussianNoise(0.01))
     model.add(ks.layers.Dense(
         params["num_latent_neurons"], activation='tanh', name="LatentLayer",     # cited 'tanh' as optimal activation function to use
         kernel_regularizer=ks.regularizers.l1_l2(l1=params["l1_kernel_regularizer"], l2=params["l2_kernel_regularizer"])))
@@ -107,83 +148,115 @@ def train_cox_nn_model(X_train, y_train, X_valid, y_valid, params):
     print("Number of features:", num_features)
     callbacks = [
         ks.callbacks.EarlyStopping(
-            monitor="val_loss", min_delta=0, patience=15, mode="min", restore_best_weights=True)
+            monitor="val_concordance_metric", min_delta=0, patience=20, mode="max", restore_best_weights=True)
     ]
     history = model.fit(
         X_train, y_labels_train, validation_data=(X_valid, y_labels_valid),
         batch_size=num_samples, epochs=params["num_epochs"], callbacks=callbacks)
-    return model
+    return model, history
 
 
-def train_and_evaluate_cox_nn_model(params):
+def train_and_evaluate_cox_nn_model(X, y_raw, params):
     """
-    Gets the training, validation, and test data.
-    Uses the data to train and evaluate the Cox PH neural network with the specified |params|.
+    Uses cross-validation to train and evaluate the Cox PH neural network with the specified |params|.
     """
-    # Get clinical and gene expression data.
-    clinical_tsv = "processed_data/clinical_processed.tsv"
-    gexp_top05_tsv = "processed_data/gene_expression_top05_matrix.tsv"
-    cox_elast_gexp_models = "output/cox_model_elastic_gexp_exp3.tsv"
+    # X, y = data_splits["X_train"], data_splits["y_train"]
 
-    clinical_df = pd.read_csv(clinical_tsv, sep="\t")
-    gexp_df = pd.read_csv(gexp_top05_tsv, sep="\t")
-    model_df = pd.read_csv(cox_elast_gexp_models, sep="\t", index_col=0)
+    kf = model_selection.KFold(n_splits=4)
+    valid_scores, train_scores = [], []
 
-    if params["num_features"] == "top5percent":
-        selected_gexp_df = gexp_df
-    else:
-        selected_gexp_df = fs.select_features_from_cox_coef(model_df, gexp_df, num_features=params["num_features"])
+    for train_index, valid_index in kf.split(X):
+        # Compute the splits for this cross-validation split.
+        X_train, X_valid = X[train_index], X[valid_index]
+        y_train, y_valid = get_y_labels(y_raw[train_index]), get_y_labels(y_raw[valid_index])
 
-    # Organize survival data into splits and get relevant data.
-    cox_data = cox.CoxRegressionDataset(selected_gexp_df, clinical_df, standardize=True)
-    X_train, X_valid, y_train, y_valid =\
-        model_selection.train_test_split(cox_data.X, cox_data.y, test_size=params["validation_split"], shuffle=False)
-    X_test, y_test = cox_data.X_test, cox_data.y_test
+        # Train model. Use validation data to determine convergence.
+        model, history = train_cox_nn_model(X_train, y_train, X_valid, y_valid, params)
+        valid_metrics = model.evaluate(X_valid, y_valid, batch_size=X_valid.shape[0])
+        train_metrics = model.evaluate(X_train, y_train, batch_size=X_train.shape[0])
 
-    event_field, time_field = y_train.dtype.names
-    y_event_train, y_time_train = y_train[event_field], y_train[time_field]     # 98 number of censored samples
-    y_event_valid, y_time_valid = y_valid[event_field], y_valid[time_field]
-    y_event_test, y_time_test = y_test[event_field], y_test[time_field]
+        valid_scores.append(valid_metrics[1])
+        train_scores.append(train_metrics[1])
 
-    y_labels_train = get_y_labels(y_event_train, y_time_train)
-    y_labels_valid = get_y_labels(y_event_valid, y_time_valid)
-    y_labels_test = get_y_labels(y_event_test, y_time_test)
+    valid_mean, train_mean = np.mean(valid_scores), np.mean(train_scores)
+    return valid_mean, train_mean
 
-    # Train model. Use validation data to determine convergence.
-    model = train_cox_nn_model(X_train, y_train, X_valid, y_valid, params)
+    # # Evaluate model with test data.
+    # print("\nTest Data:")
+    # X_test, y_test = data_splits["X_test"], data_splits["y_test"]
+    # num_samples = X_test.shape[0]
+    # test_metrics = model.evaluate(X_test, y_test, batch_size=num_samples)
 
-    # Evaluate model with validation data.
-    print("\nValidation Data:")
-    num_samples = X_valid.shape[0]
-    valid_metrics = model.evaluate(X_valid, y_labels_valid, batch_size=num_samples)
-    # print("Validation metrics:", metrics)
-
-    # Evaluate model with test data.
-    print("\nTest Data:")
-    num_samples = X_test.shape[0]
-    test_metrics = model.evaluate(X_test, y_labels_test, batch_size=num_samples)
-    # test_predictions = model.predict(X_test, batch_size=num_samples)
-    # c_index = concordance_index_censored(y_test[event_field], y_test[time_field], test_predictions[:,0])[0]
-    # print("Test Concordance Index Censored:", c_index)
-
-    return valid_metrics, test_metrics, history
+    # return valid_metrics, test_metrics, model, history
 
 
-def run_trials(params, num_trials=10):
+def grid_search(X, y_raw, grid_params, default_params):
     """
-    Run the train-evaluate-test cycle multiple times to evaluate this model-training procedure.
+    Does grid search over the possible values of the params in |grid_params| (a mapping from param to list of possible values).
     """
-    best_valid, best_trial = 0, None
-    valid_metrics, test_metrics = [], []
-    for i in range(num_trials):
-        valid, test, history = train_and_evaluate_cox_nn_model(params)
-        valid_metrics.append(valid[1])
-        test_metrics.append(test[1])
-        if valid[1] > best_valid:
-            best_valid, best_trial = valid[1], i
-    print("\nValidation:\tBest=%s\tAverage=%s\t%s" % (best_valid, np.mean(valid_metrics), valid_metrics))
-    print("\nTest:\t\tBest=%s\tAverage=%s\t%s" % (test_metrics[best_trial], np.mean(test_metrics), test_metrics))
-    return valid_metrics, test_metrics
+    variables = list(grid_params.keys())
+    variable_values = [grid_params[p] for p in variables]
+    print("Grid Search variables:", variables)
+
+    grid_results = []
+    best_valid, best_train, best_params = 0, 0, None
+    for combo in itertools.product(*variable_values):
+        print(combo)
+        # assert False
+        parameters = default_params.copy()
+        for param, param_val in zip(variables, combo):
+            parameters[param] = param_val
+        
+        print("Training NN on combo=", combo)
+        valid_mean, train_mean = train_and_evaluate_cox_nn_model(X, y_raw, parameters)
+        grid_results.append((combo, valid_mean, train_mean))
+
+        if valid_mean > best_valid:
+            best_valid, best_train, best_params = valid_mean, train_mean, parameters.copy()
+
+    return (best_valid, best_train, best_params), grid_results
+
+
+def run_experiment(grid_params, params, num_test_trials=10):
+    # Get training data.
+    X_train, y_raw_train = get_raw_data(params["num_features"], test=False)
+
+    # Use training data in grid search to get best parameters for training a model.
+    best_try, grid_results = grid_search(X_train, y_raw_train, grid_params, params)
+    best_valid, best_train, best_params = best_try[0], best_try[1], best_try[2]
+    print("Grid Search complete.\nAve Cross-Valid Score=%s\nAve Train Score=%s\nSelected Params=%s\n" % (
+        best_valid, best_train, best_params))
+    
+    # Get test data.
+    X_test, y_raw_test = get_raw_data(params["num_features"], test=True)
+    y_test = get_y_labels(y_raw_test)
+
+    # Get validation data for this run.
+    X_train, X_valid, y_raw_train, y_raw_valid = model_selection.train_test_split(X_train, y_raw_train, test_size=0.25, shuffle=False)
+    y_train, y_valid = get_y_labels(y_raw_train), get_y_labels(y_raw_valid)
+
+    valid_scores, train_scores, test_scores = [], [], []
+    for trial in range(num_test_trials):
+        model, history = train_cox_nn_model(X_train, y_train, X_valid, y_valid, best_params)
+        
+        train_metrics = model.evaluate(X_train, y_train, batch_size=X_train.shape[0])
+        valid_metrics = model.evaluate(X_valid, y_valid, batch_size=X_valid.shape[0])
+        test_metrics = model.evaluate(X_test, y_test, batch_size=X_test.shape[0])
+        
+        train_scores.append(train_metrics[1])
+        valid_scores.append(valid_metrics[1])
+        test_scores.append(test_metrics[1])
+
+    best_i = np.argmax(valid_scores)
+    print(grid_results)
+
+    print("\nBest Parameters (valid=%s, train=%s):" % (best_valid, best_train))
+    for grid_p in grid_params:
+        print("  %s=%s" % (grid_p, best_params[grid_p]))
+    print("\nTrain:\tBest=%s\tAverage=%s\t" % (train_scores[best_i], np.mean(train_scores)))
+    print("\nValid:\tBest=%s\tAverage=%s\t" % (best_valid, np.mean(valid_scores)))
+    print("\nTest:\tBest=%s\tAverage=%s\t" % (test_scores[best_i], np.mean(test_scores)))
+    return
 
 
 
@@ -192,42 +265,128 @@ def run_trials(params, num_trials=10):
 # Experiment scripts.
 ################################################################
 
-# Run 1: Uses only 79 top-ranked features, some basic regularization with 50 latent neurons.
+# Experiment 1: Uses only 79 top-ranked features, some basic regularization with 50 latent neurons.
 params1 = {
     "validation_split": 0.25,
     "num_features": 79,
     "num_latent_neurons": 50,
-    "l1_kernel_regularizer": 0,
-    "l2_kernel_regularizer": 1e-4,
-    "dropout_rate": 0.1,
+    "l1_kernel_regularizer": 0.001,
+    "l2_kernel_regularizer": 0.0,
+    "dropout_rate": 0.0,
     "num_epochs": 150,  # EarlyStop callback is expected to terminate run early.
 }
-print("\nRUN 1:\n", params1)
-run_trials(params1)
+# print("\nRUN 1:\n", params1)
+# run_trials(params1)
+
+# Train:  Best=0.7020984888076782 Average=0.7314346969127655
+# Valid:  Best=0.6943090409040451 Average=0.7201890110969543
+# Test:   Best=0.5512948036193848 Average=0.5443725168704987
 
 # RUN 1
 # Validation:     Best=0.7416038513183594 Average=0.713913643360138       [0.6970527768135071, 0.7004798054695129, 0.7416038513183594, 0.7100753784179688, 0.7128170132637024, 0.703906774520874, 0.7292666435241699, 0.7244688272476196, 0.6991089582443237, 0.7203564047813416]
 # Test:           Best=0.5826566219329834 Average=0.6014211118221283      [0.5768561363220215, 0.5968677401542664, 0.5826566219329834, 0.6125289797782898, 0.6041183471679688, 0.6255800724029541, 0.5971577763557434, 0.636310875415802, 0.6186195015907288, 0.5635150671005249]
 
 
-# Run 2: Uses all of the top 5% of features, with some basic regularization and 50 latent neurons.
+
+# Experiment 2: Using grid search, attempt to find the best number of L1-regularized latent neurons for the top ~80 features.
+grid_params = {
+    "num_latent_neurons": [55, 60, 65, 70], # 50
+    "l1_kernel_regularizer": [0.1, 0.01, 0.001], # 0.0001
+}
+default_params = {
+    "validation_split": 0.25,
+    "num_features": 65, #120?
+    "dropout_rate": 0.0,
+    "l2_kernel_regularizer": 0.0,
+    "num_epochs": 150
+}
+# run_experiment(grid_params, default_params, num_test_trials=10)
+
+# num_features=50
+# Best Parameters (valid=0.7379134446382523, train=0.7115701138973236):
+#   num_latent_neurons=70
+#   l1_kernel_regularizer=0.001
+# Train:  Best=0.7325053811073303 Average=0.7019871652126313
+# Valid:  Best=0.7379134446382523 Average=0.698024046421051
+# Test:   Best=0.5607569813728333 Average=0.5496514022350312
+
+# num_features=70
+# Best Parameters (valid=0.7572149634361267, train=0.7371134459972382):
+#   num_latent_neurons=70
+#   l1_kernel_regularizer=0.001
+# Train:  Best=0.7402141094207764 Average=0.7262269794940949
+# Valid:  Best=0.7572149634361267 Average=0.7158934652805329
+# Test:   Best=0.5804283022880554 Average=0.5580179393291473
+
+# num_features=60
+# Best Parameters (valid=0.7377019375562668, train=0.7263097316026688):
+#   num_latent_neurons=65
+#   l1_kernel_regularizer=0.01
+# Train:  Best=0.6967023611068726 Average=0.7095074951648712
+# Valid:  Best=0.7377019375562668 Average=0.7097079038619996
+# Test:   Best=0.5283864736557007 Average=0.5518924415111541
+
+# num_features=70
+# Best Parameters (valid=0.7160461843013763, train=0.7399457544088364):
+#   num_latent_neurons=55
+#   l1_kernel_regularizer=0.01
+# Train:  Best=0.739700198173523  Average=0.7026638090610504
+# Valid:  Best=0.7160461843013763 Average=0.6668384850025177
+# Test:   Best=0.5906374454498291 Average=0.5474850684404373
+
+# num_features=80
+# Best Parameters (valid=0.7074719667434692, train=0.7389127463102341):
+#   num_latent_neurons=55
+#   l1_kernel_regularizer=0.01
+# Train:  Best=0.7277087569236755 Average=0.7189807295799255
+# Valid:  Best=0.7074719667434692 Average=0.6775773167610168
+# Test:   Best=0.548804759979248  Average=0.5331175267696381
+
+
+
+# Experiment 3: Using grid search, attempt to find the best dropout rate.
+grid_params = {
+    "num_latent_neurons": [70, 75], # 50
+    "l1_kernel_regularizer": [0.01, 0.001], # 0.0001
+    "dropout_rate": [0.1, 0.15, 0.2, 0.25, 0.3]
+}
+default_params = {
+    "validation_split": 0.25,
+    "num_features": 70, #120?
+    "l2_kernel_regularizer": 0.0,
+    "num_epochs": 150
+}
+run_experiment(grid_params, default_params, num_test_trials=10)
+
+
+# Best Parameters (valid=0.7266203165054321, train=0.7270275205373764):
+#   num_latent_neurons=70
+#   l1_kernel_regularizer=0.001
+#   dropout_rate=0.2
+# Train:  Best=0.7211991548538208 Average=0.7242655277252197
+# Valid:  Best=0.7266203165054321 Average=0.7011168301105499
+# Test:   Best=0.573954164981842  Average=0.5640936255455017
+
+
+
+
+
+
+
+
+
+
 params2 = {
     "validation_split": 0.25,
     "num_features": "top5percent",
     "num_latent_neurons": 100,
-    "l1_kernel_regularizer": 1e-4,
-    "l2_kernel_regularizer": 1e-3,
+    "l1_kernel_regularizer": 1e-5,
+    "l2_kernel_regularizer": 1e-4,
     "dropout_rate": 0.3,
-    "num_epochs": 200,  # EarlyStop callback is expected to terminate run early.
+    "num_epochs": 150,  # EarlyStop callback is expected to terminate run early.
 }
 # print("\nRUN 2:\n", params2)
 # run_trials(params2)
-
-
-
-
-
-
 
 
 
