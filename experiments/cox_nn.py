@@ -112,18 +112,6 @@ def get_raw_data(num_features=79, test=False):
     cox_data = cox.CoxRegressionDataset(gexp_df, clinical_df, standardize=True, test_size=0.0)  
     return cox_data.X, cox_data.y
 
-    # If handling test data, return X and get_y_labels(y)
-    # Else, split training data into train and validation data set and return that.
-    # if test:
-    #     return {"X_test": cox_data.X, "y_test": get_y_labels(cox_data.y)}
-    # else:
-    #     return {"X_train": cox_data.X, "y_train": get_y_labels(cox_data.y)}
-    #     # X_train, X_valid, y_raw_train, y_raw_valid =\
-    #     #     model_selection.train_test_split(cox_data.X, cox_data.y, test_size=params["validation_split"], shuffle=False)
-    #     # y_train, y_valid = get_y_labels(y_raw_train), get_y_labels(y_raw_valid)
-
-    #     # return {"X_train": X_train, "y_train": y_train, "X_valid": X_valid, "y_valid": y_valid}
-
 
 def train_cox_nn_model(X_train, y_labels_train, X_valid, y_labels_valid, params):
     """
