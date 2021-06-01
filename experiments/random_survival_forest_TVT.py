@@ -164,18 +164,8 @@ print("Num training samples:", X_train_id.shape, len(y_train))
 print("Num validation samples:", X_val_id.shape, len(y_val))
 print("Num test samples:", X_test_id.shape, len(y_test))
 
-
-print("-- TODO Characterize clinical data that has associated gene expression data--")
-# Training set
-# age_mean_train = clinical_gexp_df[['age_at_index']].mean(axis=1)
-# age_std_train = clinical_gexp_df[['age_at_index']].std(axis=1)
-
-# Validation set
-
-# Test set
-
 print("-- Train RSF with Clinical Data that Has Associated Expression Data --")
-clinical_baseline_df = clinical_gexp_df[['case_id', 'figo_stage', 'normalized_age_at_index']]
+clinical_baseline_df = clinical_gexp_df[['case_id', 'figo_stage', 'age_at_index', 'normalized_age_at_index']]
 X_train_baseline, X_val_baseline, X_test_baseline = \
     feature_train_val_test(X_train_id, X_val_id, X_test_id, clinical_baseline_df)
 
@@ -193,9 +183,35 @@ score = rsf_experiment(X_train_baseline, X_test_baseline, y_train, y_test, best_
 print("Age and Stage Baseline (w/ GE data):", score)
 
 
+print("-- Characterize clinical data that has associated gene expression data--")
+# Training set
+age_mean_train = X_train_baseline['age_at_index'].mean()
+age_std_train = X_train_baseline['age_at_index'].std()
+print("Mean age of training set: ", age_mean_train, "Std: ", age_std_train)
+stage_mean_train = X_train_baseline['figo_stage'].mean()
+stage_std_train = X_train_baseline['figo_stage'].std()
+print("Mean stage of training set: ", int(stage_mean_train), "Std: ", stage_mean_train)
+
+# Validation set
+age_mean_val = X_val_baseline['age_at_index'].mean()
+age_std_val = X_val_baseline['age_at_index'].std()
+print("Mean age of validation set: ", age_mean_val, "Std: ", age_std_val)
+stage_mean_val = X_val_baseline['figo_stage'].mean()
+stage_std_val = X_val_baseline['figo_stage'].std()
+print("Mean stage of validation set: ", int(stage_mean_val), "Std: ", stage_mean_val)
+
+# Test set
+age_mean_test = X_test_baseline['age_at_index'].mean()
+age_std_test = X_test_baseline['age_at_index'].std()
+print("Mean age of test set: ", age_mean_test, "Std: ", age_std_test)
+stage_mean_test = X_test_baseline['figo_stage'].mean()
+stage_std_test = X_test_baseline['figo_stage'].std()
+print("Mean stage of test set: ", int(stage_mean_test), "Std: ", stage_mean_test)
+
+
 # Note: The new split code above does *not* change how the splitting goes for the mutations data here.
 # Should be fine since I did not have time to run experiments with the mutations data.
-
+"""
 print("-- Train RSF with Mutations Data, No Feature Selection --")
 clinical_mut_df = clinical_df.merge(mutation_df, how='inner', on='case_id')
 clinical_mut_df = clinical_mut_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
@@ -263,3 +279,4 @@ X_test_top5 = X_test_top5.iloc[:, 1:]
 best_params = rsf_hyperparameter_random_search(X_val_top5, y_val)
 score = rsf_experiment(X_train_top5, X_test_top5, y_train, y_test, best_params)
 print("5 genes from paper, Gene Expression score : ", score)
+"""
