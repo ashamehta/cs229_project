@@ -26,7 +26,7 @@ def read_data(clinical_tsv, mutation_tsv, gexp_tsv, coef_tsv, gexp_tsv_variance_
     clin_df = pd.read_csv(clinical_tsv, sep="\t")
     mut_df = pd.read_csv(mutation_tsv, sep="\t")
     gexp_df = pd.read_csv(gexp_tsv, sep="\t")
-    coef_df = pd.read_csv(coef_tsv, sep="\t")
+    coef_df = pd.read_csv(coef_tsv, sep="\t", index_col=0)
     gexp_df_03 = pd.read_csv(gexp_tsv_variance_03, sep="\t")
     # gexp_df_05 = pd.read_csv(gexp_tsv_variance_05, sep="\t")
     # gexp_df_15 = pd.read_csv(gexp_tsv_variance_15, sep="\t")
@@ -134,7 +134,36 @@ X, y = get_x_and_y(labels_df)
 
 print("-- Split X and y --")
 
-X_train_id, X_val_id, X_test_id, y_train, y_val, y_test = split_x_and_Y_id(X, y)
+# X_train_id, X_val_id, X_test_id, y_train, y_val, y_test = split_x_and_Y_id(X, y)
+#
+# NEW SPLIT CODE USING EXISTING 70/30 SPLIT (replaces above line):
+
+# Get the train/test gexp data.
+train_gexp_tsv = "processed_data/gene_expression_top05_train.tsv"
+test_gexp_tsv = "processed_data/gene_expression_top05_test.tsv"
+train_gexp_df = pd.read_csv(train_gexp_tsv, sep="\t")
+test_gexp_df = pd.read_csv(test_gexp_tsv, sep="\t")
+
+# The train and test case_id's are the ids of each split.
+X_train_id, X_test_id = train_gexp_df.loc[:,["case_id"]], test_gexp_df.loc[:,["case_id"]]
+X_train_id, X_test_id = X_train_id.drop_duplicates(subset=["case_id"]), X_test_id.drop_duplicates(subset=["case_id"])
+# X_train_id.columns = ["case_id"]
+# print(X_train_id.case_id)
+# assert False
+
+# The corresponding label data of each split.
+labels_train_df = labels_df[labels_df["case_id"].isin(X_train_id["case_id"])]
+labels_test_df = labels_df[labels_df["case_id"].isin(X_test_id["case_id"])]
+labels_train_df, labels_test_df = labels_train_df.drop_duplicates(subset=["case_id"]), labels_test_df.drop_duplicates(subset=["case_id"])
+x1, y_train = get_x_and_y(labels_train_df)
+x2, y_test = get_x_and_y(labels_test_df)
+
+# Split training data set into train/validation splits.
+X_train_id, X_val_id, y_train, y_val = train_test_split(X_train_id, y_train, test_size=0.25, random_state=RANDOM_STATE)
+print("Num training samples:", X_train_id.shape, len(y_train))
+print("Num validation samples:", X_val_id.shape, len(y_val))
+print("Num test samples:", X_test_id.shape, len(y_test))
+
 
 print("-- TODO Characterize clinical data that has associated gene expression data--")
 # Training set
@@ -149,13 +178,23 @@ print("-- Train RSF with Clinical Data that Has Associated Expression Data --")
 clinical_baseline_df = clinical_gexp_df[['case_id', 'figo_stage', 'normalized_age_at_index']]
 X_train_baseline, X_val_baseline, X_test_baseline = \
     feature_train_val_test(X_train_id, X_val_id, X_test_id, clinical_baseline_df)
+
+X_train_baseline = X_train_baseline.drop_duplicates(subset=["case_id"])
+X_val_baseline = X_val_baseline.drop_duplicates(subset=["case_id"])
+X_test_baseline = X_test_baseline.drop_duplicates(subset=["case_id"])
+
 X_train_baseline = X_train_baseline.iloc[:, 1:]
 X_val_baseline = X_val_baseline.iloc[:, 1:]
 X_test_baseline = X_test_baseline.iloc[:, 1:]
 
 best_params = rsf_hyperparameter_random_search(X_val_baseline, y_val)
+
 score = rsf_experiment(X_train_baseline, X_test_baseline, y_train, y_test, best_params)
 print("Age and Stage Baseline (w/ GE data):", score)
+
+
+# Note: The new split code above does *not* change how the splitting goes for the mutations data here.
+# Should be fine since I did not have time to run experiments with the mutations data.
 
 print("-- Train RSF with Mutations Data, No Feature Selection --")
 clinical_mut_df = clinical_df.merge(mutation_df, how='inner', on='case_id')
@@ -174,8 +213,16 @@ best_params = rsf_hyperparameter_random_search(X_val_mut, y_val_mut)
 score = rsf_experiment(X_train_mut, X_test_mut, y_train_mut, y_test_mut, best_params)
 print("Mutations Concordance Index: ", score)
 
+##
+
+
 print("\n###### Gene Expression Data - variance thresholding top 3% #######")
 X_train_variance, X_val_variance, X_test_variance = feature_train_val_test(X_train_id, X_val_id, X_test_id, gexp_df_03)
+
+X_train_variance = X_train_variance.drop_duplicates(subset=["case_id"])
+X_val_variance = X_val_variance.drop_duplicates(subset=["case_id"])
+X_test_variance = X_test_variance.drop_duplicates(subset=["case_id"])
+
 X_train_variance = X_train_variance.iloc[:, 1:]
 X_val_variance = X_val_variance.iloc[:, 1:]
 X_test_variance = X_test_variance.iloc[:, 1:]
@@ -185,10 +232,15 @@ score = rsf_experiment(X_train_variance, X_test_variance, y_train, y_test, best_
 print("97th quantile Gene Expression score:", score)
 
 print("\n###### Gene Expression Data w/ random search & Coxnet #######")
-all_coef_df = pd.read_csv("~/Documents/Github/cs229_project/experiments/output/cox_model_elastic_gexp_exp3.tsv", sep="\t")
+all_coef_df = pd.read_csv("~/Documents/Github/cs229_project/experiments/output/cox_model_elastic_gexp_exp3.tsv", sep="\t", index_col=0)
 coef_df = fs.select_features_from_cox_coef(all_coef_df, gexp_df, 10)
 
 X_train_coxnet, X_val_coxnet, X_test_coxnet = feature_train_val_test(X_train_id, X_val_id, X_test_id, coef_df)
+
+X_train_coxnet = X_train_coxnet.drop_duplicates(subset=["case_id"])
+X_val_coxnet = X_val_coxnet.drop_duplicates(subset=["case_id"])
+X_test_coxnet = X_test_coxnet.drop_duplicates(subset=["case_id"])
+
 X_train_coxnet = X_train_coxnet.iloc[:, 1:]
 X_val_coxnet = X_val_coxnet.iloc[:, 1:]
 X_test_coxnet = X_test_coxnet.iloc[:, 1:]
@@ -199,6 +251,11 @@ print("Coxnet Gene Expression score : ", score)
 
 print("\n###### Gene Expression Data w/ random search & TAP1, ZFHX4, CXCL9, FBN1, PTGER3 #######")
 X_train_top5, X_val_top5, X_test_top5 = feature_train_val_test(X_train_id, X_val_id, X_test_id, gexp_top5_df)
+
+X_train_top5 = X_train_top5.drop_duplicates(subset=["case_id"])
+X_val_top5 = X_val_top5.drop_duplicates(subset=["case_id"])
+X_test_top5 = X_test_top5.drop_duplicates(subset=["case_id"])
+
 X_train_top5 = X_train_top5.iloc[:, 1:]
 X_val_top5 = X_val_top5.iloc[:, 1:]
 X_test_top5 = X_test_top5.iloc[:, 1:]
