@@ -96,27 +96,7 @@ def analyze_clustering():
 
         # From this basic analysis, it seems that k=3 or k=4 clusters is best.
 
+
 # analyze_clustering()
 
 
-def cluster_and_divide(num_clusters=3):
-    clinical_tsv = "processed_data/clinical_train.tsv"
-    clinical_df = pd.read_csv(clinical_tsv, sep="\t")
-
-    gexp_top05_tsv = "processed_data/gene_expression_top05_train.tsv"
-    gexp_df = pd.read_csv(gexp_top05_tsv, sep="\t")
-
-    cox_data = cox.CoxRegressionDataset(gexp_df, clinical_df, standardize=False, test_size=0.0)
-    X_train, y_train = cox_data.X, cox_data.y
-
-    clusterer = KMeans(n_clusters=num_clusters, random_state=10)
-    l_train = clusterer.fit_predict(X_train)
-
-    for k in range(num_clusters):
-        gexp_cluster_tsv = "clustering_analysis/gene_expression_top05_c%s_train.tsv" % k
-        clinical_cluster_tsv = "clustering_analysis/clinical_c%s_train.tsv" % k
-
-        c_indeces = np.where(l_train == k)
-
-
-cluster_and_divide():
