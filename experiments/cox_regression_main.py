@@ -20,6 +20,7 @@ class CoxRegressionDataset(object):
 
     def __init__(self, feature_df, clinical_df, standardize=False, test_size=0.3):
         self.feature_df = feature_df
+        self.clinical_df = clinical_df
         self.labels_df = self.get_labels(clinical_df)
 
         X, y = self.get_x_and_y(self.feature_df, self.labels_df)
@@ -29,6 +30,7 @@ class CoxRegressionDataset(object):
             self.X, self.X_test, self.y, self.y_test = self.split_dataset(X, y, test_size=test_size)
         else:
             self.X, self.y = X, y
+
 
     def standardize_data(self, X):
         scaler = preprocessing.StandardScaler()
@@ -57,7 +59,8 @@ class CoxRegressionDataset(object):
         return labels_df
 
     def get_x_and_y(self, feature_df, labels_df):
-        merged_df = labels_df.merge(feature_df, left_on="case_id", right_on="case_id")
+        merged_df = labels_df.merge(feature_df, how="inner", on="case_id") #left_on="case_id", right_on="case_id")
+        self.cases = merged_df["case_id"]
 
         # Gets the X and Y matrices for the model to use.
         y_dataframe = merged_df[[self.STATUS, self.STATUS_TIME]]
@@ -149,6 +152,7 @@ clinical_tsv = "processed_data/clinical_processed_adjusted.tsv"
 #     test_X_filename="processed_data/gene_expression_top05_test.tsv",
 #     test_y_filename="processed_data/clinical_test.tsv")
 
+## The below splits were done to do some debugging. Don't use these splits.
 # X_train, y_train, X_test, y_test = split_and_save_dataset(
 #     gexp_df, clinical_df, test_size=0.3,
 #     train_X_filename="processed_data/gene_expression_top05_train2.tsv",
@@ -156,7 +160,6 @@ clinical_tsv = "processed_data/clinical_processed_adjusted.tsv"
 #     test_X_filename="processed_data/gene_expression_top05_test2.tsv",
 #     test_y_filename="processed_data/clinical_test2.tsv",
 #     random_state=10)
-
 # X_train, y_train, X_test, y_test = split_and_save_dataset(
 #     gexp_df, clinical_df, test_size=0.3,
 #     train_X_filename="processed_data/gene_expression_top05_train3.tsv",
@@ -164,6 +167,24 @@ clinical_tsv = "processed_data/clinical_processed_adjusted.tsv"
 #     test_X_filename="processed_data/gene_expression_top05_test3.tsv",
 #     test_y_filename="processed_data/clinical_test3.tsv")
 
+
+
+
+##############################################################
+# Run the below once to get a specific training/valid split.
+##############################################################
+
+train_gexp_top05_tsv = "processed_data/gene_expression_top05_train.tsv"
+train_clinical_tsv = "processed_data/clinical_train.tsv"
+# train_gexp_df = pd.read_csv(train_gexp_top05_tsv, sep="\t")
+# train_clinical_df = pd.read_csv(train_clinical_tsv, sep="\t")
+
+# X_strain, y_strain, X_valid, y_valid = split_and_save_dataset(
+#     train_gexp_df, train_clinical_df, test_size=0.25,
+#     train_X_filename="processed_data/gene_expression_top05_train_small.tsv",
+#     train_y_filename="processed_data/clinical_train_small.tsv",
+#     test_X_filename="processed_data/gene_expression_top05_valid.tsv",
+#     test_y_filename="processed_data/clinical_valid.tsv")
 
 
 

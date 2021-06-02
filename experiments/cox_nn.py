@@ -97,7 +97,8 @@ def get_raw_data(num_features=79, test=False):
     suffix = "test" if test else "train"
     clinical_tsv = "processed_data/clinical_%s.tsv" % suffix    
     gexp_top05_tsv = "processed_data/gene_expression_top05_%s.tsv" % suffix
-    cox_elast_gexp_models = "output/cox_model_elastic_gexp_exp5.tsv"
+    # cox_elast_gexp_models = "output/cox_model_elastic_gexp_exp5.tsv"
+    cox_elast_gexp_models = "output/cox_model_elastic_si_gexp_exp1.tsv"
 
     # Read in the clinical and gene expression data.
     clinical_df = pd.read_csv(clinical_tsv, sep="\t")
@@ -121,7 +122,7 @@ def train_cox_nn_model(X_train, y_labels_train, X_valid, y_labels_valid, params)
     # Construct neural network model.
     tf.config.experimental_run_functions_eagerly(True)
     model = ks.models.Sequential()
-    # model.add(ks.layers.GaussianNoise(0.01))
+    model.add(ks.layers.GaussianNoise(0.01))
     model.add(ks.layers.Dense(
         params["num_latent_neurons"], activation='tanh', name="LatentLayer",     # cited 'tanh' as optimal activation function to use
         kernel_regularizer=ks.regularizers.l1_l2(l1=params["l1_kernel_regularizer"], l2=params["l2_kernel_regularizer"])))
@@ -136,7 +137,7 @@ def train_cox_nn_model(X_train, y_labels_train, X_valid, y_labels_valid, params)
     print("Number of features:", num_features)
     callbacks = [
         ks.callbacks.EarlyStopping(
-            monitor="val_concordance_metric", min_delta=0, patience=20, mode="max", restore_best_weights=True)
+            monitor="concordance_metric", min_delta=0, patience=20, mode="max", restore_best_weights=True)
     ]
     history = model.fit(
         X_train, y_labels_train, validation_data=(X_valid, y_labels_valid),
@@ -150,7 +151,7 @@ def train_and_evaluate_cox_nn_model(X, y_raw, params):
     """
     # X, y = data_splits["X_train"], data_splits["y_train"]
 
-    kf = model_selection.KFold(n_splits=4)
+    kf = model_selection.KFold(n_splits=3)
     valid_scores, train_scores = [], []
 
     for train_index, valid_index in kf.split(X):
@@ -158,24 +159,17 @@ def train_and_evaluate_cox_nn_model(X, y_raw, params):
         X_train, X_valid = X[train_index], X[valid_index]
         y_train, y_valid = get_y_labels(y_raw[train_index]), get_y_labels(y_raw[valid_index])
 
-        # Train model. Use validation data to determine convergence.
-        model, history = train_cox_nn_model(X_train, y_train, X_valid, y_valid, params)
-        valid_metrics = model.evaluate(X_valid, y_valid, batch_size=X_valid.shape[0])
-        train_metrics = model.evaluate(X_train, y_train, batch_size=X_train.shape[0])
+        for trial in range(2):
+            # Train model. Use validation data to determine convergence.
+            model, history = train_cox_nn_model(X_train, y_train, X_valid, y_valid, params)
+            valid_metrics = model.evaluate(X_valid, y_valid, batch_size=X_valid.shape[0])
+            train_metrics = model.evaluate(X_train, y_train, batch_size=X_train.shape[0])
 
-        valid_scores.append(valid_metrics[1])
-        train_scores.append(train_metrics[1])
+            valid_scores.append(valid_metrics[1])
+            train_scores.append(train_metrics[1])
 
     valid_mean, train_mean = np.mean(valid_scores), np.mean(train_scores)
     return valid_mean, train_mean
-
-    # # Evaluate model with test data.
-    # print("\nTest Data:")
-    # X_test, y_test = data_splits["X_test"], data_splits["y_test"]
-    # num_samples = X_test.shape[0]
-    # test_metrics = model.evaluate(X_test, y_test, batch_size=num_samples)
-
-    # return valid_metrics, test_metrics, model, history
 
 
 def grid_search(X, y_raw, grid_params, default_params):
@@ -205,7 +199,7 @@ def grid_search(X, y_raw, grid_params, default_params):
     return (best_valid, best_train, best_params), grid_results
 
 
-def run_experiment(grid_params, params, num_test_trials=10):
+def run_grid_search_experiment(grid_params, params, num_test_trials=10):
     # Get training data.
     X_train, y_raw_train = get_raw_data(params["num_features"], test=False)
 
@@ -214,35 +208,48 @@ def run_experiment(grid_params, params, num_test_trials=10):
     best_valid, best_train, best_params = best_try[0], best_try[1], best_try[2]
     print("Grid Search complete.\nAve Cross-Valid Score=%s\nAve Train Score=%s\nSelected Params=%s\n" % (
         best_valid, best_train, best_params))
+
+    run_experiment(best_params, num_test_trials)
+    print("\nBest Parameters:")
+    for grid_p in grid_params:
+        print("  %s=%s" % (grid_p, best_params[grid_p]))
+    print("\nAve Cross-Valid= %s" % best_valid)
+    print(grid_results)
+    return
+
+
+def run_experiment(params, num_test_trials=10):
+    # Get training data.
+    X_train, y_raw_train = get_raw_data(params["num_features"], test=False)
+    y_train = get_y_labels(y_raw_train)
     
     # Get test data.
     X_test, y_raw_test = get_raw_data(params["num_features"], test=True)
     y_test = get_y_labels(y_raw_test)
 
     # Get validation data for this run.
-    X_train, X_valid, y_raw_train, y_raw_valid = model_selection.train_test_split(X_train, y_raw_train, test_size=0.25, shuffle=False)
-    y_train, y_valid = get_y_labels(y_raw_train), get_y_labels(y_raw_valid)
+    # X_train, X_valid, y_raw_train, y_raw_valid = model_selection.train_test_split(X_train, y_raw_train, test_size=0.33, shuffle=False)
+    # y_train, y_valid = get_y_labels(y_raw_train), get_y_labels(y_raw_valid)
 
     valid_scores, train_scores, test_scores = [], [], []
     for trial in range(num_test_trials):
-        model, history = train_cox_nn_model(X_train, y_train, X_valid, y_valid, best_params)
+        # print(X_train.shape, X_valid.shape, X_test.shape)
+        # assert False
+        # Train model on entire training dataset.
+        model, history = train_cox_nn_model(X_train, y_train, X_train, y_train, params)
         
         train_metrics = model.evaluate(X_train, y_train, batch_size=X_train.shape[0])
-        valid_metrics = model.evaluate(X_valid, y_valid, batch_size=X_valid.shape[0])
+        # valid_metrics = model.evaluate(X_valid, y_valid, batch_size=X_valid.shape[0])
         test_metrics = model.evaluate(X_test, y_test, batch_size=X_test.shape[0])
         
         train_scores.append(train_metrics[1])
-        valid_scores.append(valid_metrics[1])
+        # valid_scores.append(valid_metrics[1])
         test_scores.append(test_metrics[1])
 
-    best_i = np.argmax(valid_scores)
-    print(grid_results)
+    best_i = np.argmax(test_scores)
 
-    print("\nBest Parameters (valid=%s, train=%s):" % (best_valid, best_train))
-    for grid_p in grid_params:
-        print("  %s=%s" % (grid_p, best_params[grid_p]))
     print("\nTrain:\tBest=%s\tAverage=%s\t" % (train_scores[best_i], np.mean(train_scores)))
-    print("\nValid:\tBest=%s\tAverage=%s\t" % (best_valid, np.mean(valid_scores)))
+    # print("\nValid:\tBest=%s\tAverage=%s\t" % (valid_scores[best_i], np.mean(valid_scores)))
     print("\nTest:\tBest=%s\tAverage=%s\t" % (test_scores[best_i], np.mean(test_scores)))
     return
 
@@ -288,7 +295,7 @@ default_params = {
     "l2_kernel_regularizer": 0.0,
     "num_epochs": 150
 }
-# run_experiment(grid_params, default_params, num_test_trials=10)
+# run_grid_search_experiment(grid_params, default_params, num_test_trials=10)
 
 # num_features=50
 # Best Parameters (valid=0.7379134446382523, train=0.7115701138973236):
@@ -298,7 +305,7 @@ default_params = {
 # Valid:  Best=0.7379134446382523 Average=0.698024046421051
 # Test:   Best=0.5607569813728333 Average=0.5496514022350312
 
-# num_features=70
+# num_features=55
 # Best Parameters (valid=0.7572149634361267, train=0.7371134459972382):
 #   num_latent_neurons=70
 #   l1_kernel_regularizer=0.001
@@ -332,11 +339,106 @@ default_params = {
 
 
 
-# Experiment 3: Using grid search, attempt to find the best dropout rate.
+
+# Experiment 3: Use grid search with SI-CoxNet ranked features.
 grid_params = {
-    "num_latent_neurons": [70, 75], # 50
-    "l1_kernel_regularizer": [0.01, 0.001], # 0.0001
-    "dropout_rate": [0.1, 0.15, 0.2, 0.25, 0.3]
+    "num_latent_neurons": [55, 60, 65, 70], # 50
+    "l1_kernel_regularizer": [0.001], # 0.01, 0.0001
+    "dropout_rate": [0.0, 0.1, 0.2, 0.3],
+}
+default_params = {
+    "validation_split": 0.25,
+    "num_features": 65,
+    # "dropout_rate": 0.1, # 0.0
+    "l2_kernel_regularizer": 0.0,
+    "num_epochs": 160
+}
+run_grid_search_experiment(grid_params, default_params, num_test_trials=10)
+
+
+
+# num_features = 50
+# Ave Cross-Valid= 0.6817124386628469
+# Train:  Best=0.7296658754348755 Average=0.730408889055252
+# Test:   Best=0.5871514081954956 Average=0.5726344645023346
+# Best Parameters:
+#   num_latent_neurons=65
+#   l1_kernel_regularizer=0.01
+
+# num_features = 55
+# Ave Cross-Valid= 0.6984230677286783
+# Train:  Best=0.7370467185974121 Average=0.7419573903083801
+# Test:   Best=0.592131495475769  Average=0.5830677390098572
+# Best Parameters:
+#   num_latent_neurons=60
+#   l1_kernel_regularizer=0.01
+#   dropout_rate=0.0
+
+# num_features = 55
+# Ave Cross-Valid= 0.7059690952301025
+# Train:  Best=0.7327658534049988 Average=0.7356246590614319
+# Test:   Best=0.5933765172958374 Average=0.5687002003192901
+# Best Parameters:
+#   num_latent_neurons=55
+#   l1_kernel_regularizer=0.001
+#   dropout_rate=0.1
+
+# num_features = 55
+# Ave Cross-Valid= 0.6908576389153799
+# Train:  Best=0.7406386733055115 Average=0.7208729028701782
+# Test:   Best=0.5948705077171326 Average=0.5669322729110717
+# Best Parameters:
+#   num_latent_neurons=55
+#   l1_kernel_regularizer=0.001
+#   dropout_rate=0.3
+
+
+# num_features = 60
+# Ave Cross-Valid= 0.7021611432234446
+# Train:  Best=0.7455592155456543 Average=0.7473306059837341
+# Test:   Best=0.586902379989624  Average=0.5684760868549347
+# Best Parameters:
+#   num_latent_neurons=70
+#   l1_kernel_regularizer=0.01
+
+# num_features = 65
+# Ave Cross-Valid= 0.7243321537971497
+# Train:  Best=0.7649953365325928 Average=0.7646902561187744
+# Test:   Best=0.5625     Average=0.5510707199573517
+# Best Parameters:
+#   num_latent_neurons=60
+#   l1_kernel_regularizer=0.01
+#   dropout_rate=0.0
+
+# num_features = 65
+# Ave Cross-Valid= 0.7133029500643412
+# Train:  Best=0.7674555778503418 Average=0.7517000436782837
+# Test:   Best=0.5891434550285339 Average=0.5483067750930786
+# Best Parameters:
+#   num_latent_neurons=60
+#   l1_kernel_regularizer=0.001
+#   dropout_rate=0.1 (out of 0.1, 0.2, 0.3)
+
+
+
+# num_features=70
+# Ave Cross-Valid= 0.7055005033810934
+# Train:  Best=0.7748855948448181 Average=0.7688382565975189
+# Test:   Best=0.5774402618408203 Average=0.5559760987758636
+# Best Parameters:
+#   num_latent_neurons=70
+#   l1_kernel_regularizer=0.01
+
+
+
+
+
+
+# Experiment 4: Using grid search, attempt to find the best dropout rate.
+grid_params = {
+    "num_latent_neurons": [70, 75, 80], # 50
+    "l1_kernel_regularizer": [0.001, 0.001], # 0.0001
+    "dropout_rate": [0.1, 0.2, 0.25, 0.3, 0.35, 0.4]
 }
 default_params = {
     "validation_split": 0.25,
@@ -344,8 +446,7 @@ default_params = {
     "l2_kernel_regularizer": 0.0,
     "num_epochs": 150
 }
-run_experiment(grid_params, default_params, num_test_trials=10)
-
+# run_grid_search_experiment(grid_params, default_params, num_test_trials=10)
 
 # Best Parameters (valid=0.7266203165054321, train=0.7270275205373764):
 #   num_latent_neurons=70
@@ -357,36 +458,21 @@ run_experiment(grid_params, default_params, num_test_trials=10)
 
 
 
-
-
-
-
-
-
-
-params2 = {
+# Experiment 5: Same thing, but with all top5% of features.
+grid_params = {
+    "num_latent_neurons": [40, 50, 60], # 50
+    # "l1_kernel_regularizer": [0.001, 0.01], # 0.0001
+    "dropout_rate": [0.3, 0.4, 0.5, 0.6, 0.7]
+}
+default_params = {
     "validation_split": 0.25,
     "num_features": "top5percent",
-    "num_latent_neurons": 100,
-    "l1_kernel_regularizer": 1e-5,
-    "l2_kernel_regularizer": 1e-4,
-    "dropout_rate": 0.3,
-    "num_epochs": 150,  # EarlyStop callback is expected to terminate run early.
+    "l1_kernel_regularizer": 0.001,
+    "l2_kernel_regularizer": 0.0,
+    "num_epochs": 150
 }
-# print("\nRUN 2:\n", params2)
-# run_trials(params2)
+# run_grid_search_experiment(grid_params, default_params, num_test_trials=10)
 
 
 
-
-
-
-
-# Ensemble Method: categorize sample, and train a model for each category
-
-# Which features most important? Why might they be most important?
-
-# Correlation between feature and predicted T values?
-
-# Covariate: age, stage of cancer at diagnosis
 

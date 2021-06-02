@@ -109,35 +109,27 @@ def si_rank_on_clustered_data(num_clusters=3):
 # learn_coxnet_on_clustered_data()
 
 ## Use SI Ranking to rank features for each cluster
-si_rank_on_clustered_data(num_clusters=3)
+# si_rank_on_clustered_data(num_clusters=3)
 
 ## Analyze the different models for each feature set for each cluster (except cluster 0...)
-# for k in [1, 2]:
-#     train_gexp_tsv = "clustering_analysis/gene_expression_top05_c%s_train2.tsv" % k
-#     train_clinical_tsv = "clustering_analysis/clinical_c%s_train2.tsv" % k
-#     test_gexp_tsv = "clustering_analysis/gene_expression_top05_c%s_test2.tsv" % k
-#     test_clinical_tsv = "clustering_analysis/clinical_c%s_test2.tsv" % k
-#     model_tsv = "clustering_analysis/cox_model_elastic_c%s_exp2.tsv" % k
+for k in [1, 2]:
+    train_gexp_tsv = "clustering_analysis/gene_expression_top05_c%s_train2.tsv" % k
+    train_clinical_tsv = "clustering_analysis/clinical_c%s_train2.tsv" % k
+    test_gexp_tsv = "clustering_analysis/gene_expression_top05_c%s_test2.tsv" % k
+    test_clinical_tsv = "clustering_analysis/clinical_c%s_test2.tsv" % k
+    # model_tsv = "clustering_analysis/cox_model_elastic_c%s_exp2.tsv" % k
+    si_tsv = "clustering_analysis/si_ranking_c%s_exp2.tsv" % k
 
-#     train_gexp_df = pd.read_csv(train_gexp_tsv, sep="\t")
-#     train_clinical_df = pd.read_csv(train_clinical_tsv, sep="\t")
-#     test_gexp_df = pd.read_csv(test_gexp_tsv, sep="\t")
-#     test_clinical_df = pd.read_csv(test_clinical_tsv, sep="\t")
-#     model_df = pd.read_csv(model_tsv, sep="\t", index_col=0)
+    train_gexp_df = pd.read_csv(train_gexp_tsv, sep="\t")
+    train_clinical_df = pd.read_csv(train_clinical_tsv, sep="\t")
+    test_gexp_df = pd.read_csv(test_gexp_tsv, sep="\t")
+    test_clinical_df = pd.read_csv(test_clinical_tsv, sep="\t")
+    # model_df = pd.read_csv(model_tsv, sep="\t", index_col=0)
 
-#     print("Cluster " + str(k))
-#     print(train_gexp_df.shape)
-#     print(train_clinical_df.shape)
-#     print(test_gexp_df.shape)
-#     print(test_clinical_df.shape)
-#     assert False
-#     # print(model_df)
-#     # num_nonzero_features = np.sum(np.sign(np.abs(np.asarray(model_df))), axis=1)
-#     # print(num_nonzero_features)
-#     # assert False
-
-#     output_file = "clustering_analysis/model_selection_c%s_run2_log.txt" % k
-#     cox_exp.iterative_model_selection(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df, output_file)
+    print("Cluster " + str(k))
+    output_file = "clustering_analysis/model_selection_si_c%s_run1_log.txt" % k
+    # cox_exp.iterative_model_selection(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, model_df=model_df, log_filename=output_file)
+    cox_exp.iterative_model_selection(train_gexp_df, train_clinical_df, test_gexp_df, test_clinical_df, si_tsv=si_tsv, log_filename=output_file)
 
 
 
