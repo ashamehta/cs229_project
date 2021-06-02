@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3f1a0b78-f9ff-4be4-9bad-ccd4b02c5380" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/experiments/random_survival_forest_TVT.py" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/random_survival_forest_TVT.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/experiments/random_survival_forest_TVT.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="95" column="30" lean-forward="true" selection-start-line="95" selection-start-column="30" selection-end-line="95" selection-end-column="30" />
+            <state relative-caret-position="-2361">
+              <caret line="134" column="26" selection-start-line="134" selection-start-column="10" selection-end-line="134" selection-end-column="26" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -36,7 +35,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>--outpu</find>
       <find>output</find>
       <find>NSG00000050628</find>
       <find>read_data</find>
@@ -66,6 +64,7 @@
       <find>plt.show</find>
       <find>clinical</find>
       <find>surv</find>
+      <find>validation</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,6 +110,26 @@
               <item name="cs229_project" type="b2602c69:ProjectViewProjectNode" />
               <item name="cs229_project" type="462c0819:PsiDirectoryNode" />
               <item name="experiments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs229_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs229_project" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs229_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs229_project" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+              <item name="cumulative_hazard_curves" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cs229_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cs229_project" type="462c0819:PsiDirectoryNode" />
+              <item name="experiments" type="462c0819:PsiDirectoryNode" />
+              <item name="output" type="462c0819:PsiDirectoryNode" />
+              <item name="survival_curves" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cs229_project" type="b2602c69:ProjectViewProjectNode" />
@@ -175,18 +194,17 @@
       <workItem from="1622231579838" duration="4644000" />
       <workItem from="1622249422035" duration="5915000" />
       <workItem from="1622258809419" duration="6008000" />
-      <workItem from="1622585365073" duration="5828000" />
+      <workItem from="1622585365073" duration="8381000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96920000" />
+    <option name="totallyTimeSpent" value="99473000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="619" y="23" width="813" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.24034335" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24034335" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -200,7 +218,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007153" side_tool="true" weight="0.49759036" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49928468" visible="true" weight="0.3388535" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49928468" visible="true" weight="0.32048193" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32891566" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -443,8 +461,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/experiments/random_survival_forest_TVT.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="95" column="30" lean-forward="true" selection-start-line="95" selection-start-column="30" selection-end-line="95" selection-end-column="30" />
+        <state relative-caret-position="-2361">
+          <caret line="134" column="26" selection-start-line="134" selection-start-column="10" selection-end-line="134" selection-end-column="26" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>

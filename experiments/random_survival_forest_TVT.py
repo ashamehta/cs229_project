@@ -1,7 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import eli5
 
+from eli5.sklearn import PermutationImportance
 from scipy.stats import uniform, randint, zscore
 from sklearn.model_selection import RandomizedSearchCV, train_test_split
 from sklearn import preprocessing
@@ -85,6 +87,7 @@ def rsf_experiment(X_train, X_test, y_train, y_test, best_params):
                            min_samples_leaf=best_params['min_samples_leaf'],
                            random_state=RANDOM_STATE)
     rsf = rsf.fit(X_train, y_train)
+    print("Training score: ", rsf.score(X_train, y_train))
 
     predict_surv = rsf.predict_survival_function(X_test, return_array=True)
 
@@ -127,6 +130,9 @@ def rsf_hyperparameter_random_search(X_val, y_val):
 
     print(
         f"The best set of parameters is: {tuned_rsf.best_params_}"
+    )
+    print(
+        f"Validation score: {tuned_rsf.score(X_val, y_val)}"
     )
 
     return tuned_rsf.best_params_
@@ -218,7 +224,6 @@ print("Age and Stage Baseline (w/ GE data):", score)
 
 print("-- Characterize clinical data that has associated gene expression data--")
 # Training set
-print(X_train_baseline)
 age_mean_train = X_train_baseline['age_at_index'].mean()
 age_std_train = X_train_baseline['age_at_index'].std()
 print("Mean age of training set: ", age_mean_train, "Std: ", age_std_train)
@@ -242,7 +247,6 @@ stage_mean_test = X_test_baseline['figo_stage'].mean()
 stage_std_test = X_test_baseline['figo_stage'].std()
 print("Mean stage of test set: ", int(stage_mean_test), "Std: ", stage_mean_test)
 
-"""
 # Note: The new split code above does *not* change how the splitting goes for the mutations data here.
 # Should be fine since I did not have time to run experiments with the mutations data.
 
@@ -261,7 +265,7 @@ X_test_mut = X_test_mut.iloc[:, 1:]
 
 best_params = rsf_hyperparameter_random_search(X_val_mut, y_val_mut)
 score = rsf_experiment(X_train_mut, X_test_mut, y_train_mut, y_test_mut, best_params)
-print("Mutations Concordance Index: ", score)
+print("Mutations Test Score: ", score)
 
 ##
 
@@ -279,8 +283,8 @@ X_test_variance = X_test_variance.iloc[:, 1:]
 
 best_params = rsf_hyperparameter_random_search(X_val_variance, y_val)
 score = rsf_experiment(X_train_variance, X_test_variance, y_train, y_test, best_params)
-print("97th quantile Gene Expression score:", score)
-"""
+print("97th quantile Gene Expression Test Score:", score)
+
 print("\n###### Gene Expression Data w/ random search & Coxnet #######")
 all_coef_df = pd.read_csv("~/Documents/Github/cs229_project/experiments/output/cox_model_elastic_gexp_exp3.tsv", sep="\t", index_col=0)
 coef_df = fs.select_features_from_cox_coef(all_coef_df, gexp_df, 10)
@@ -297,8 +301,8 @@ X_test_coxnet = X_test_coxnet.iloc[:, 1:]
 
 best_params = rsf_hyperparameter_random_search(X_val_coxnet, y_val)
 score = rsf_experiment(X_train_coxnet, X_test_coxnet, y_train, y_test, best_params)
-print("Coxnet Gene Expression score : ", score)
-"""
+print("Coxnet Gene Expression Test Score : ", score)
+
 print("\n###### Gene Expression Data w/ random search & TAP1, ZFHX4, CXCL9, FBN1, PTGER3 #######")
 X_train_top5, X_val_top5, X_test_top5 = feature_train_val_test(X_train_id, X_val_id, X_test_id, gexp_top5_df)
 
@@ -312,5 +316,4 @@ X_test_top5 = X_test_top5.iloc[:, 1:]
 
 best_params = rsf_hyperparameter_random_search(X_val_top5, y_val)
 score = rsf_experiment(X_train_top5, X_test_top5, y_train, y_test, best_params)
-print("5 genes from paper, Gene Expression score : ", score)
-"""
+print("5 genes from paper, Gene Expression Test Score : ", score)
