@@ -13,7 +13,7 @@ import feature_selection as fs
 
 clinical_tsv = "processed_data/clinical_processed.tsv"
 mutation_tsv = "processed_data/mutations_matrix.tsv"
-coef_tsv = "~/Documents/Github/cs229_project/experiments/output/cox_model_elastic_gexp_exp3.tsv"
+coef_tsv = "~/Documents/Github/cs229_project/experiments/output/cox_model_elastic_gexp_exp5.tsv"
 gexp_tsv = "processed_data/gene_expression_matrix.tsv"
 gexp_tsv_variance_03 = "processed_data/gene_expression_top03_matrix.tsv"
 #gexp_tsv_variance_05 = "processed_data/gene_expression_top05_matrix.tsv"
@@ -85,6 +85,26 @@ def rsf_experiment(X_train, X_test, y_train, y_test, best_params):
                            min_samples_leaf=best_params['min_samples_leaf'],
                            random_state=RANDOM_STATE)
     rsf = rsf.fit(X_train, y_train)
+
+    predict_surv = rsf.predict_survival_function(X_test, return_array=True)
+
+    for i, s in enumerate(predict_surv):
+        plt.step(rsf.event_times_, s, where="post", label=str(i))
+    plt.ylabel("Survival probability")
+    plt.xlabel("Time in days")
+    plt.grid(True)
+    plt.savefig('rsf_surv_prob.png')
+    plt.show()
+
+    cum_surv = rsf.predict_cumulative_hazard_function(X_test, return_array=True)
+
+    for i, s in enumerate(cum_surv):
+        plt.step(rsf.event_times_, s, where="post", label=str(i))
+    plt.ylabel("Cumulative hazard")
+    plt.xlabel("Time in days")
+    plt.grid(True)
+    plt.savefig('rsf_cum_haz.png')
+    plt.show()
 
     score = rsf.score(X_test, y_test)
     return score
@@ -164,6 +184,19 @@ print("Num training samples:", X_train_id.shape, len(y_train))
 print("Num validation samples:", X_val_id.shape, len(y_val))
 print("Num test samples:", X_test_id.shape, len(y_test))
 
+# Percent censored of train, validation, and test sets
+y_train_df = pd.DataFrame(y_train)
+percent_censored_train = y_train_df['status'].value_counts()[False]/len(y_train_df)
+print("% censored of training set: ", percent_censored_train)
+
+y_val_df = pd.DataFrame(y_val)
+percent_censored_val = y_val_df['status'].value_counts()[False]/len(y_val_df)
+print("% censored of validation set: ", percent_censored_val)
+
+y_test_df = pd.DataFrame(y_test)
+percent_censored_test = y_test_df['status'].value_counts()[False]/len(y_test_df)
+print("% censored of test set: ", percent_censored_test)
+
 print("-- Train RSF with Clinical Data that Has Associated Expression Data --")
 clinical_baseline_df = clinical_gexp_df[['case_id', 'figo_stage', 'age_at_index', 'normalized_age_at_index']]
 X_train_baseline, X_val_baseline, X_test_baseline = \
@@ -185,6 +218,7 @@ print("Age and Stage Baseline (w/ GE data):", score)
 
 print("-- Characterize clinical data that has associated gene expression data--")
 # Training set
+print(X_train_baseline)
 age_mean_train = X_train_baseline['age_at_index'].mean()
 age_std_train = X_train_baseline['age_at_index'].std()
 print("Mean age of training set: ", age_mean_train, "Std: ", age_std_train)
@@ -208,10 +242,10 @@ stage_mean_test = X_test_baseline['figo_stage'].mean()
 stage_std_test = X_test_baseline['figo_stage'].std()
 print("Mean stage of test set: ", int(stage_mean_test), "Std: ", stage_mean_test)
 
-
+"""
 # Note: The new split code above does *not* change how the splitting goes for the mutations data here.
 # Should be fine since I did not have time to run experiments with the mutations data.
-"""
+
 print("-- Train RSF with Mutations Data, No Feature Selection --")
 clinical_mut_df = clinical_df.merge(mutation_df, how='inner', on='case_id')
 clinical_mut_df = clinical_mut_df[["case_id", "vital_status", "days_to_last_follow_up", "days_to_death"]]
@@ -246,7 +280,7 @@ X_test_variance = X_test_variance.iloc[:, 1:]
 best_params = rsf_hyperparameter_random_search(X_val_variance, y_val)
 score = rsf_experiment(X_train_variance, X_test_variance, y_train, y_test, best_params)
 print("97th quantile Gene Expression score:", score)
-
+"""
 print("\n###### Gene Expression Data w/ random search & Coxnet #######")
 all_coef_df = pd.read_csv("~/Documents/Github/cs229_project/experiments/output/cox_model_elastic_gexp_exp3.tsv", sep="\t", index_col=0)
 coef_df = fs.select_features_from_cox_coef(all_coef_df, gexp_df, 10)
@@ -264,7 +298,7 @@ X_test_coxnet = X_test_coxnet.iloc[:, 1:]
 best_params = rsf_hyperparameter_random_search(X_val_coxnet, y_val)
 score = rsf_experiment(X_train_coxnet, X_test_coxnet, y_train, y_test, best_params)
 print("Coxnet Gene Expression score : ", score)
-
+"""
 print("\n###### Gene Expression Data w/ random search & TAP1, ZFHX4, CXCL9, FBN1, PTGER3 #######")
 X_train_top5, X_val_top5, X_test_top5 = feature_train_val_test(X_train_id, X_val_id, X_test_id, gexp_top5_df)
 
