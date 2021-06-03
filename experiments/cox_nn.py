@@ -119,6 +119,12 @@ def train_cox_nn_model(X_train, y_labels_train, X_valid, y_labels_valid, params)
     Creates single-latent-layer neural network with a Cox PH loss, parameterized with |params|.
     Trains the model on X_train,y_train, and validates the model with X_valid,y_valid.
     """
+    if "learning_rate" in params:
+        learning_rate = params["learning_rate"]
+    else:
+        learning_rate = 0.001
+    optimizer = ks.optimizers.Adam(learning_rate=learning_rate)
+
     # Construct neural network model.
     tf.config.experimental_run_functions_eagerly(True)
     model = ks.models.Sequential()
@@ -128,7 +134,7 @@ def train_cox_nn_model(X_train, y_labels_train, X_valid, y_labels_valid, params)
         kernel_regularizer=ks.regularizers.l1_l2(l1=params["l1_kernel_regularizer"], l2=params["l2_kernel_regularizer"])))
     model.add(ks.layers.Dropout(params["dropout_rate"]))
     model.add(ks.layers.Dense(1))
-    model.compile(optimizer="Adam", loss=cox_ph_loss, metrics=[concordance_metric], run_eagerly=True)
+    model.compile(optimizer=optimizer, loss=cox_ph_loss, metrics=[concordance_metric], run_eagerly=True)
     # default hyperparams: learning_rate=0.001, epsilon=1e-07
 
     # Train model on training dataset.
@@ -342,13 +348,14 @@ default_params = {
 
 # Experiment 3: Use grid search with SI-CoxNet ranked features.
 grid_params = {
-    "num_latent_neurons": [55, 60, 65, 70], # 50
+    "num_latent_neurons": [55, 60, 70], # 50
+    "learning_rate": [0.01, 0.001, 0.0001],
     "l1_kernel_regularizer": [0.001], # 0.01, 0.0001
-    "dropout_rate": [0.0, 0.1, 0.2, 0.3],
+    "dropout_rate": [0.1, 0.2, 0.3],
 }
 default_params = {
     "validation_split": 0.25,
-    "num_features": 65,
+    "num_features": 55,
     # "dropout_rate": 0.1, # 0.0
     "l2_kernel_regularizer": 0.0,
     "num_epochs": 160
